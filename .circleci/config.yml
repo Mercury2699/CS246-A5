@@ -15,15 +15,3 @@ jobs:
     executor: my-executor
     steps:
       - run: make
-      
-  testbuild:
-    docker:
-      - image: gcc
-    working_directory: ~
-    branches:
-      only:
-        - master
-    steps:
-      - run: make test
-      - run: make
-
