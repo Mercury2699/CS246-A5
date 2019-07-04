@@ -1,4 +1,5 @@
 version: 2.1
+
 executors:
   my-executor:
     docker:
@@ -9,14 +10,12 @@ jobs:
     executor: my-executor
     steps:
       - run: make test
-
-jobs:
+      
   build:
     executor: my-executor
     steps:
       - run: make
       
-jobs:
   testbuild:
     docker:
       - image: gcc
