@@ -6,14 +6,9 @@ executors:
       - image: gcc
 
 jobs:
-  test:
-    executor: my-executor
-    steps:
-      - checkout
-      - run: make test
-      
   build:
     executor: my-executor
     steps:
       - checkout
+      - run: make test
       - run: make
