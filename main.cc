@@ -2,9 +2,10 @@
  * Welcome to Seashell!
  */
 
-#include <stdio.h>
+#include <iostream>
 
-int main(void) {
+int main(int argc, char *argv[]) {
 	// You can enter your code here.
-	printf("Hello World!\n");
+	std::cout << "Hello World!" << std::endl;
+	return 0
 }
