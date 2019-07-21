@@ -3,7 +3,8 @@
 
 #include "textDisplay.h"
 
-class Stuff {
+struct Stuff {
+    virtual char getState() = 0;
 };
 
 #endif
