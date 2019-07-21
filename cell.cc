@@ -15,5 +15,3 @@ Stuff * Cell::getOccupant() {
 }
 
 
-
-

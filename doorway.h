@@ -3,6 +3,9 @@
 #include "cell.h"
 
 class Doorway : public Cell {
+    char getState() override {
+        return '+';
+    }
 };
 
 #endif

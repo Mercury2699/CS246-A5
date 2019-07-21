@@ -2,7 +2,10 @@
 #define EMPTYCELL_H
 #include "cell.h"
 
-class EmptyCell : public Cell {
+struct EmptyCell : public Cell {
+    char getState() override {
+        return ' ';
+    }
 };
 #endif
 
