@@ -16,6 +16,7 @@ TextDisplay::TextDisplay(string map = "map.txt"){
             row.emplace_back(c);
         }
     }
+    m.close();
 }
 
 void TextDisplay::notify(int x, int y, char type){
