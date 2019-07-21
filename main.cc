@@ -3,9 +3,10 @@
  */
 
 #include <iostream>
+#include "textDisplay.h"
 
 int main(int argc, char *argv[]) {
-	// You can enter your code here.
-	std::cout << "Hello World!" << std::endl;
+	TextDisplay td;
+	std::cout << td << std::endl;
 	return 0;
 }
