@@ -5,10 +5,8 @@
 class Wall : public Cell {
     bool isHorizontal;
     public:
-    char getState() override {
-        if (isHorizontal) return '-';
-        return '|';
-    }
+    Wall(TextDisplay * td, int x, int y, bool isHor);
+    char getState() override;
 };
 
 #endif

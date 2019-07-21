@@ -3,9 +3,9 @@
 #include "cell.h"
 
 struct EmptyCell : public Cell {
-    char getState() override {
-        return ' ';
-    }
+    EmptyCell(TextDisplay *, int, int);
+    char getState() override;
 };
+
 #endif
 

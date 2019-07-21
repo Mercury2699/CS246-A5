@@ -1,7 +1,8 @@
 #ifndef CELL_H
 #define CELL_H
-#include "textDisplay.h"
 #include "stuff.h"
+
+class TextDisplay;
 
 class Cell {
 	const int x, y;
