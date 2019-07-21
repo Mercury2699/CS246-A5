@@ -5,13 +5,16 @@
 
 class Player : public Character {
 
-	int gold;
+	int treasure;
 
 	public:
-	Player(int gold);
-	void virtual setGold(int gold) = 0;
-	void virtual applyPotion(Potion *p) = 0;
+	Player(int treasure);
+	void virtual pickUpTreasure(Treasure *);
+	void virtual applyPotion(Potion *);
+	~Player() = 0;
 	
-
+	protected:
+	void setTreasure(int);
 };
+
 #endif

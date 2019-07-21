@@ -3,8 +3,11 @@
 #include "player.h"
 
 
-#include "player.h"
 class Dwarf : public Player {
+	
+	public:
+	Dwarf();
+	void pickUpTreasure(Treasure *) override;
 };
 
 #endif
