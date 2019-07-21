@@ -4,7 +4,7 @@
 
 using namespace std;
 
-TextDisplay::TextDisplay(string map = "map.txt"){
+TextDisplay::TextDisplay(string map){
     ifstream m(map);
     char c;
     vector<char> row;
@@ -26,10 +26,11 @@ void TextDisplay::notify(int x, int y, char type){
 ostream &operator<<(ostream & out, const TextDisplay & td){
     for (auto i : td.theDisplay){
         for (auto j : i){
-            cout << j;
+            out << j;
         }
-        cout << endl;
+        out << endl;
     }
+    return out;
 }
 
 

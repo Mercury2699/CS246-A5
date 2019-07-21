@@ -10,7 +10,7 @@ using std::vector;
 class TextDisplay {
     vector<vector<char>> theDisplay;
     public:
-    TextDisplay::TextDisplay(std::string map = "map.txt");
+    TextDisplay(std::string map = "map.txt");
     void notify(int x, int y, char type);
     friend std::ostream &operator<<(std::ostream &out, const Floor &);
     friend std::ostream &operator<<(std::ostream &out, const TextDisplay &);

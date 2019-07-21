@@ -4,6 +4,8 @@
 #include <vector>
 #include <iostream>
 
+class Cell;
+
 class Floor {
 	std::vector<std::vector<Cell*>> cells;
 
