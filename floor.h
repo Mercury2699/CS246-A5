@@ -3,11 +3,12 @@
 
 #include <vector>
 #include <iostream>
+#include "cell.h"
 
 class Floor {
 	std::vector<std::vector<Cell*>> cells;
 
+	friend std::ostream &operator<<(std::ostream &out, const Floor &f);
 };
 
-std::ostream &operator<<(std::ostream &out, const Floor &f);
 #endif

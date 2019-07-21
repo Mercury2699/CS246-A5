@@ -11,7 +11,7 @@ class Character : public Stuff {
 	public:
 	Character(int HP, int Atk, int Def);
 	void virtual attack(Character *defender) = 0;
-	bool isDead();
+	bool isDead() = 0;
 
 };
 

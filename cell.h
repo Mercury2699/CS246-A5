@@ -1,14 +1,17 @@
 #ifndef CELL_H
 #define CELL_H
 
+#include "textDisplay.h"
+#include "stuff.h"
+
 class Cell {
 
 	TextDisplay *td;
-	char state;
-	
+	Stuff *state;
+
 	public:
 
 	void notifyObserver();
-	char getState();
+	Stuff *getState();
 };
 #endif
