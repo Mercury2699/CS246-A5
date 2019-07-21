@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -g -std=c++14 -Wall -MMD
 #CXXFLAGS = -std=c++14 -Wall -MMD
-EXEC = exec
+EXEC = cc3k
 OBJECTS = main.o
 DEPENDS = ${OBJECTS:.o=.d}
 
