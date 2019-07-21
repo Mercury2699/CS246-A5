@@ -1,7 +1,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-class Character {
+class Character : public Stuff {
 };
 
 #endif
