@@ -3,7 +3,7 @@
 #include "cell.h"
 
 struct EmptyCell : public Cell {
-    EmptyCell(TextDisplay *, int, int);
+    EmptyCell(int, int);
     char getState() override;
 };
 

@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
 	} else if (command == "o"){
 		// orc
 	}
-	floors[0].init();
+	floors[0];
 	while(1){
 		cin >> command;
 		//if command is valid...

@@ -7,12 +7,11 @@ struct Stuff;
 
 class Cell {
 	const int x, y;
-	TextDisplay *td;
-	bool isOccupied;
-	Stuff * occupant;
+	// bool isOccupied;
+	// Stuff * occupant;
 	
 	public:
-	Cell(TextDisplay *, int, int);
+	Cell(int, int);
 	virtual char getState() = 0;
 	int getX();
 	int getY();

@@ -2,8 +2,16 @@
 #define PASS_H
 #include "cell.h"
 
-struct Passage : public Cell {
-    Passage(TextDisplay * td, int x, int y) : Cell{td,x,y} {}
+class Passage : public Cell {
+    TextDisplay *td = nullptr;
+	bool isOccupied;
+	Stuff * occupant;
+
+    public:
+    Passage(int x, int y) : Cell{x,y} {}
+    bool checkOccupancy();
+	void notifyObserver();
+	Stuff * getOccupant();
     char getState() override { return '#';}
 };
 #endif
