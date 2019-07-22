@@ -3,5 +3,7 @@
 #include "item.h"
 
 class Treasure : public Item {
+	public:
+	virtual int getValue() = 0;
 };
 #endif

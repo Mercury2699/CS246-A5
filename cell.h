@@ -4,6 +4,7 @@
 
 class TextDisplay;
 
+struct Stuff;
 class Cell {
 	const int x, y;
 	TextDisplay *td;
