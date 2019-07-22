@@ -1,19 +1,17 @@
 #ifndef CELL_H
 #define CELL_H
 #include "textDisplay.h"
-// #include "stuff.h"
 
 class TextDisplay;
 struct Stuff;
 
 class Cell {
 	const int x, y;
-	TextDisplay *td;
-	bool isOccupied;
-	Stuff * occupant;
+	// bool isOccupied;
+	// Stuff * occupant;
 	
 	public:
-	Cell(TextDisplay *, int, int);
+	Cell(int, int);
 	virtual char getState() = 0;
 	int getX();
 	int getY();

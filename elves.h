@@ -6,7 +6,7 @@
 class Elves : public Player {
 
 	public:
-	Elves(int HP = 140, Atk = 30, Def = 10);
+	Elves(int HP = 140, int Atk = 30, int Def = 10, double treasure = 0);
 	void applyPotion(Potion *);
 };
 

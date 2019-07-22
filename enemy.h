@@ -8,7 +8,7 @@ class Enemy : public Character {
 	Treasure *t;
 
 	public:
-	Enemy(Treasure *t);
+	Enemy(int HP, int Atk, int Def, Treasure *t);
 	void attack(Character *) override;
 
 };

@@ -2,7 +2,12 @@
 #define POTION_H
 
 #include "item.h"
-class Potion : public Item, public Decorator {
+class Human;
+class Dwarf;
+class Elves;
+class Orc;
+
+class Potion : public Item {
 
 	public:
 	void virtual effect(Human &) = 0;

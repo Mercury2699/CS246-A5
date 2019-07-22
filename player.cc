@@ -1,19 +1,19 @@
 #include "player.h"
 #include "treasure.h"
-Player::Player(double treasure):
-	treasure{treasure}{}
+Player::Player(int HP, int Atk, int Def, double treasure):
+	Character{HP, Atk, Def}, treasure{treasure}{}
 
 Player::~Player() {}
 
-Player::setTreasure(Treasure *t) {
-	treasure = t->getValue();
+void Player::setTreasure(double t) {
+	treasure = t;
 }
 
-Player::pickUpTreasure(Treasure *t) {
+void Player::pickUpTreasure(Treasure *t) {
 	setTreasure(t->getValue());
 }
 
-Player::attack(Character *c) {
+void Player::attack(Character *c) {
 	c->setHP(c->getHP()-((100 / (100 + c->getDef())) * getAtk()));
 	c->attack(this);
 }

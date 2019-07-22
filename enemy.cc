@@ -1,7 +1,7 @@
 #include "enemy.h"
 
 Enemy::Enemy(Treasure *t):
-	t{t}{}
+	Character{HP, Atk, Def, t{t}{}
 
 Enemy::attack(Character *c) {
 	if (c->getSuit()) {

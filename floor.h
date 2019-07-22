@@ -15,8 +15,7 @@ class Floor {
 	std::vector<std::vector<std::shared_ptr<Cell>>> theGrid;
 	TextDisplay * td;
 	public:
-	Floor();
-	void init(std::string file = "map.txt");
+	Floor(std::string file = "map.txt");
 	friend std::ostream &operator<<(std::ostream &out, const Floor &f);
 };
 

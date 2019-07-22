@@ -10,18 +10,7 @@
 
 using namespace std;
 
-Floor::Floor() {
-    for(int i = 0; i < 30; i++){
-        vector<Cell> row;
-        for(int j = 0; j < 79; j++){
-            row.emplace_back(new EmptyCell(td, i, j));
-        }
-        theGrid.emplace_back(row);
-        row.clear();
-    }
-}
-
-void Floor::init(std::string file){
+Floor::Floor(std::string file){
     ifstream m(file);
     char c;
     int x, y;
@@ -33,15 +22,15 @@ void Floor::init(std::string file){
             x = 0;
             y++;
         } else if (c == ' ') {
-            row.emplace_back(new EmptyCell(td, x, y));
+            row.emplace_back(new EmptyCell(x, y));
         } else if (c == '-') {
-            row.emplace_back(new Wall(td, x, y, true));
+            row.emplace_back(new Wall(x, y, true));
         } else if (c == '|') {
-            row.emplace_back(new Wall(td, x, y, false));
+            row.emplace_back(new Wall(x, y, false));
         } else if (c == '+') {
-            row.emplace_back(new Doorway(td, x, y));
+            row.emplace_back(new Doorway(x, y));
         } else if (c == '#') {
-            row.emplace_back(new Passage(td, x, y));
+            row.emplace_back(new Passage(x, y));
         } else if (c == '.') {
             row.emplace_back(new FloorTile(td, x ,y));
         }

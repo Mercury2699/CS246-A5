@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include "character.h"
+#include "treasure.h"
+#include "potion.h"
 
 class Player : public Character {
 
@@ -9,11 +11,11 @@ class Player : public Character {
 	bool hasSuit;
 
 	public:
-	Player(double treasure);
+	Player(int HP, int Atk, int Def, double treasure);
 	void virtual pickUpTreasure(Treasure *);
 	void virtual applyPotion(Potion *) = 0;
 	void attack(Character *) override;
-	~Player() = 0;
+	virtual ~Player() = 0;
 	
 	protected:
 	void setTreasure(double);

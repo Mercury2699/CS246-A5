@@ -2,9 +2,16 @@
 #define FLOORTILE_H
 #include "cell.h"
 
-struct FloorTile : public Cell {
-    FloorTile(TextDisplay * td, int x, int y) : Cell{td, x, y} {}
-    
+class FloorTile : public Cell {
+    TextDisplay *td = nullptr;
+	bool isOccupied;
+	Stuff * occupant;
+
+    public:
+    FloorTile(TextDisplay * td, int x, int y) : Cell{x, y} {}
+    bool checkOccupancy();
+	void notifyObserver();
+	Stuff * getOccupant();
     char getState() override {
         if(checkOccupancy())
             return getOccupant()->getState();
