@@ -1,10 +1,10 @@
 #ifndef CELL_H
 #define CELL_H
-#include "stuff.h"
+#include "textDisplay.h"
 
 class TextDisplay;
-
 struct Stuff;
+
 class Cell {
 	const int x, y;
 	TextDisplay *td;
