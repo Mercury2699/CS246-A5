@@ -5,16 +5,20 @@
 
 class Player : public Character {
 
-	int treasure;
+	double treasure;
+	bool hasSuit;
 
 	public:
-	Player(int treasure);
+	Player(double treasure);
 	void virtual pickUpTreasure(Treasure *);
-	void virtual applyPotion(Potion *);
+	void virtual applyPotion(Potion *) = 0;
+	void attack(Character *) override;
 	~Player() = 0;
 	
 	protected:
-	void setTreasure(int);
+	void setTreasure(double);
+	void setSuit(bool);
+	bool getSuit();
 };
 
 #endif

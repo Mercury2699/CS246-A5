@@ -1,8 +1,12 @@
 #include "dwarf.h"
 
-Dwarf::Dwarf():
-	Character(100, 20, 30){}
+Dwarf::Dwarf(int HP, int Atk, int Def):
+	Character{Hp, Atk, Def}{}
 
 void Dwarf::pickUpTreasure(Treasure *t) {
-	setTreasure(2 * t->value());
+	setTreasure(2 * t->getValue());
+}
+
+void Dwarf::applyPotion(Potion *p) {
+	p->effect(*this);
 }

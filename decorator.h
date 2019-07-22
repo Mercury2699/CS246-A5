@@ -2,6 +2,7 @@
 #define DECORATOR_H
 
 class Decorator {
+	Player *p;
 };
 
 #endif

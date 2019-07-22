@@ -11,12 +11,14 @@ class Character : public Stuff {
 	public:
 	Character(int HP, int Atk, int Def);
 	int getHP();
-	void setHP();
+	void setHP(int);
 	int getAtk();
+	void setAtk(int);
 	int getDef();
+	void setDef(int);
 	virtual void attack(Character *) = 0;
-	virtual bool isDead() = 0;
-	virtual void beAttacked(Character *);
+	virtual bool isDead();
+	virtual void beAttacked(Character *) = 0;
 };
 
 #endif

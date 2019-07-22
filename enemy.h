@@ -5,7 +5,12 @@
 
 #include "character.h"
 class Enemy : public Character {
-	
+	Treasure *t;
+
+	public:
+	Enemy(Treasure *t);
+	void attack(Character *) override;
+
 };
 
 #endif
