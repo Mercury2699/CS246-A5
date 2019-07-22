@@ -3,5 +3,7 @@
 #include "enemy.h"
 
 class Vampire : public Enemy {
+  public:
+  Vampire(); 
 };
 #endif
