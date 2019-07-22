@@ -4,14 +4,18 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <memory>
 #include "cell.h"
+#include "textDisplay.h"
 
+class TextDisplay;
 class Cell;
 
 class Floor {
-	std::vector<std::vector<Cell*>> cells;
+	std::vector<std::vector<std::shared_ptr<Cell>>> theGrid;
 	TextDisplay * td;
-
+	public:
+	Floor();
 	void init(std::string file = "map.txt");
 	friend std::ostream &operator<<(std::ostream &out, const Floor &f);
 };
