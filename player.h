@@ -18,6 +18,8 @@ class Player : public Character {
 	public:
 	Player(int HP, int Atk, int Def, double treasure);
 	void virtual pickUpTreasure(Treasure *);
+	void virtual applyPotion(RH &rh);
+	void virtual applyPotion(PH &ph);
 	void virtual applyPotion(BA &ba);
 	void virtual applyPotion(WA &wa);
 	void virtual applyPotion(BD &bd);

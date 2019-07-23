@@ -28,9 +28,9 @@ void Player::attack(Character *c) {
 
 void Player::beAttacked(Character *c) {
 	if (getSuit()) {
-		setHP(getHP() - ceil (ceil(((100 / (100 + getDef())) * c->getAtk())) / 2));
+		setHP(getHP() - ceil(ceil(((100 / (100 + getDef())) * c->getAtk())) / 2));
 	} else {
-		setHP(getHP()-((100 / (100 + getDef())) * c->getAtk()));
+		setHP(getHP()- ceil((100 / (100 + getDef())) * c->getAtk()));
 	}
 }
 
@@ -48,6 +48,16 @@ void Player::applyPotion(BD &bd) {
 
 void Player::applyPotion(WD &wd) {
 	setAtk(getDef() - 5);
+}
+
+void Player::applyPotion(RH &rh) {
+	int newHP = (getHP() + 10) <= getMaxHP() ? (getHP() + 10) : getMaxHP();
+	setHP(newHP);
+}
+
+void Player::applyPotion(PH &ph) {
+	int newHP = (getHP() - 10) >= 0 ? (getHP() - 10) : 0;
+	setHP(newHP);
 }
 
 void Player::removePotion(BA &ba) {

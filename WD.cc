@@ -4,7 +4,6 @@ WD::WD(Player *p):
 	Potion{p}{}
 
 void WD::effect() {
-	getP()->effect();
 	getP()->applyPotion(*this);
 }
 

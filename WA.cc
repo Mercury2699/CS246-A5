@@ -4,7 +4,6 @@ WA::WA(Player *p):
 	Potion{p}{}
 
 void WA::effect() {
-	getP()->effect();
 	getP()->applyPotion(*this);
 }
 
