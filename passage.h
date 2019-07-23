@@ -1,9 +1,9 @@
 #ifndef PASS_H
 #define PASS_H
 #include "cell.h"
+#include "stuff.h"
 
 class TextDisplay;
-struct Stuff;
 
 class Passage final : protected Cell {
     TextDisplay *td = nullptr;
@@ -17,5 +17,8 @@ class Passage final : protected Cell {
 	void notifyObserver();
 	Stuff * getOccupant();
     char getChar() override;
+};
+
+
 #endif
 

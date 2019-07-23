@@ -1,8 +1,10 @@
 #ifndef FLOORTILE_H
 #define FLOORTILE_H
 #include "cell.h"
+#include "stuff.h"
+
 class TextDisplay;
-struct Stuff;
+
 
 class FloorTile final : protected Cell {
     TextDisplay *td = nullptr;

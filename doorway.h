@@ -1,9 +1,9 @@
 #ifndef DOORWAY_H
 #define DOORWAY_H
 #include "cell.h"
+#include "stuff.h"
 
 class TextDisplay;
-struct Stuff;
 
 class Doorway final : protected Cell {
     TextDisplay *td = nullptr;

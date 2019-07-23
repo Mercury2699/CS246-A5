@@ -4,7 +4,7 @@
 #include "textDisplay.h"
 
 struct Stuff {
-    virtual char getState() = 0;
+    virtual char getChar() = 0;
 };
 
 #endif

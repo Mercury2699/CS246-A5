@@ -32,7 +32,7 @@ Floor::Floor(std::string file){
         } else if (c == '#') {
             row.emplace_back(new Passage(x, y));
         } else if (c == '.') {
-            row.emplace_back(new FloorTile(td, x ,y));
+            row.emplace_back(new FloorTile(x ,y));
         }
         x++;
     }
