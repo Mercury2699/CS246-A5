@@ -16,6 +16,11 @@ class Floor {
 	TextDisplay * td;
 	public:
 	void startGame(std::string race);
+	void playerMove(std::string direction);
+	void playerAtk(std::string direction);
+	void playerUse(std::string direction);
+	void moveEnemies();
+
 	
 	Floor(std::string file = "map.txt");
 	friend std::ostream &operator<<(std::ostream &out, const Floor &f);
