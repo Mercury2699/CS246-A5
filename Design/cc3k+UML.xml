@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mxfile modified="2019-07-23T19:24:26.029Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15" etag="91mTViBMb5qSxoomal74" version="11.0.4" type="google" compressed="false">
+<mxfile modified="2019-07-23T19:27:51.345Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15" etag="SxCorKoQuDNRsGk1kRHQ" version="11.0.4" type="google" compressed="false">
   <diagram id="C2094yCdZct4yrG6JZ1e" name="Page-1">
-    <mxGraphModel dx="2852" dy="1738" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" math="0" shadow="0">
+    <mxGraphModel dx="1426" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -372,11 +372,14 @@
         <mxCell id="CL77BtKyBlIw3x44raxb-55" value="+ use(Player Reference):  void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="CL77BtKyBlIw3x44raxb-52" vertex="1">
           <mxGeometry y="34" width="186" height="40" as="geometry"/>
         </mxCell>
-        <mxCell id="CL77BtKyBlIw3x44raxb-47" value="BarrierSuit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="2011.5" y="1026" width="190" height="34" as="geometry"/>
+        <mxCell id="CL77BtKyBlIw3x44raxb-47" value="BarrierSuit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=24;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+          <mxGeometry x="2012" y="1026" width="190" height="70" as="geometry"/>
         </mxCell>
         <mxCell id="CL77BtKyBlIw3x44raxb-49" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="CL77BtKyBlIw3x44raxb-47" vertex="1">
-          <mxGeometry y="26" width="190" height="8" as="geometry"/>
+          <mxGeometry y="24" width="190" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="CL77BtKyBlIw3x44raxb-50" value="+ use(Player Reference):  void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="CL77BtKyBlIw3x44raxb-47" vertex="1">
+          <mxGeometry y="30" width="190" height="40" as="geometry"/>
         </mxCell>
         <mxCell id="X4qG7hlZkMhb3qOqNSxj-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;startArrow=block;startFill=0;startSize=10;" parent="1" target="QCHnJkMdxqAnB3Ida6eo-3" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -771,9 +774,6 @@
             </Array>
             <mxPoint x="560" y="710" as="sourcePoint"/>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="CL77BtKyBlIw3x44raxb-50" value="+ use(Player Reference):  void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="1" vertex="1">
-          <mxGeometry x="2011.5" y="1060" width="190" height="40" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>
