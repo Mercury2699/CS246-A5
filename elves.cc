@@ -3,18 +3,23 @@
 Elves::Elves(int HP, int Atk, int Def, double treasure):
 	Player{HP, Atk, Def, treasure}{}
 
-Elves::applyPotion(WA &wa) {
+Elves::applyPotion(WoundAtk &wa) {
 	setAtk(getAtk() + 5);
 }
 
-Elves::applyPotion(WD &wd) {
+Elves::applyPotion(WoundDef &wd) {
 	setDef(getDef() + 5);
 }
 
-Elves::removePotion(WA &wa) {
+Elves::removePotion(WoundAtk &wa) {
 	setAtk(getAtk() - 5);
 }
 
-Elves::removePotion(WD &wd) {
+Elves::removePotion(WoundDef &wd) {
 	setDef(getDef() - 5);
 }
+
+
+
+
+

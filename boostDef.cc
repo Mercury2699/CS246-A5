@@ -1,14 +1,20 @@
-#include "BD.h"
+#include "boostDef.h"
 
-BD::BD(Player *p):
+BoostDef::BoostDef(Player *p):
 	Potion{p}{}
 
-void BD::effect() {
+void BoostDef::effect() {
 	getP()->effect();
 	getP()->applyPotion(*this);
 }
 
-void BD::remove() {
+void BoostDef::remove() {
 	getP()->removePotion(*this);
 	getP()->remove();
 }
+
+
+
+
+
+

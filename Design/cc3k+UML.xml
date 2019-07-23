@@ -257,7 +257,7 @@
         <mxCell id="CL77BtKyBlIw3x44raxb-28" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="CL77BtKyBlIw3x44raxb-26" vertex="1">
           <mxGeometry y="70" width="267" height="8" as="geometry"/>
         </mxCell>
-        <mxCell id="X4qG7hlZkMhb3qOqNSxj-83" value="+ attack(Character Pointer): void&#xa;+ pickupTreasure(Treasure Pointer): void&#xa;+ applyPotion(BA Reference): void&#xa;+ applyPotion(WA Reference): void&#xa;+ applyPotion(BD Referece): void&#xa;+ applyPotion(WD Reference): void&#xa;+ removePotion(BA Reference): void&#xa;+ removePotion(WA Reference): void&#xa;+ removePotion(BD Referece): void&#xa;+ removePotion(WD Reference): void&#xa;+ beAttacked(Character Pointer): void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" vertex="1" parent="CL77BtKyBlIw3x44raxb-26">
+        <mxCell id="X4qG7hlZkMhb3qOqNSxj-83" value="+ attack(Character Pointer): void&#xa;+ pickupTreasure(Treasure Pointer): void&#xa;+ applyPotion(BoostAtk Reference): void&#xa;+ applyPotion(WA Reference): void&#xa;+ applyPotion(BoostDef Referece): void&#xa;+ applyPotion(WD Reference): void&#xa;+ removePotion(BoostAtk Reference): void&#xa;+ removePotion(WA Reference): void&#xa;+ removePotion(BoostDef Referece): void&#xa;+ removePotion(WD Reference): void&#xa;+ beAttacked(Character Pointer): void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" vertex="1" parent="CL77BtKyBlIw3x44raxb-26">
           <mxGeometry y="78" width="267" height="182" as="geometry"/>
         </mxCell>
         <mxCell id="oADH9t_thnL_sqh25xlf-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;endSize=10;" parent="1" source="CL77BtKyBlIw3x44raxb-113" target="CL77BtKyBlIw3x44raxb-26" edge="1">
@@ -380,7 +380,7 @@
         <mxCell id="CL77BtKyBlIw3x44raxb-55" value="+ effect(Player Reference):  void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="CL77BtKyBlIw3x44raxb-52" vertex="1">
           <mxGeometry y="34" width="186" height="40" as="geometry"/>
         </mxCell>
-        <mxCell id="CL77BtKyBlIw3x44raxb-47" value="BarrierSuit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+        <mxCell id="CL77BtKyBlIw3x44raxb-47" value="BoostAtkrrierSuit" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="2011.5" y="1026" width="190" height="74" as="geometry"/>
         </mxCell>
         <mxCell id="CL77BtKyBlIw3x44raxb-49" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="CL77BtKyBlIw3x44raxb-47" vertex="1">
@@ -544,7 +544,7 @@
         <mxCell id="CL77BtKyBlIw3x44raxb-39" value="+ effect(Human Reference):  void&#xa;+ effect(Dwarf Reference):  void&#xa;+ effect(Elves Reference):  void&#xa;+ effect(Orc Reference):  void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" parent="CL77BtKyBlIw3x44raxb-36" vertex="1">
           <mxGeometry y="60" width="204" height="80" as="geometry"/>
         </mxCell>
-        <mxCell id="S-8BzlrjVBmqoAVdAwa1-36" value="BA" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+        <mxCell id="S-8BzlrjVBmqoAVdAwa1-36" value="BoostAtk" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="1419" y="1233" width="190" height="90" as="geometry"/>
         </mxCell>
         <mxCell id="S-8BzlrjVBmqoAVdAwa1-38" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="S-8BzlrjVBmqoAVdAwa1-36" vertex="1">
@@ -553,7 +553,7 @@
         <mxCell id="S-8BzlrjVBmqoAVdAwa1-39" value="+ effect(Player Reference):  void &#xa;+ remove(): void&#xa;+ getChar(): character&#xa;&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="S-8BzlrjVBmqoAVdAwa1-36" vertex="1">
           <mxGeometry y="34" width="190" height="56" as="geometry"/>
         </mxCell>
-        <mxCell id="S-8BzlrjVBmqoAVdAwa1-31" value="BD" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+        <mxCell id="S-8BzlrjVBmqoAVdAwa1-31" value="BoostDef" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="1620" y="1233" width="190" height="90" as="geometry"/>
         </mxCell>
         <mxCell id="S-8BzlrjVBmqoAVdAwa1-33" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="S-8BzlrjVBmqoAVdAwa1-31" vertex="1">
@@ -562,7 +562,7 @@
         <mxCell id="S-8BzlrjVBmqoAVdAwa1-34" value="+ effect(Player Reference):  void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="S-8BzlrjVBmqoAVdAwa1-31" vertex="1">
           <mxGeometry y="34" width="190" height="56" as="geometry"/>
         </mxCell>
-        <mxCell id="S-8BzlrjVBmqoAVdAwa1-26" value="PH" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+        <mxCell id="S-8BzlrjVBmqoAVdAwa1-26" value="PoisonHp" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="1821.5" y="1233" width="190" height="90" as="geometry"/>
         </mxCell>
         <mxCell id="S-8BzlrjVBmqoAVdAwa1-28" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="S-8BzlrjVBmqoAVdAwa1-26" vertex="1">

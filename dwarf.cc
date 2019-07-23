@@ -6,3 +6,7 @@ Dwarf::Dwarf(int HP, int Atk, int Def, double treasure):
 void Dwarf::pickUpTreasure(Treasure *t) {
 	setTreasure(2 * t->getValue());
 }
+
+
+
+

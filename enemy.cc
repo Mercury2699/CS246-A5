@@ -11,3 +11,5 @@ void Enemy::attack(Character *c) {
 void Enemy::beAttacked(Character *c) {
 	setHP(getHP()-ceil((100 / (100 + getDef())) * c->getAtk()));
 }
+
+

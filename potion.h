@@ -3,6 +3,7 @@
 
 #include "item.h"
 #include "player.h"
+
 class Human;
 class Dwarf;
 class Elves;
@@ -20,3 +21,6 @@ class Potion : public Item, public Player {
 };
 
 #endif
+
+
+

@@ -2,7 +2,14 @@
 #define NORMAL_H
 
 #include "treasure.h"
-class Normal : public Treasure {
 
+class Normal : public Treasure {
+    Normal(){
+        val = 1;
+    }
 };
+
+
 #endif
+
+

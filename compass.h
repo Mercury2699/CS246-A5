@@ -10,3 +10,5 @@ class Compass : public Item {
 };
 
 #endif
+
+

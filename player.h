@@ -4,12 +4,12 @@
 #include "character.h"
 #include "treasure.h"
 
-class BA;
-class WA;
-class BD;
-class WD;
-class RH;
-class PH;
+class BoostAtk;
+class WoundAtk;
+class BoostDef;
+class WoundDef;
+class RestorHP;
+class PoisonHP;
 
 class Player : public Character {
 
@@ -20,16 +20,16 @@ class Player : public Character {
 	public:
 	Player(int HP, int Atk, int Def, double treasure);
 	void virtual pickUpTreasure(Treasure *);
-	void virtual applyPotion(RH &rh);
-	void virtual applyPotion(PH &ph);
-	void virtual applyPotion(BA &ba);
-	void virtual applyPotion(WA &wa);
-	void virtual applyPotion(BD &bd);
-	void virtual applyPotion(WD &wd);
-	void virtual removePotion(BA &ba);
-	void virtual removePotion(WA &wa);
-	void virtual removePotion(BD &bd);
-	void virtual removePotion(WD &wd);
+	void virtual applyPotion(RestorHP &rh);
+	void virtual applyPotion(PoisonHP &ph);
+	void virtual applyPotion(BoostAtk &ba);
+	void virtual applyPotion(WoundAtk &wa);
+	void virtual applyPotion(BoostDef &bd);
+	void virtual applyPotion(WoundDef &wd);
+	void virtual removePotion(BoostAtk &ba);
+	void virtual removePotion(WoundAtk &wa);
+	void virtual removePotion(BoostDef &bd);
+	void virtual removePotion(WoundDef &wd);
 	void attack(Character *) override;
 	void beAttacked(Character *) override;
 	void virtual remove() = 0;

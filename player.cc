@@ -34,45 +34,45 @@ void Player::beAttacked(Character *c) {
 	}
 }
 
-void Player::applyPotion(BA &ba) {
+void Player::applyPotion(BoostAtk &ba) {
 	setAtk(getAtk() + 5);
 }
 
-void Player::applyPotion(WA &wa) {
+void Player::applyPotion(WoundAtk &wa) {
 	setAtk(getAtk() - 5);
 }
 
-void Player::applyPotion(BD &bd) {
+void Player::applyPotion(BoostDef &bd) {
 	setAtk(getDef() + 5);
 }
 
-void Player::applyPotion(WD &wd) {
+void Player::applyPotion(WoundDef &wd) {
 	setAtk(getDef() - 5);
 }
 
-void Player::applyPotion(RH &rh) {
+void Player::applyPotion(RestorHP &rh) {
 	int newHP = (getHP() + 10) <= getMaxHP() ? (getHP() + 10) : getMaxHP();
 	setHP(newHP);
 }
 
-void Player::applyPotion(PH &ph) {
+void Player::applyPotion(PoisonHP &ph) {
 	int newHP = (getHP() - 10) >= 0 ? (getHP() - 10) : 0;
 	setHP(newHP);
 }
 
-void Player::removePotion(BA &ba) {
+void Player::removePotion(BoostAtk &ba) {
 	setAtk(getAtk() - 5);
 }
 
-void Player::removePotion(WA &wa) {
+void Player::removePotion(WoundAtk &wa) {
 	setAtk(getAtk() + 5);
 }
 
-void Player::removePotion(BD &bd) {
+void Player::removePotion(BoostDef &bd) {
 	setAtk(getDef() - 5);
 }
 
-void Player::removePotion(WD &wd) {
+void Player::removePotion(WoundDef &wd) {
 	setAtk(getDef() + 5);
 }
 

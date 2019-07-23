@@ -24,3 +24,6 @@ class Character : public Stuff {
 };
 
 #endif
+
+
+

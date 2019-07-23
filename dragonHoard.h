@@ -3,7 +3,11 @@
 #include "treasure.h"
 
 class DragonHoard : public Treasure {
-
+    DragonHoard(){
+        val = 6;
+    }
 };
 
 #endif
+
+

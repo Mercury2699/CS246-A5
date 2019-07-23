@@ -22,4 +22,6 @@ class FloorTile final : protected Cell {
     
     char getChar() override;
 };
+
 #endif
+

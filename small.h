@@ -2,8 +2,15 @@
 #define SMALL_H
 
 #include "treasure.h"
-class Small : public Treasure {
 
+class Small : public Treasure {
+    Small(){
+        val = 2;
+    }
 };
 
 #endif
+
+
+
+

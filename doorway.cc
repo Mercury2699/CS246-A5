@@ -41,3 +41,5 @@ char Doorway::getChar() {
     return '.';
 }
 
+
+
