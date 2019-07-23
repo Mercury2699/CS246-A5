@@ -2,7 +2,7 @@
 #include <cmath>
 
 Enemy::Enemy(int HP, int Atk, int Def, Treasure *t):
-	Character{HP, Atk, Def}, t{t}{}
+	Character{HP, Atk, Def}, t{t} {}
 
 void Enemy::attack(Character *c) {
 	c->beAttacked(this);

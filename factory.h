@@ -23,9 +23,9 @@
 #include "woundAtk.h"
 #include "woundDef.h"
 // Treasures
-#include "normal.h"
-#include "small.h"
-#include "merchantHoard.h"
+#include "normHoard.h"
+#include "smallHoard.h"
+#include "merchHoard.h"
 #include "dragonHoard.h"
 // Items
 #include "compass.h"

@@ -1,4 +1,9 @@
-#include "Vampire.h"
-#include "character.h"
+#include "vampire.h"
 
-Vampire::Vampire(): HP{50}, Atk{20}, Def{30}{}
+Vampire::Vampire(): Enemy{50, 20, 30, nullptr} {}
+
+
+
+
+
+
