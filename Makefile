@@ -7,7 +7,7 @@ POTIONS = potion.o restorHP.o poisonHP.o boostAtk.o boostDef.o woundAtk.o woundD
 EMENIES = vampire.o troll.o werewolf.o phoenix.o dragon.o merchant.o
 CELLS = doorway.o passage.o floorTile.o 
 ITEMS = compass.o barrierSuit.o
-#GOLDS = normHoard.o smallHoard.o merchHoard.o dragonHoard.o
+CONTROLLERS = floor.o factory.o
 OBJECTS = main.o textDisplay.o ${CELLS} ${POTIONS} ${PLAYERS}
 DEPENDS = ${OBJECTS:.o=.d}
 

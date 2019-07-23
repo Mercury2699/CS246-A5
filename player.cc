@@ -3,7 +3,7 @@
 #include <cmath>
 
 Player::Player(int HP, int Atk, int Def, double treasure):
-	Character{HP, Atk, Def}, treasure{treasure}, hasSuit{false}, maxHP{HP}{}
+	Character{HP, Atk, Def}, treasure{treasure}, maxHP{HP}{}
 
 void Player::setTreasure(double t) {
 	treasure = t;

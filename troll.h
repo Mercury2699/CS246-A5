@@ -2,7 +2,14 @@
 #define TROLL_H
 #include "enemy.h"
 
-#include "enemy.h"
+
 class Troll : public Enemy {
 };
+
+
+
+
 #endif
+
+
+
