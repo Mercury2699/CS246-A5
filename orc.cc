@@ -6,7 +6,3 @@ Orc::Orc(int HP, int Atk, int Def, double treasure):
 Orc::pickUpTreasure(Treasure *t) {
 	setTreasure(0.5 * t->getValue());
 }
-
-Orc::applyPotion(Potion *p) {
-	p->effect(*this);
-}

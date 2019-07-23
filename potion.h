@@ -2,18 +2,21 @@
 #define POTION_H
 
 #include "item.h"
+class Player;
 class Human;
 class Dwarf;
 class Elves;
 class Orc;
 
-class Potion : public Item {
+class Potion : public Item, public Player {
+
+	Player *p;
+
+	protected:
+	Player *getP();
 
 	public:
-	void virtual effect(Human &) = 0;
-	void virtual effect(Dwarf &) = 0;
-	void virtual effect(Elves &) = 0;
-	void virtual effect(Orc &) = 0;
+	Potion(Player *);
 };
 
 #endif

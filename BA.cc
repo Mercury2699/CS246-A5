@@ -1,14 +1,13 @@
-#include "BD.h"
+#include "BA.h"
 
-BD::BD(Player *p):
+BA::BA(Player *p):
 	Potion{p}{}
 
-void BD::effect() {
-	getP()->effect();
+void BA::effect() {
 	getP()->applyPotion(*this);
 }
 
-void BD::remove() {
+void BA::remove() {
 	getP()->removePotion(*this);
 	getP()->remove();
 }

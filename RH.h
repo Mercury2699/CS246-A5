@@ -5,6 +5,10 @@
 
 class RH : public Potion {
 
+	public:
+	RH(Player *p);
+	void effect() override;
+	void remove() override;
 };
 
 #endif

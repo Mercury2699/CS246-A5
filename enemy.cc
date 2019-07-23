@@ -5,7 +5,7 @@ Enemy::Enemy(Treasure *t):
 
 Enemy::attack(Character *c) {
 	if (c->getSuit()) {
-		c.setHP(c.getHP() - ceiling (ceiling(((100 / (100 + c->getDef())) * getAtk())) / 2));
+		c->setHP(c->getHP() - ceiling (ceiling(((100 / (100 + c->getDef())) * getAtk())) / 2));
 	} else {
 		c->setHP(c->getHP()-((100 / (100 + c->getDef())) * getAtk()));
 	}

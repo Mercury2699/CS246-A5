@@ -4,7 +4,11 @@
 #include "potion.h"
 
 class WA : public Potion {
-
+	
+	public:
+	WA(Player *p);
+	void effect() override;
+	void remove() override;
 };
 
 #endif
