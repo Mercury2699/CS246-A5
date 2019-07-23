@@ -2,7 +2,7 @@
 #define POTION_H
 
 #include "item.h"
-class Player;
+#include "player.h"
 class Human;
 class Dwarf;
 class Elves;

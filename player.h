@@ -3,9 +3,13 @@
 
 #include "character.h"
 #include "treasure.h"
-#include "potion.h"
 
-class Player : public Character, public potion {
+class BA;
+class WA;
+class BD;
+class WD;
+
+class Player : public Character {
 
 	double treasure;
 	bool hasSuit;
@@ -24,6 +28,7 @@ class Player : public Character, public potion {
 	void attack(Character *) override;
 	void virtual remove() = 0;
 	void virtual effect() = 0;
+	char getState() override;
 
 	protected:
 	void setTreasure(double);
