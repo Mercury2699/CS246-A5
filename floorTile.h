@@ -1,22 +1,21 @@
 #ifndef FLOORTILE_H
 #define FLOORTILE_H
 #include "cell.h"
+class TextDisplay;
+struct Stuff;
 
-class FloorTile : public Cell {
+class FloorTile final : protected Cell {
     TextDisplay *td = nullptr;
-	bool isOccupied;
-	Stuff * occupant;
+    Stuff * occupant = nullptr;
+	bool isOccupied = false;
 
     public:
-    FloorTile(TextDisplay * td, int x, int y) : Cell{x, y} {}
+    FloorTile(int x, int y);
     bool checkOccupancy();
+    void setObserver(TextDisplay *);
 	void notifyObserver();
 	Stuff * getOccupant();
     
-    char getState() override {
-        if(checkOccupancy())
-            return getOccupant()->getState();
-        return '.';
-    }
+    char getChar() override;
 };
 #endif
