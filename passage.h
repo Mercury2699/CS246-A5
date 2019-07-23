@@ -18,5 +18,6 @@ class Passage final : protected Cell {
 	Stuff * getOccupant();
     char getChar() override;
 };
-s#endif
+
+#endif
 
