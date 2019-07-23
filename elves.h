@@ -2,7 +2,6 @@
 #define ELVES_H
 #include "player.h"
 
-#include "player.h"
 class Elves : public Player {
 
 	public:
