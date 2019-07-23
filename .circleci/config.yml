@@ -10,6 +10,5 @@ jobs:
     executor: my-executor
     steps:
       - checkout
-      - run: chmod 777 runSuite
       - run: make test
       - run: make
