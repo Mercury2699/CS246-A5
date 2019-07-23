@@ -1,27 +1,27 @@
-#include "floorTile.h"
+#include "doorway.h"
 
-FloorTile::FloorTile(int x, int y) {
+Doorway::Doorway(int x, int y) {
     this->x = x;
     this->y = y;
 }
 
-bool FloorTile::checkOccupancy(){
+bool Doorway::checkOccupancy(){
     return (isOccupied && occupant);
 }
 
-void FloorTile::setObserver(TextDisplay * td){
+void Doorway::setObserver(TextDisplay * td){
     this->td = td;
 }
 
-void FloorTile::notifyObserver(){
+void Doorway::notifyObserver(){
     td->notify(x,y,getChar());
 }
 
-Stuff * FloorTile::getOccupant(){
+Stuff * Doorway::getOccupant(){
     return occupant;
 }
 
-char FloorTile::getChar() {
+char Doorway::getChar() {
     if(checkOccupancy())
         return getOccupant()->getChar();
     return '.';

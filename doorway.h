@@ -2,17 +2,21 @@
 #define DOORWAY_H
 #include "cell.h"
 
-class Doorway : public Cell {
+class TextDisplay;
+struct Stuff;
+
+class Doorway final : protected Cell {
     TextDisplay *td = nullptr;
-	bool isOccupied;
-	Stuff * occupant;
+    Stuff * occupant = nullptr;
+	bool isOccupied = false;
 
     public:
-    Doorway(int x, int y) : Cell{x, y} {}
-    bool checkOccupancy() override;
-	void notifyObserver() override;
-	Stuff * getOccupant() override;
-    char getState() override;
+    Doorway(int x, int y);
+    bool checkOccupancy();
+    void setObserver(TextDisplay *);
+	void notifyObserver();
+	Stuff * getOccupant();
+    char getChar() override;
 };
 
 #endif
