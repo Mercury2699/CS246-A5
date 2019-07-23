@@ -21,6 +21,20 @@ Stuff * Passage::getOccupant(){
     return occupant;
 }
 
+void Passage::attachStuff(Stuff * s){
+    isOccupied = true;
+    occupant = s;
+    notifyObserver();
+}
+
+Stuff* Passage::detachStuff(){
+    Stuff * temp = occupant;
+    isOccupied = false;
+    occupant = nullptr;
+    notifyObserver();
+    return temp;
+}
+
 char Passage::getChar(){
     if(checkOccupancy()){
         return getOccupant()->getChar();

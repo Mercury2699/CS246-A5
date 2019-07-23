@@ -21,6 +21,20 @@ Stuff * Doorway::getOccupant(){
     return occupant;
 }
 
+void Doorway::attachStuff(Stuff * s){
+    isOccupied = true;
+    occupant = s;
+    notifyObserver();
+}
+
+Stuff* Doorway::detachStuff(){
+    Stuff * temp = occupant;
+    isOccupied = false;
+    occupant = nullptr;
+    notifyObserver();
+    return temp;
+}
+
 char Doorway::getChar() {
     if(checkOccupancy())
         return getOccupant()->getChar();

@@ -16,6 +16,8 @@ class Passage final : protected Cell {
     void setObserver(TextDisplay *);
 	void notifyObserver();
 	Stuff * getOccupant();
+    void attachStuff(Stuff *);
+    Stuff* detachStuff();
     char getChar() override;
 };
 
