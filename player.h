@@ -13,6 +13,7 @@ class Player : public Character {
 
 	double treasure;
 	bool hasSuit;
+	const int maxHP;
 
 	public:
 	Player(int HP, int Atk, int Def, double treasure);
@@ -26,9 +27,11 @@ class Player : public Character {
 	void virtual removePotion(BD &bd);
 	void virtual removePotion(WD &wd);
 	void attack(Character *) override;
+	void beAttacked(Character *) override;
 	void virtual remove() = 0;
 	void virtual effect() = 0;
-	char getState() override;
+	char getChar() override;
+	int getMaxHP() const;
 
 	protected:
 	void setTreasure(double);

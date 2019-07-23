@@ -1,11 +1,20 @@
 #include "player.h"
 #include "treasure.h"
+#include <cmath>
 
 Player::Player(int HP, int Atk, int Def, double treasure):
-	Character{HP, Atk, Def}, treasure{treasure}{}
+	Character{HP, Atk, Def}, treasure{treasure}, hasSuit{false}, maxHP{HP}{}
 
 void Player::setTreasure(double t) {
 	treasure = t;
+}
+
+void Player::setSuit(bool suit) {
+	hasSuit = suit;
+}
+
+bool Player::getSuit() {
+	return hasSuit;
 }
 
 void Player::pickUpTreasure(Treasure *t) {
@@ -13,8 +22,16 @@ void Player::pickUpTreasure(Treasure *t) {
 }
 
 void Player::attack(Character *c) {
-	c->setHP(c->getHP()-((100 / (100 + c->getDef())) * getAtk()));
+	c->beAttacked(this);
 	c->attack(this);
+}
+
+void Player::beAttacked(Character *c) {
+	if (getSuit()) {
+		setHP(getHP() - ceil (ceil(((100 / (100 + getDef())) * c->getAtk())) / 2));
+	} else {
+		setHP(getHP()-((100 / (100 + getDef())) * c->getAtk()));
+	}
 }
 
 void Player::applyPotion(BA &ba) {
@@ -49,8 +66,12 @@ void Player::removePotion(WD &wd) {
 	setAtk(getDef() + 5);
 }
 
-char Player::getState() {
+char Player::getChar() {
 	return '@';
+}
+
+int Player::getMaxHP() const {
+	return maxHP;
 }
 
 

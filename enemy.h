@@ -11,6 +11,7 @@ class Enemy : public Character {
 	public:
 	Enemy(int HP, int Atk, int Def, Treasure *t);
 	void attack(Character *) override;
+	void beAttacked(Character *) override;
 
 };
 

@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -g -std=c++14 -Wall -MMD
 EXEC = cc3k
 
-OBJECTS = main.o textDisplay.o doorway.o passage.o floorTile.o
+OBJECTS = main.o textDisplay.o doorway.o passage.o floorTile.o stuff.o character.o player.o
 
 DEPENDS = ${OBJECTS:.o=.d}
 
