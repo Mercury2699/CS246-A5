@@ -12,6 +12,7 @@ class FloorTile : public Cell {
     bool checkOccupancy();
 	void notifyObserver();
 	Stuff * getOccupant();
+    
     char getState() override {
         if(checkOccupancy())
             return getOccupant()->getState();

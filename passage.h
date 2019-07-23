@@ -9,9 +9,9 @@ class Passage : public Cell {
 
     public:
     Passage(int x, int y) : Cell{x,y} {}
-    bool checkOccupancy();
-	void notifyObserver();
-	Stuff * getOccupant();
-    char getState() override { return '#';}
-};
+    bool checkOccupancy() override;
+	void notifyObserver() override;
+	Stuff * getOccupant() override;
+    char getState() override;
 #endif
+
