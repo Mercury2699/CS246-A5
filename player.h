@@ -13,8 +13,8 @@ class PoisonHP;
 
 class Player : public Character {
 
-	double treasure;
-	bool hasSuit;
+	double treasure = 0;
+	bool hasSuit = false, hasCompass = false;
 	const int maxHP;
 
 	public:
