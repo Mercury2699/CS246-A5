@@ -13,5 +13,6 @@ class Passage : public Cell {
 	void notifyObserver() override;
 	Stuff * getOccupant() override;
     char getState() override;
-#endif
+};
 
+#endif

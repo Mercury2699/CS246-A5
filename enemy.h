@@ -3,7 +3,8 @@
 #include "character.h"
 
 
-#include "character.h"
+class Treasure;
+
 class Enemy : public Character {
 	Treasure *t;
 
