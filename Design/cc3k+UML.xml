@@ -257,7 +257,7 @@
         <mxCell id="CL77BtKyBlIw3x44raxb-28" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="CL77BtKyBlIw3x44raxb-26" vertex="1">
           <mxGeometry y="70" width="267" height="8" as="geometry"/>
         </mxCell>
-        <mxCell id="X4qG7hlZkMhb3qOqNSxj-83" value="+ attack(Character Pointer): void&#xa;+ pickupTreasure(Treasure Pointer): void&#xa;+ applyPotion(BoostAtk Reference): void&#xa;+ applyPotion(WA Reference): void&#xa;+ applyPotion(BoostDef Referece): void&#xa;+ applyPotion(WD Reference): void&#xa;+ removePotion(BoostAtk Reference): void&#xa;+ removePotion(WA Reference): void&#xa;+ removePotion(BoostDef Referece): void&#xa;+ removePotion(WD Reference): void&#xa;+ beAttacked(Character Pointer): void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" vertex="1" parent="CL77BtKyBlIw3x44raxb-26">
+        <mxCell id="X4qG7hlZkMhb3qOqNSxj-83" value="+ attack(Character Pointer): void&#xa;+ pickupTreasure(Treasure Pointer): void&#xa;+ applyPotion(BoostAtk Reference): void&#xa;+ applyPotion(WoundAtk Reference): void&#xa;+ applyPotion(BoostDef Referece): void&#xa;+ applyPotion(WoundDef Reference): void&#xa;+ removePotion(BoostAtk Reference): void&#xa;+ removePotion(WoundAtk Reference): void&#xa;+ removePotion(BoostDef Referece): void&#xa;+ removePotion(WoundDef Reference): void&#xa;+ beAttacked(Character Pointer): void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=2" vertex="1" parent="CL77BtKyBlIw3x44raxb-26">
           <mxGeometry y="78" width="267" height="182" as="geometry"/>
         </mxCell>
         <mxCell id="oADH9t_thnL_sqh25xlf-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=0;endSize=10;" parent="1" source="CL77BtKyBlIw3x44raxb-113" target="CL77BtKyBlIw3x44raxb-26" edge="1">
@@ -580,7 +580,7 @@
         <mxCell id="S-8BzlrjVBmqoAVdAwa1-23" value="+ effect(Player Reference):  void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="S-8BzlrjVBmqoAVdAwa1-20" vertex="1">
           <mxGeometry y="34" width="189" height="56" as="geometry"/>
         </mxCell>
-        <mxCell id="S-8BzlrjVBmqoAVdAwa1-11" value="WD" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+        <mxCell id="S-8BzlrjVBmqoAVdAwa1-11" value="WoundDef" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="2223" y="1233" width="190" height="90" as="geometry"/>
         </mxCell>
         <mxCell id="S-8BzlrjVBmqoAVdAwa1-13" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="S-8BzlrjVBmqoAVdAwa1-11" vertex="1">
@@ -589,7 +589,7 @@
         <mxCell id="S-8BzlrjVBmqoAVdAwa1-14" value="+ effect(Player Reference):  void&#xa;+ getChar(): character" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="S-8BzlrjVBmqoAVdAwa1-11" vertex="1">
           <mxGeometry y="34" width="190" height="56" as="geometry"/>
         </mxCell>
-        <mxCell id="S-8BzlrjVBmqoAVdAwa1-6" value="RH" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+        <mxCell id="S-8BzlrjVBmqoAVdAwa1-6" value="RestorHP" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="1218" y="1233" width="190" height="90" as="geometry"/>
         </mxCell>
         <mxCell id="S-8BzlrjVBmqoAVdAwa1-8" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="S-8BzlrjVBmqoAVdAwa1-6" vertex="1">
