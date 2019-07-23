@@ -1,6 +1,8 @@
 #ifndef ELVES_H
 #define ELVES_H
 #include "player.h"
+#include "WA.h"
+#include "WD.h"
 
 class Elves : public Player {
 

@@ -17,5 +17,7 @@ class Passage final : protected Cell {
 	void notifyObserver();
 	Stuff * getOccupant();
     char getChar() override;
+};
+
 #endif
 
