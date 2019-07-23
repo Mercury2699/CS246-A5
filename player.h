@@ -8,6 +8,8 @@ class BA;
 class WA;
 class BD;
 class WD;
+class RH;
+class PH;
 
 class Player : public Character {
 

@@ -7,6 +7,6 @@ void RH::effect() {
 	getP()->applyPotion(*this);
 }
 
-void PH::remove() {
+void RH::remove() {
 	getP()->remove();
 }

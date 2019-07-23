@@ -1,4 +1,4 @@
-#include "wd.cc"
+#include "WD.h"
 
 WD::WD(Player *p):
 	Potion{p}{}

@@ -2,8 +2,10 @@
 #define ITEM_H
 #include "stuff.h"
 
+class Player;
 
-#include "stuff.h"
 class Item : public Stuff {
+    public:
+    virtual void effect(Player &) = 0;
 };
 #endif
