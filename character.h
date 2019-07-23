@@ -15,14 +15,15 @@ class Character : public Stuff {
 	int getHP() { return HP; }
 	int getAtk() { return Atk; }
 	int getDef() { return Def; }
+	bool isDead() { return (HP <= 0); }
 	virtual void attack(Character *) = 0;
-	virtual bool isDead() { return (HP == 0); }
 	virtual void beAttacked(Character *) = 0;
 
 	protected:
 	void setHP(int hp) { HP = hp; }
 	void setAtk(int atk) { Atk = atk; }
 	void setDef(int def) { Def = def; }
+
 };
 
 #endif

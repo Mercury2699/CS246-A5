@@ -17,6 +17,10 @@ class Player : public Character {
 	bool hasSuit = false, hasCompass = false;
 	const int maxHP;
 
+	protected:
+	void setTreasure(double);
+	bool getSuit();
+
 	public:
 	Player(int HP, int Atk, int Def, double treasure);
 	void virtual pickUpTreasure(Treasure *);
@@ -30,17 +34,14 @@ class Player : public Character {
 	void virtual removePotion(WoundAtk &wa);
 	void virtual removePotion(BoostDef &bd);
 	void virtual removePotion(WoundDef &wd);
+	void setCompass(bool);
+	void setSuit(bool);
 	void attack(Character *) override;
 	void beAttacked(Character *) override;
 	void virtual remove() = 0;
 	void virtual effect() = 0;
 	char getChar() override;
 	int getMaxHP() const;
-
-	protected:
-	void setTreasure(double);
-	void setSuit(bool);
-	bool getSuit();
 };
 
 #endif

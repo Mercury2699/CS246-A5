@@ -13,6 +13,10 @@ void Player::setSuit(bool suit) {
 	hasSuit = suit;
 }
 
+void Player::setCompass(bool comp) {
+	hasCompass = comp;
+}
+
 bool Player::getSuit() {
 	return hasSuit;
 }

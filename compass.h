@@ -4,9 +4,10 @@
 #include "player.h"
 
 
-class Compass : public Item {
-    public:
-    void effect(Player &) override;
+struct Compass : public Item {
+    void effect(Player & pc) override {
+        pc.setCompass(true);
+    }
 };
 
 #endif
