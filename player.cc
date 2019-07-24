@@ -3,7 +3,9 @@
 #include <cmath>
 
 Player::Player(int HP, int Atk, int Def, double treasure):
-	Character{HP, Atk, Def}, treasure{treasure}, maxHP{HP}, defaultAtk{Atk}, defaultDef{Def}{}
+	Character{HP, Atk, Def}, treasure{treasure}, maxHP{HP}, defaultAtk{Atk}, defaultDef{Def}{
+		type = Type::Plyr;
+	}
 
 void Player::setTreasure(double t) {
 	treasure = t;
