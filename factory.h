@@ -22,11 +22,6 @@
 #include "poisonHP.h"
 #include "woundAtk.h"
 #include "woundDef.h"
-// Treasures
-#include "normHoard.h"
-#include "smallHoard.h"
-#include "merchHoard.h"
-#include "dragonHoard.h"
 // Items
 #include "compass.h"
 #include "barrierSuit.h"

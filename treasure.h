@@ -4,11 +4,10 @@
 #include "item.h"
 
 class Treasure : public Item {
-	protected:
 	int val;
 
 	public:
-	virtual int getValue() = 0;
+	int getValue();
 	char getChar() override {return 'G';}
 };
 
