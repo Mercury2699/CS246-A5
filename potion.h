@@ -15,21 +15,21 @@ class Potion : public Item {
 
 class BoostDef : public Potion {
 	public:
-	void effect(Player * pc) override {
+	void effect(std::shared_ptr<Player> pc) override {
 		pc->setDef(pc->getDef() + 5);
 	}
 };
 
 class BoostAtk : public Potion {
 	public:
-	void effect(Player * pc) override {
+	void effect(std::shared_ptr<Player> pc) override {
 		pc->setAtk(pc->getAtk() + 5);
 	}
 };
 
 class RestorHP : public Potion {
 	public:
-	void effect(Player * pc) override {
+	void effect(std::shared_ptr<Player> pc) override {
 		int newHP = (pc->getHP() + 10) <= pc->getMaxHP() ? (pc->getHP() + 10) : pc->getMaxHP();
 		pc->setHP(newHP);
 	}
@@ -37,7 +37,7 @@ class RestorHP : public Potion {
 
 class PoisonHP : public Potion {
 	public:
-	void effect(Player * pc) override {
+	void effect(std::shared_ptr<Player> pc) override {
 		if(pc->getRace() == PCRace::Elves){
 			int newHP = (pc->getHP() + 10) <= pc->getMaxHP() ? (pc->getHP() + 10) : pc->getMaxHP();
 			pc->setHP(newHP);
@@ -50,7 +50,7 @@ class PoisonHP : public Potion {
 
 class WoundAtk : public Potion {
 	public:
-	void effect(Player * pc) override {
+	void effect(std::shared_ptr<Player> pc) override {
 		if(pc->getRace() == PCRace::Elves){
 			pc->setAtk(pc->getAtk() + 5);
 		} else {
@@ -62,7 +62,7 @@ class WoundAtk : public Potion {
 
 class WoundDef : public Potion {
 	public:
-	void effect(Player * pc) override {
+	void effect(std::shared_ptr<Player> pc) override {
 		if(pc->getRace() == PCRace::Elves){
 			pc->setDef(pc->getDef() + 5);
 		} else {

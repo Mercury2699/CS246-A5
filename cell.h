@@ -4,7 +4,8 @@
 #include "stuff.h"
 #include "textDisplay.h"
 
-struct Cell {
+class Cell {
+	protected:
 	int x = 0, y = 0;
 	bool isOccupied = false;
 	Stuff *occupant = nullptr;

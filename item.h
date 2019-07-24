@@ -1,32 +1,29 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include <memory>
 #include "stuff.h"
 #include "player.h"
 
 class Stuff;
 
 class Item : public Stuff {
+    // Type type; inherited from Stuff
     public:
+    // Type getType(); inherited from Stuff
     Item(){ this->type = Type::Itm;}
-    virtual char getChar() = 0;
-    virtual void effect(Player *) = 0;
+    // virtual char getChar() = 0;
+    virtual void effect(std::shared_ptr<Player>) = 0;
 };
 
 class BarrierSuit : public Item {
-    void effect(Player * pc) override {
-        pc->setSuit(true);
-    }
-
-    char getChar() override { return 'B'; }
+    void effect(std::shared_ptr<Player>) override;
+    char getChar() override;
 };
 
 struct Compass : public Item {
-    void effect(Player * pc) override {
-        pc->setCompass(true);
-    }
-
-    char getChar() override { return 'C'; }
+    void effect(std::shared_ptr<Player>) override;
+    char getChar() override;
 };
 
 

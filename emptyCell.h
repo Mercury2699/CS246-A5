@@ -2,7 +2,7 @@
 #define EMPTYCELL_H
 #include "cell.h"
 
-struct EmptyCell final : private Cell {
+struct EmptyCell : public Cell {
     EmptyCell(int x, int y):
         Cell{x, y}{}
     char getChar() override {return ' ';};

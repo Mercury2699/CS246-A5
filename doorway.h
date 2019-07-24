@@ -3,7 +3,7 @@
 #include "cell.h"
 
 
-class Doorway final : protected Cell {
+class Doorway final : public Cell {
     public:
     Doorway(int x, int y);
     char getChar() override;

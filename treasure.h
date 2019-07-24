@@ -13,7 +13,7 @@ class Treasure : public Item {
 	int getValue();
 	char getChar() override;
 	void setCollect();
-	void effect(Player *) override;
+	void effect(std::shared_ptr<Player>) override;
 };
 
 

@@ -6,9 +6,9 @@ PLAYERS = player.o human.o dwarf.o orc.o elves.o
 POTIONS = potion.o
 EMENIES = vampire.o troll.o werewolf.o phoenix.o dragon.o merchant.o
 CELLS = doorway.o passage.o floorTile.o 
-ITEMS = compass.o barrierSuit.o treasure.o
+ITEMS = item.o treasure.o
 CONTROLLERS = floor.o factory.o
-OBJECTS = main.o textDisplay.o treasure.o ${POTIONS} ${PLAYERS}
+OBJECTS = main.o textDisplay.o ${ITEMS} ${POTIONS} ${PLAYERS}
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

@@ -5,7 +5,7 @@
 
 class TextDisplay;
 
-class Passage final : protected Cell {
+class Passage final : public Cell {
     public:
     Passage(int x, int y);
     char getChar() override;

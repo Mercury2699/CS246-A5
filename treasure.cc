@@ -20,7 +20,7 @@ void Treasure::setCollect() {
 	canCollect = true;
 }
 
-void Treasure::effect(Player * pc) {
+void Treasure::effect(std::shared_ptr<Player> pc) {
 	pc->setTreasure(pc->getTreasure() + val);
 }
 

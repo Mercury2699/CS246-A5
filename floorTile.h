@@ -6,7 +6,7 @@
 class TextDisplay;
 
 
-class FloorTile final : protected Cell {
+class FloorTile final : public Cell {
     public:
     FloorTile(int x, int y);
     char getChar() override;
