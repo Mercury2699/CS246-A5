@@ -4,6 +4,7 @@
 
 
 class Troll : public Enemy {
+    Troll(Treasure *t): Enemy{120, 25, 15, t}{}
 };
 
 

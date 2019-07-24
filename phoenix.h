@@ -3,5 +3,7 @@
 
 #include "enemy.h"
 class Phoenix : public Enemy {
+    public:
+    Phoenix(Treasure *t): Enemy{50, 35, 20, t}{}
 };
 #endif

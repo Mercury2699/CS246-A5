@@ -3,5 +3,6 @@
 
 #include "enemy.h"
 class Werewolf : public Enemy {
+    Werewolf(Treasure *t): Enemy{120, 30, 5, t}{}
 };
 #endif
