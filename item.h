@@ -4,7 +4,6 @@
 #include "stuff.h"
 #include "player.h"
 
-
 class Item : public Stuff {};
 
 class BarrierSuit : public Item {

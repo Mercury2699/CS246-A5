@@ -4,6 +4,10 @@
 #include "textDisplay.h"
 
 enum Type {Plyr, Enmy, Trsr, Ptn, Itm};
+class Human;
+class Dwarf;
+class Orc;
+class Elves;
 
 class Stuff {
     protected:
@@ -23,6 +27,9 @@ class Stuff {
     virtual int getHP() = 0;
 	virtual int getAtk() = 0;
 	virtual int getDef() = 0;
+    virtual void setHP(int hp) = 0;
+	virtual void setAtk(int atk) = 0;
+	virtual void setDef(int def) = 0;
 };
 
 #endif
