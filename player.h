@@ -2,15 +2,9 @@
 #define PLAYER_H
 
 #include "character.h"
-#include "treasure.h"
-#include "potion.h"
 
-class RestorHP;
-class PoisonHP;
-class BoostAtk;
-class BoostDef;
-class WoundAtk;
-class WoundDef;
+class Treasure;
+class Potion;
 
 enum class PCRace {Human, Elves, Dwarf, Orc};
 
@@ -29,8 +23,8 @@ class Player : public Character {
 	void virtual pickUpTreasure(Treasure *);
 	void virtual applyPotion(Potion *);
 	void virtual removePotion();
-	void attack(Stuff *) override;
-	void beAttacked(Stuff *) override;
+	void attack(Character *) override;
+	void beAttacked(Character *) override;
 	void setPosn(int x, int y);
 	int getX();
 	int getY();

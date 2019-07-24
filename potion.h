@@ -4,9 +4,6 @@
 #include "item.h"
 #include "player.h"
 
-class Item;
-class Player;
-
 
 class Potion : public Item {
 	Type type = Type::Ptn;

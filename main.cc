@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 #include "textDisplay.h"
-#include "factory.h"
 #include "floor.h"
 
 const std::string N = "no", S = "so", E = "ea", W = "we", NE = "ne", NW = "nw", SE = "se", SW = "sw";
@@ -14,7 +13,6 @@ const std::string AtkNE = "a<ne>", AtkNW = "a<nw>", AtkSE = "a<se>", AtkSW = "a<
 int main(int argc, char *argv[]) {
 	std::vector<Floor> floors;
 	TextDisplay td;
-	Factory f;
 	std::string command;
 	std::cout << "Welcome to the game of Chamber Crawler 3000+! To start, please select your character:" << std::endl;
 	std::cout << "h: Human, e: Elves, d: Dwarf, o: Orc" << std::endl;

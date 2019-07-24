@@ -1,6 +1,7 @@
-#include "player.h"
-#include "treasure.h"
 #include <cmath>
+#include "player.h"
+#include "potion.h"
+#include "treasure.h"
 
 Player::Player(int HP, int Atk, int Def, double treasure):
 	Character{HP, Atk, Def}, treasure{treasure}, maxHP{HP}, defaultAtk{Atk}, defaultDef{Def}{
@@ -60,18 +61,18 @@ void Player::beAttacked(Character *c) {
 }
 
 void Player::applyPotion(Potion * s) {
-	s->effect(*this);
+	s->effect(this);
 }
 
 void Player::killedMerchant(){
 	killedMerch = true;
 }
 
-bool hasKilledMerch(){
+bool Player::hasKilledMerch(){
 	return killedMerch;
 };
 
-void Player::remove() {
+void Player::removePotion() {
 	setAtk(getDefaultAtk());
 	setDef(getDefaultDef());
 }

@@ -3,7 +3,6 @@
 
 #include "stuff.h"
 
-
 class Character : public Stuff {
 
 	int HP;

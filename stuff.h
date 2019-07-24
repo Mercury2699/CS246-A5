@@ -2,7 +2,8 @@
 #define STUFF_H
 
 #include "textDisplay.h"
-#include "player.h"
+
+class Player;
 
 enum Type {Plyr, Enmy, Trsr, Ptn, Itm};
 
