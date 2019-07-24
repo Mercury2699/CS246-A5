@@ -1,6 +1,6 @@
 #include "phoenix.h"
 
-char getChar() {
+char Phoenix::getChar() {
     return 'X';
 }
 
