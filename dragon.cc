@@ -5,5 +5,3 @@ char getChar() {
 }
 
 
-
-

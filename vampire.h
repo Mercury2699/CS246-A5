@@ -3,8 +3,8 @@
 #include "enemy.h"
 
 class Vampire : public Enemy {
-  public:
-  Vampire(Treasure *t) : Enemy{50, 25, 25, t} {}
+  	public:
+  	Vampire(Item *i) : Enemy{50, 25, 25, i} {}
 	char getChar() override;
 };
 

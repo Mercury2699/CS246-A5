@@ -4,7 +4,7 @@
 #include "enemy.h"
 class Werewolf : public Enemy {
     public:
-    Werewolf(Treasure *t): Enemy{120, 30, 5, t} {}
+    Werewolf(Item *i): Enemy{120, 30, 5, i} {}
     char getChar() override;
 };
 #endif

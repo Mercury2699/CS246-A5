@@ -5,17 +5,17 @@
 #include <memory>
 #include "character.h"
 
-class Treasure;
+class Item;
 
 class Enemy : public Character {
 	protected:
-	std::unique_ptr<Treasure> t;
+	std::shared_ptr<Item> i; // Item includes Suit, Compass, and Treasuress
 	bool hostile = false;
 
 	public:
 	virtual char getChar() = 0;
 	virtual void becomeHostile() { hostile = true; }
-	Enemy(int HP, int Atk, int Def, Treasure *t) : Character{HP, Atk, Def}, t{t} {
+	Enemy(int HP, int Atk, int Def, Item *i) : Character{HP, Atk, Def}, i{i} {
 		type = Type::Enmy;
 	}
 	void attack(Character *c) {

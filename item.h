@@ -12,12 +12,14 @@ class BarrierSuit : public Item {
     void effect(Player & pc) {
         pc.setSuit(true);
     }
+    char getChar() { return 'B'; }
 };
 
 struct Compass : public Item {
     void effect(Player & pc) {
         pc.setCompass(true);
     }
+    char getChar() { return 'C'; }
 };
 
 

@@ -3,7 +3,8 @@
 #include "enemy.h"
 
 class Dragon : public Enemy {
-    Dragon(): Enemy{150, 20, 20, nullptr} {}
+    // Dragon must be initialized with an Item (Dragon Hoard or Barrier Suit)
+    Dragon(Item * it): Enemy{150, 20, 20, it} {} 
     public:
     char getChar() override;
 };
