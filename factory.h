@@ -22,9 +22,10 @@
 #include "poisonHP.h"
 #include "woundAtk.h"
 #include "woundDef.h"
-
-
-
+// Item
+#include "item.h"
+#include "potion.h"
+#include "treasure.h"
 
 struct Factory {
     Player * createPlayer(char race);
