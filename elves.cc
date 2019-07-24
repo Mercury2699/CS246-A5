@@ -11,15 +11,6 @@ void Elves::applyPotion(WoundDef &wd) {
 	setDef(getDef() + 5);
 }
 
-void Elves::removePotion(WoundAtk &wa) {
-	setAtk(getAtk() - 5);
-}
-
-void Elves::removePotion(WoundDef &wd) {
-	setDef(getDef() - 5);
-}
-
-
 
 
 

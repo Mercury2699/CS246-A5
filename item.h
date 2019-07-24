@@ -7,8 +7,7 @@ class Player;
 
 
 class Item : public Stuff {
-    public:
-    virtual void effect(Player &) = 0;
+	void virtual effect(Player &pc) = 0;
 };
 
 

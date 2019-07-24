@@ -3,7 +3,7 @@
 #include <cmath>
 
 Player::Player(int HP, int Atk, int Def, double treasure):
-	Character{HP, Atk, Def}, treasure{treasure}, maxHP{HP}{}
+	Character{HP, Atk, Def}, treasure{treasure}, maxHP{HP}, defaultAtk{Atk}, defaultDef{Def}{}
 
 void Player::setTreasure(double t) {
 	treasure = t;
@@ -19,6 +19,14 @@ void Player::setCompass(bool comp) {
 
 bool Player::getSuit() {
 	return hasSuit;
+}
+
+int Player::getDefaultAtk() {
+	return defaultAtk;
+}
+
+int Player::getDefaultDef() {
+	return defaultDef;
 }
 
 void Player::pickUpTreasure(Treasure *t) {
@@ -64,20 +72,9 @@ void Player::applyPotion(PoisonHP &ph) {
 	setHP(newHP);
 }
 
-void Player::removePotion(BoostAtk &ba) {
-	setAtk(getAtk() - 5);
-}
-
-void Player::removePotion(WoundAtk &wa) {
-	setAtk(getAtk() + 5);
-}
-
-void Player::removePotion(BoostDef &bd) {
-	setAtk(getDef() - 5);
-}
-
-void Player::removePotion(WoundDef &wd) {
-	setAtk(getDef() + 5);
+void Player::remove() {
+	setAtk(getDefaultAtk());
+	setDef(getDefaultDef());
 }
 
 char Player::getChar() {

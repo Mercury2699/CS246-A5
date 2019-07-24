@@ -9,15 +9,8 @@ class Dwarf;
 class Elves;
 class Orc;
 
-class Potion : public Item, public Player {
+class Potion : public Item {
 
-	Player *p;
-
-	protected:
-	Player *getP();
-
-	public:
-	Potion(Player *);
 };
 
 #endif

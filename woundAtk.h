@@ -5,13 +5,6 @@
 
 class WoundAtk : public Potion {
 	
-	using Player::effect;
-	using Player::remove;
-
-	public:
-	WoundAtk(Player *p);
-	void effect() override;
-	void remove() override;
 };
 
 #endif

@@ -5,13 +5,6 @@
 
 class WoundDef : public Potion {
 
-	using Player::effect;
-	using Player::remove;
-	
-	public:
-	WoundDef(Player *p);
-	void effect() override;
-	void remove() override;
 };
 
 #endif

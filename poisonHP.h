@@ -5,13 +5,6 @@
 
 class PoisonHP : public Potion {
 
-	using Player::effect;
-	using Player::remove;
-
-	public:
-	PoisonHP(Player *p);
-	void effect() override;
-	void remove() override;
 };
 
 #endif
