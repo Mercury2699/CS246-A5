@@ -3,6 +3,8 @@
 
 #include "enemy.h"
 class Werewolf : public Enemy {
-    Werewolf(Treasure *t): Enemy{120, 30, 5, t}{}
+    public:
+    Werewolf(Treasure *t): Enemy{120, 30, 5, t} {}
+    char getChar() override;
 };
 #endif

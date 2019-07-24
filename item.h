@@ -4,7 +4,9 @@
 #include "stuff.h"
 #include "player.h"
 
-class Item : public Stuff {};
+class Item : public Stuff {
+    Item(){type = Type::Itm;}
+};
 
 class BarrierSuit : public Item {
     void effect(Player & pc) {

@@ -4,6 +4,9 @@
 
 class Vampire : public Enemy {
   public:
-  Varmpire(Treasure *t) {50, 25, 25, t}{}
+  Vampire(Treasure *t) : Enemy{50, 25, 25, t} {}
+	char getChar() override;
 };
+
+
 #endif

@@ -22,9 +22,6 @@
 #include "poisonHP.h"
 #include "woundAtk.h"
 #include "woundDef.h"
-// Items
-#include "compass.h"
-#include "barrierSuit.h"
 
 
 

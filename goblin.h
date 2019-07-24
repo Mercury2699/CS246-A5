@@ -4,7 +4,9 @@
 #include "enemy.h"
 
 class Goblin : public Enemy {
-    Phoenix(Treasure *t): Enemy{70, 5, 10, t}{}
+    Goblin(Treasure *t): Enemy{70, 5, 10, t} {}
+    public:
+    char getChar() override;
 };
 
 #endif

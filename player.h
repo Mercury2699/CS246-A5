@@ -11,13 +11,16 @@ class BoostDef;
 class WoundAtk;
 class WoundDef;
 
-class Player : public Character {
+enum class PCRace {Human, Elves, Dwarf, Orc};
 
+class Player : public Character {
+	protected:
 	double treasure = 0;
 	bool hasSuit = false, hasCompass = false;
 	const int maxHP;
 	const int defaultAtk;
 	const int defaultDef;
+	PCRace race;
 
 	public:
 	Player(int HP, int Atk, int Def, double treasure);
@@ -32,9 +35,11 @@ class Player : public Character {
 	void setTreasure(double);
 	char getChar() override;
 	bool getSuit();
+	Race getRace();
 	int getDefaultAtk();
 	int getDefaultDef();
 	int getMaxHP() const;
 };
 
 #endif
+

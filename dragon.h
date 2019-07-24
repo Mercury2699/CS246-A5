@@ -3,7 +3,9 @@
 #include "enemy.h"
 
 class Dragon : public Enemy {
-    Dragon(): Enemy{150, 20, 20, nullptr}
+    Dragon(): Enemy{150, 20, 20, nullptr} {}
+    public:
+    char getChar() override;
 };
 
 #endif
