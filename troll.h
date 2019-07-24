@@ -4,8 +4,8 @@
 
 
 class Troll : public Enemy {
-    Troll(Item *i): Enemy{120, 25, 15, i} {}
     public:
+    Troll(Item *i): Enemy{120, 25, 15, i} {}
     char getChar() override;
 };
 

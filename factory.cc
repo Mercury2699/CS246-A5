@@ -25,17 +25,17 @@ Potion * Factory::genPotion() {
     int RandNum = rand() % 6;
 
     if ( RandNum == 0 ) {
-        return new BoostAtk{};
+        return new RestorHP{};
     } else if ( RandNum == 1 ) {
-        return new BoostDef{};
+        return new BoostAtk{};
     } else if ( RandNum == 2 ) {
-        return new WoundAtk{};
+        return new BoostDef{};
     } else if ( RandNum == 3 ) {
-        return new WoundDef{};
-    } else if ( RandNum == 4 ) {
-        return new RestoreHP{};
-    } else if ( RandNum == 5 ) {
         return new PoisonHP{};
+    } else if ( RandNum == 4 ) {
+        return new WoundAtk{};
+    } else if ( RandNum == 5 ) {
+        return new WoundDef{};
     }
 }
 

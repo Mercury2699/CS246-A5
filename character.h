@@ -15,6 +15,8 @@ class Character : public Stuff {
 	int getAtk() { return Atk; }
 	int getDef() { return Def; }
 	bool isDead() { return (HP <= 0); }
+	virtual void attack(Character *) = 0;
+    virtual void beAttacked(Character *) = 0;
 
 	void setHP(int hp) { HP = hp; }
 	void setAtk(int atk) { Atk = atk; }

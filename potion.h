@@ -4,8 +4,13 @@
 #include "item.h"
 #include "player.h"
 
+// enum Potype { BoostAtk, BoostDef, RestoreHP, WoundAtk, WoundDef, PoisonHP };
+
 class Potion : public Item {
 	Type type = Type::Ptn;
+	// Potype potype;
+	public:
+	char getChar() override {return 'P';}
 };
 
 class BoostDef : public Potion {
