@@ -4,10 +4,44 @@
 #include "player.h"
 
 class Orc : public Player {
-	
+	// protected:
+	// Type type; inherited from Stuff
+	// int HP; inherited from Character
+	// int Atk; inherited from Character
+	// int Def; inherited from Character
+	// std::shared_ptr<Cell> currPos; inherited from Player
+	// double treasure = 0; inherited from Player
+	// bool hasSuit = false, hasCompass = false, killedMerch = false; inherited from Player
+	// const int maxHP; inherited from Player
+	// const int defaultAtk; inherited from Player
+	// const int defaultDef; inherited from Player
+	// PCRace race; inherited from Player
+
 	public:
 	Orc(int HP = 180, int Atk = 30, int Def = 25, double treasure = 0);
-	// void pickUpTreasure(Treasure *) override;
+	// Type getType(); inherited from Stuff
+	// int getHP() { return HP; } inherited from Character
+	// int getAtk() { return Atk; } inherited from Character
+	// int getDef() { return Def; } inherited from Character
+	// bool isDead() { return (HP <= 0); } inherited from Character
+	// void setHP(int hp) { HP = hp; } inherited from Character
+	// void setAtk(int atk) { Atk = atk; } inherited from Character
+	// void setDef(int def) { Def = def; } inherited from Character
+	// void removePotion(); inherited from Player
+	// void beAttacked(std::shared_ptr<Character>) override; inherited from Player
+	// void setCell(std::shared_ptr<Cell>); inherited from Player
+	// void setCompass(bool); inherited from Player
+	// void setSuit(bool); inherited from Player
+	// void setTreasure(double); inherited from Player
+	// double getTreasure() const; inherited from Player
+	// void killedMerchant(); inherited from Player
+	// bool hasKilledMerch() const; inherited from Player
+	// char getChar() const override; inherited from Player
+	// bool getSuit() const; inherited from Player
+	// PCRace getRace() const; inherited from Player
+	// int getDefaultAtk() const; inherited from Player
+	// int getDefaultDef() const; inherited from Player
+	// int getMaxHP() const; inherited from Player
 };
 
 #endif

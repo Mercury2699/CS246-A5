@@ -34,14 +34,9 @@ class Player : public Character,  std::enable_shared_from_this<Player>{
 	// void setAtk(int atk) { Atk = atk; } inherited from Character
 	// void setDef(int def) { Def = def; } inherited from Character
 	Player(int HP, int Atk, int Def, double treasure);
-	// void virtual pickUpTreasure(std::shared_ptr<Treasure>);
-	// void virtual applyPotion(std::shared_ptr<Potion>);
-	void virtual removePotion();
-	// void attack(std::shared_ptr<Character>) override;
+	void removePotion();
 	void beAttacked(std::shared_ptr<Character>) override;
-	// void setPosn(int x, int y);
-	// int getX();
-	// int getY();
+	void setCell(std::shared_ptr<Cell>);
 	void setCompass(bool);
 	void setSuit(bool);
 	void setTreasure(double);

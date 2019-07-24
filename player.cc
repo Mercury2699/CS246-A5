@@ -22,6 +22,10 @@ void Player::setCompass(bool comp) {
 	hasCompass = comp;
 }
 
+void Player::setCell(std::shared_ptr<Cell> c){
+	currPos = c;
+}
+
 // void Player::setPosn(int x, int y){
 // 	this->x = x;
 // 	this->y = y;
