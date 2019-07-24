@@ -7,7 +7,8 @@ class Treasure : public Item {
 	int val;
 
 	public:
-	int getValue();
+	Treasure(int val): val{val}{}
+	int getValue() { return val; }
 	char getChar() override {return 'G';}
 };
 
