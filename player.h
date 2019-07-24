@@ -37,7 +37,7 @@ class Player : public Character {
 	void virtual pickUpTreasure(std::shared_ptr<Treasure>);
 	void virtual applyPotion(std::shared_ptr<Potion>);
 	void virtual removePotion();
-	void attack(std::shared_ptr<Character>) override;
+	// void attack(std::shared_ptr<Character>) override;
 	void beAttacked(std::shared_ptr<Character>) override;
 	// void setPosn(int x, int y);
 	// int getX();

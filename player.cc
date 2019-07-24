@@ -47,10 +47,10 @@ void Player::pickUpTreasure(std::shared_ptr<Treasure> t) {
 	setTreasure(t->getValue());
 }
 
-void Player::attack(std::shared_ptr<Character> c) {
-	c->beAttacked(std::make_shared<Player> (this));
-	c->attack(std::make_shared<Player> (this));
-}
+// void Player::attack(std::shared_ptr<Character> c) {
+// 	c->beAttacked(std::make_shared<Player> (this));
+// 	c->attack(std::make_shared<Player> (this));
+// }
 
 void Player::beAttacked(std::shared_ptr<Character> c) {
 	if (getSuit()) {

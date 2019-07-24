@@ -29,9 +29,9 @@ class Enemy : public Character {
 	Enemy(int HP, int Atk, int Def, Item *i) : Character{HP, Atk, Def}, i{i} {
 		type = Type::Enmy;
 	}
-	void attack(std::shared_ptr<Character> c) {
-		c->beAttacked(std::make_shared<Character> (this));
-	}
+	// void attack(std::shared_ptr<Character> c) {
+	// 	c->beAttacked(std::make_shared<Character> (this));
+	// }
 	void beAttacked(std::shared_ptr<Character> c) {
 		setHP(getHP()-ceil((100 / (100 + getDef())) * c->getAtk()));
 	}
