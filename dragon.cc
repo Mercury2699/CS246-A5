@@ -1,6 +1,6 @@
 #include "dragon.h"
 
-char getChar() {
+char Dragon::getChar() {
     return 'D';
 }
 

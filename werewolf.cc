@@ -1,6 +1,6 @@
 #include "werewolf.h"
 
-char getChar() {
+char WereWolf::getChar() {
     return 'W';
 }
 

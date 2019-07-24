@@ -1,6 +1,6 @@
 #include "goblin.h"
 
-char getChar() {
+char Goblin::getChar() {
     return 'N';
 }
 

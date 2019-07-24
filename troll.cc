@@ -1,6 +1,6 @@
 #include "troll.h"
 
-char getChar() {
+char Troll::getChar() {
     return 'T';
 }
 
