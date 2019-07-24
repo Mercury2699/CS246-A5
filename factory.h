@@ -12,7 +12,7 @@
 #include "cell.h"
 
 struct Factory {
-    Player * spawnPlayer();
+    void spawnPlayer();
     Enemy * genEnemy();
     Potion * genPotion();
     Treasure * genTreasure();

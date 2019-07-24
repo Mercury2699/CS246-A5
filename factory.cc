@@ -15,8 +15,15 @@
 #include "merchant.h"
 #include "goblin.h"
 
+void Factory::spawnPlayer() {
+    srand( time(nullptr) );
+    int randNum = rand() % floorTiles.size();
+    pc->setCurrPos( floorTiles[randNum] );
+}
+
+
 Enemy * Factory::genEnemy() {
-    srand(time(0));
+    srand( time(nullptr) );
     int NPCRand = rand() % 18;
     
     if ( NPCRand <= 3 ) {
