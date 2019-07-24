@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <cmath>
 #include "cell.h"
 #include "textDisplay.h"
 #include "player.h"
@@ -14,7 +15,7 @@ class Floor {
 	std::vector<std::vector<std::shared_ptr<Cell>>> theGrid;
 	TextDisplay * td = nullptr;
 	Player *pc;
-	std::vector<std::vector<std::shared_ptr<Cell>>> enemies;
+	std::vector<std::shared_ptr<Cell>> enemies;
 
 	public:
 	void startGame(std::string race);
@@ -22,7 +23,8 @@ class Floor {
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);
 	void moveEnemies();
-	void checkEvents(int x, int y);
+	void checkEvents(Cell *);
+	Cell *target(Cell *cur, std::string direction)
 
 	void setObserver(TextDisplay *td);
 

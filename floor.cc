@@ -43,49 +43,64 @@ void setObserver(TextDisplay *td) {
     this->td = td;
 }
 
-void Floor::playerMove(std::string direction) {
-    int curX = pc->getX();
-    int curY = pc->getY();
-    int targetX, targetY = 0;
+Cell *Floor::target(Cell *cur, std::string direction) {
+    int curX = cur->getX();
+    int curY = cur->getY();
+    int targetX = targetY = 0;
     if (direction == "N") {
-        if (theGrid[curX][curY - 1].get()->checkOccupancy()) return;
         targetX = curX;
         targetY = curY - 1;
     } else if (direction == "S") {
-        if (theGrid[curX][curY + 1].get()->checkOccupancy()) return;
         targetX = curX;
         targetY = curY + 1;
     } else if (direction == "E") {
-        if (theGrid[curX + 1][curY].get()->checkOccupancy()) return;
         targetX = curX + 1;
         targetY = curY;
     } else if (direction == "W") {
-        if (theGrid[curX - 1][curY].get()->checkOccupancy()) return;
         targetX = curX - 1;
         targetY = curY;
     } else if (direction == "NE") {
-        if (theGrid[curX + 1][curY - 1].get()->checkOccupancy()) return;
         targetX = curX + 1;
         targetY = curY - 1;
     } else if (direction == "NW") {
-        if (theGrid[curX - 1][curY - 1].get()->checkOccupancy()) return;
         targetX = curX - 1;
         targetY = curY - 1;
     } else if (direction == "SE") {
-        if (theGrid[curX + 1][curY + 1].get()->checkOccupancy()) return;
         targetX = curX + 1;
         targetY = curY + 1;
     } else {
-        if (theGrid[curX - 1][curY + 1].get()->checkOccupancy()) return;
         targetX = curX - 1;
         targetY = curY + 1;
     }
+    return theGrid[targetX][targetY].get();
+}
+void Floor::playerMove(std::string direction) {
+    int curX = pc->getX();
+    int curY = pc->getY();
+    Cell *targetCell = target(theGrid[curX][curY].get(), direction);
+    int targetX = targetCell->getX();
+    int targetY = targetCell->getY();
+    if (targetCell->checkOccupancy()) return;
     theGrid[curX][curY].get()->setOccupant(nullptr);
     theGrid[curX][curY].get()->setOccupancy(false);
     pc->setPosn(targetX, targetY);
     theGrid[targetX][targetY].get()->setOccupant(pc);
     theGrid[targetX][targetY].get()->notifyObserver();
-    checkEvents(targetX, targetY);
+    checkEvents(theGrid[targetX][targetY].get());
+}
+
+bool isClose(Cell *c1, Cell *c2) {
+    if (std::abs(c1->getX() - c2->getX()) <= 1 && std::abs(c1->getY() - c2->getY()) <= 1) return true;
+    else return false;
+}
+
+void Floor::checkEvents(Cell *c) {
+    for (auto cur : enemies) {
+        if(isClose(cur.get(), c)) pc->beAttacked(cur.get()->getOccupant());
+    }
+}
+
+void playerAtk(std::string direction) {
 }
 
 
