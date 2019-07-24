@@ -1,7 +1,22 @@
 #include "factory.h"
 
+//Players
+#include "human.h"
+#include "orc.h"
+#include "elves.h"
+#include "dwarf.h"
+
+// Enemies
+#include "vampire.h"
+#include "werewolf.h"
+#include "troll.h"
+#include "phoenix.h"
+#include "dragon.h"
+#include "merchant.h"
+#include "goblin.h"
+
 Enemy * Factory::genEnemy() {
-    srand(time(nullptr));
+    srand(time(0));
     int NPCRand = rand() % 18;
     
     if ( NPCRand <= 3 ) {
@@ -17,11 +32,10 @@ Enemy * Factory::genEnemy() {
     } else {
         return new Merchant{};
     }
-
 }
 
 Potion * Factory::genPotion() {
-    srand(time(nullptr));
+    srand(time(0));
     int RandNum = rand() % 6;
 
     if ( RandNum == 0 ) {
@@ -34,12 +48,28 @@ Potion * Factory::genPotion() {
         return new PoisonHP{};
     } else if ( RandNum == 4 ) {
         return new WoundAtk{};
-    } else if ( RandNum == 5 ) {
+    } else { // if ( RandNum == 5 )
         return new WoundDef{};
     }
 }
 
+Treasure * Factory::genTreasure(){
+    srand(time(0));
+    int RandNum = rand() % 4;
 
+    if (RandNum == 0){
+        return new Treasure{1};
+    } else if (RandNum == 1) {
+        return new Treasure{2};
+    } else if (RandNum == 2) {
+        return new Treasure{4};
+    } else { // RandNum == 3s
+        return new Treasure{6};
+    }
+}
 
+void Factory::genFloor(Floor *){
+
+}
 
 

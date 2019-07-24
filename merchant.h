@@ -2,6 +2,8 @@
 #define MERCHANT_H
 
 #include "enemy.h"
+#include "treasure.h"
+
 class Merchant : public Enemy {
     // Merchant is inited with MerchantHoard by default;
     public:
