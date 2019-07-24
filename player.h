@@ -19,28 +19,22 @@ class Player : public Character {
 	const int defaultAtk;
 	const int defaultDef;
 
-	protected:
+	public:
+	Player(int HP, int Atk, int Def, double treasure);
+	void virtual pickUpTreasure(Stuff *);
+	void virtual applyPotion(Stuff *);
+	void virtual removePotion();
+	void attack(Stuff *) override;
+	void beAttacked(Stuff *) override;
+
+	void setCompass(bool);
+	void setSuit(bool);
 	void setTreasure(double);
+	char getChar() override;
 	bool getSuit();
 	int getDefaultAtk();
 	int getDefaultDef();
 	int getMaxHP() const;
-
-	public:
-	Player(int HP, int Atk, int Def, double treasure);
-	void virtual pickUpTreasure(Treasure *);
-	void applyPotion(RestorHP &rh);
-	void applyPotion(PoisonHP &ph);
-	void applyPotion(BoostAtk &ba);
-	void applyPotion(BoostDef &bd);
-	void virtual applyPotion(WoundAtk &wa);
-	void virtual applyPotion(WoundDef &wd);
-	void virtual remove();
-	void setCompass(bool);
-	void setSuit(bool);
-	void attack(Character *) override;
-	void beAttacked(Character *) override;
-	char getChar() override;
 };
 
 #endif

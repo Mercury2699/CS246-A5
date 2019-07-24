@@ -12,17 +12,14 @@ class Character : public Stuff {
 
 	public:
 	Character(int HP, int Atk, int Def) : HP{HP}, Atk{Atk}, Def{Def}{}
-	int getHP() { return HP; }
-	int getAtk() { return Atk; }
-	int getDef() { return Def; }
-	bool isDead() { return (HP <= 0); }
-	virtual void attack(Character *) = 0;
-	virtual void beAttacked(Character *) = 0;
+	int getHP() override { return HP; }
+	int getAtk() override { return Atk; }
+	int getDef() override { return Def; }
+	bool isDead() override { return (HP <= 0); }
 
-	protected:
-	void setHP(int hp) { HP = hp; }
-	void setAtk(int atk) { Atk = atk; }
-	void setDef(int def) { Def = def; }
+	void setHP(int hp) override { HP = hp; }
+	void setAtk(int atk) override { Atk = atk; }
+	void setDef(int def) override { Def = def; }
 
 };
 

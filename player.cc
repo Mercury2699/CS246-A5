@@ -46,6 +46,10 @@ void Player::beAttacked(Character *c) {
 	}
 }
 
+void Player::applyPotion(Stuff *s) {
+	s->effect(*this);
+}
+
 void Player::applyPotion(BoostAtk &ba) {
 	setAtk(getAtk() + 5);
 }
