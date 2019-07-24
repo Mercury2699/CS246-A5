@@ -21,7 +21,7 @@ class Player : public Character {
 
 	public:
 	Player(int HP, int Atk, int Def, double treasure);
-	void virtual pickUpTreasure(Stuff *);
+	void virtual pickUpTreasure(Treasure *);
 	void virtual applyPotion(Stuff *);
 	void virtual removePotion();
 	void attack(Stuff *) override;

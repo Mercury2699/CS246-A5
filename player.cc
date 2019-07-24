@@ -52,32 +52,6 @@ void Player::applyPotion(Stuff *s) {
 	s->effect(*this);
 }
 
-void Player::applyPotion(BoostAtk &ba) {
-	setAtk(getAtk() + 5);
-}
-
-void Player::applyPotion(WoundAtk &wa) {
-	setAtk(getAtk() - 5);
-}
-
-void Player::applyPotion(BoostDef &bd) {
-	setAtk(getDef() + 5);
-}
-
-void Player::applyPotion(WoundDef &wd) {
-	setAtk(getDef() - 5);
-}
-
-void Player::applyPotion(RestorHP &rh) {
-	int newHP = (getHP() + 10) <= getMaxHP() ? (getHP() + 10) : getMaxHP();
-	setHP(newHP);
-}
-
-void Player::applyPotion(PoisonHP &ph) {
-	int newHP = (getHP() - 10) >= 0 ? (getHP() - 10) : 0;
-	setHP(newHP);
-}
-
 void Player::remove() {
 	setAtk(getDefaultAtk());
 	setDef(getDefaultDef());
