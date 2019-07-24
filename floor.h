@@ -24,7 +24,7 @@ class Floor {
 	void playerUse(std::string direction);
 	void moveEnemies();
 	void checkEvents(Cell *);
-	Cell *target(Cell *cur, std::string direction)
+	Cell *target(Cell *cur, std::string direction);
 
 	void setObserver(TextDisplay *td);
 

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include "floor.h"
+// #include "floor.h"
 
 class Player;
 
@@ -16,7 +16,7 @@ class TextDisplay {
     public:
     TextDisplay(std::string map = "map.txt");
     void notify(int x, int y, char type);
-    friend std::ostream &operator<<(std::ostream &out, const Floor &);
+    // friend std::ostream &operator<<(std::ostream &out, const Floor &);
     friend std::ostream &operator<<(std::ostream &out, const TextDisplay &);
 };
 
