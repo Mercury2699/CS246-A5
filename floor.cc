@@ -39,6 +39,55 @@ Floor::Floor(std::string file){
     m.close();
 }
 
+void setObserver(TextDisplay *td) {
+    this->td = td;
+}
+
+void Floor::playerMove(std::string direction) {
+    int curX = pc->getX();
+    int curY = pc->getY();
+    int targetX, targetY = 0;
+    if (direction == "N") {
+        if (theGrid[curX][curY - 1].get()->checkOccupancy()) return;
+        targetX = curX;
+        targetY = curY - 1;
+    } else if (direction == "S") {
+        if (theGrid[curX][curY + 1].get()->checkOccupancy()) return;
+        targetX = curX;
+        targetY = curY + 1;
+    } else if (direction == "E") {
+        if (theGrid[curX + 1][curY].get()->checkOccupancy()) return;
+        targetX = curX + 1;
+        targetY = curY;
+    } else if (direction == "W") {
+        if (theGrid[curX - 1][curY].get()->checkOccupancy()) return;
+        targetX = curX - 1;
+        targetY = curY;
+    } else if (direction == "NE") {
+        if (theGrid[curX + 1][curY - 1].get()->checkOccupancy()) return;
+        targetX = curX + 1;
+        targetY = curY - 1;
+    } else if (direction == "NW") {
+        if (theGrid[curX - 1][curY - 1].get()->checkOccupancy()) return;
+        targetX = curX - 1;
+        targetY = curY - 1;
+    } else if (direction == "SE") {
+        if (theGrid[curX + 1][curY + 1].get()->checkOccupancy()) return;
+        targetX = curX + 1;
+        targetY = curY + 1;
+    } else {
+        if (theGrid[curX - 1][curY + 1].get()->checkOccupancy()) return;
+        targetX = curX - 1;
+        targetY = curY + 1;
+    }
+    theGrid[curX][curY].get()->setOccupant(nullptr);
+    theGrid[curX][curY].get()->setOccupancy(false);
+    pc->setPosn(targetX, targetY);
+    theGrid[targetX][targetY].get()->setOccupant(pc);
+    theGrid[targetX][targetY].get()->notifyObserver();
+    checkEvents(targetX, targetY);
+}
+
 
 
 

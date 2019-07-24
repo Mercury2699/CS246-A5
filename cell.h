@@ -30,12 +30,14 @@ struct Cell {
     	occupant = nullptr;
     	notifyObserver();
    		return temp;
-	);
-
-	protected:
+	};
 	void setOccupancy(bool occupied) { isOccupied = occupied; };
-	TextDisplay *getTD(){ return td; };
-};
+	void setOccupant(Stuff *occupant) { this->occupant = occupant; };
+	int getX() {return x;}
+	int getY() {return y;}
+	void setX(int x) {this->x = x;}
+	void setY(int y) {this->y = y;}
+	};
 
 
 #endif
