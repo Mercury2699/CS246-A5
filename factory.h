@@ -16,12 +16,7 @@
 #include "merchant.h"
 #include "dragon.h"
 // Potions
-#include "restorHP.h"
-#include "boostAtk.h"
-#include "boostDef.h"
-#include "poisonHP.h"
-#include "woundAtk.h"
-#include "woundDef.h"
+#include "potion.h"
 
 
 

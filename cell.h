@@ -2,7 +2,7 @@
 #define CELL_H
 
 #include "stuff.h"
-class TextDisplay;
+#include "textDisplay.h"
 
 struct Cell {
 	int x = 0, y = 0;

@@ -5,7 +5,8 @@
 #include "player.h"
 
 class Item : public Stuff {
-    Item(){type = Type::Itm;}
+    Item(){ this->type = Type::Itm;}
+    virtual void effect(Player *) = 0;
 };
 
 class BarrierSuit : public Item {
