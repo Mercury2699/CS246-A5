@@ -8,7 +8,7 @@ EMENIES = vampire.o troll.o werewolf.o phoenix.o dragon.o merchant.o
 CELLS = doorway.o passage.o floorTile.o 
 ITEMS = compass.o barrierSuit.o
 CONTROLLERS = floor.o factory.o
-OBJECTS = main.o textDisplay.o ${POTIONS} 
+OBJECTS = main.o textDisplay.o ${POTIONS} ${PLAYERS}
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
