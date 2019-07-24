@@ -7,18 +7,25 @@
 #include <memory>
 #include "cell.h"
 #include "textDisplay.h"
-
+#include "player.h"
 class TextDisplay;
 
 class Floor {
 	std::vector<std::vector<std::shared_ptr<Cell>>> theGrid;
-	TextDisplay * td;
+	TextDisplay * td = nullptr;
+	Player *pc;
+	std::vector<std::vector<std::shared_ptr<Cell>>> enemies;
+
 	public:
 	void startGame(std::string race);
 	void playerMove(std::string direction);
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);
 	void moveEnemies();
+	void checkEvents(int x, int y);
+
+	void setObserver(TextDisplay *td);
+
 
 	
 	Floor(std::string file = "map.txt");

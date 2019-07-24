@@ -2,9 +2,9 @@
 #define STUFF_H
 
 #include "textDisplay.h"
+#include "player.h"
 
 enum Type {Plyr, Enmy, Trsr, Ptn, Itm};
-class Player;
 
 class Stuff {
     protected:
@@ -12,18 +12,11 @@ class Stuff {
 
     public:
     virtual char getChar() = 0;
-    virtual void effect(Player *) = 0;
     virtual void attack(Stuff *) = 0;
     virtual void beAttacked(Stuff *) = 0;
+    virtual void effect(Player *) = 0;
     virtual bool isDead() = 0;
-    virtual void remove() = 0;
     Type getType() {return type;}
-    virtual int getHP() = 0;
-	virtual int getAtk() = 0;
-	virtual int getDef() = 0;
-    virtual void setHP(int hp) = 0;
-	virtual void setAtk(int atk) = 0;
-	virtual void setDef(int def) = 0;
 };
 
 #endif

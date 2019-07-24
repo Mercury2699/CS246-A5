@@ -12,14 +12,14 @@ class Character : public Stuff {
 
 	public:
 	Character(int HP, int Atk, int Def) : HP{HP}, Atk{Atk}, Def{Def}{}
-	int getHP() override { return HP; }
-	int getAtk() override { return Atk; }
-	int getDef() override { return Def; }
-	bool isDead() override { return (HP <= 0); }
+	int getHP() { return HP; }
+	int getAtk() { return Atk; }
+	int getDef() { return Def; }
+	bool isDead() { return (HP <= 0); }
 
-	void setHP(int hp) override { HP = hp; }
-	void setAtk(int atk) override { Atk = atk; }
-	void setDef(int def) override { Def = def; }
+	void setHP(int hp) { HP = hp; }
+	void setAtk(int atk) { Atk = atk; }
+	void setDef(int def) { Def = def; }
 
 };
 

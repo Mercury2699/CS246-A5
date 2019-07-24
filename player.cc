@@ -11,6 +11,8 @@ void Player::setTreasure(double t) {
 	treasure = t;
 }
 
+double Player::getTreasure() {return treasure;}
+
 void Player::setSuit(bool suit) {
 	hasSuit = suit;
 }
@@ -18,6 +20,15 @@ void Player::setSuit(bool suit) {
 void Player::setCompass(bool comp) {
 	hasCompass = comp;
 }
+
+void Player::setPosn(int x, int y){
+	this->x = x;
+	this->y = y;
+}
+
+int Player::getX(){return x;}
+
+int Player::getY(){return y;}
 
 bool Player::getSuit() {
 	return hasSuit;
@@ -48,9 +59,17 @@ void Player::beAttacked(Character *c) {
 	}
 }
 
-void Player::applyPotion(Stuff *s) {
+void Player::applyPotion(Potion * s) {
 	s->effect(*this);
 }
+
+void Player::killedMerchant(){
+	killedMerch = true;
+}
+
+bool hasKilledMerch(){
+	return killedMerch;
+};
 
 void Player::remove() {
 	setAtk(getDefaultAtk());
@@ -59,6 +78,10 @@ void Player::remove() {
 
 char Player::getChar() {
 	return '@';
+}
+
+PCRace Player::getRace(){
+	return race;
 }
 
 int Player::getMaxHP() const {
