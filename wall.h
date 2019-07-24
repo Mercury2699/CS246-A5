@@ -2,13 +2,13 @@
 #define WALL_H
 #include "cell.h"
 
- class Wall final : private Cell{
+ class Wall final : public Cell{
     bool isHorizontal;
     public:
-    Wall(int x, int y, bool isHor) : isHorizontal{isHor} {
-        this->x = x;
-        this->y = y;
+    Wall(int x, int y, bool isHor) : Cell{x, y}, isHorizontal{isHor} {
+        setOccupancy(true);
     }
+    bool checkOccupancy() override { return true; }
     char getChar() override {
         if (isHorizontal) return '-';
         return '|';

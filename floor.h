@@ -9,7 +9,6 @@
 #include "textDisplay.h"
 
 class TextDisplay;
-struct Cell;
 
 class Floor {
 	std::vector<std::vector<std::shared_ptr<Cell>>> theGrid;
