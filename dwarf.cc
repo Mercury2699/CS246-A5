@@ -6,9 +6,9 @@ Dwarf::Dwarf(int HP, int Atk, int Def, double treasure):
 		race = PCRace::Dwarf;
 	}
 
-void Dwarf::pickUpTreasure(Treasure *t) {
-	setTreasure(2 * t->getValue());
-}
+// void Dwarf::pickUpTreasure(Treasure *t) {
+// 	setTreasure(2 * t->getValue());
+// }
 
 
 

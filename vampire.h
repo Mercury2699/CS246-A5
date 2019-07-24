@@ -5,7 +5,7 @@
 class Vampire : public Enemy {
   	public:
   	Vampire(Item *i) : Enemy{50, 25, 25, i} {}
-	char getChar() override;
+	char getChar() const override;
 };
 
 

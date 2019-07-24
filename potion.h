@@ -1,16 +1,17 @@
 #ifndef POTION_H
 #define POTION_H
 
+#include <memory>
 #include "item.h"
 #include "player.h"
 
 // enum Potype { BoostAtk, BoostDef, RestoreHP, WoundAtk, WoundDef, PoisonHP };
 
-class Potion : public Item {
+class Potion : public Item, public std::enable_shared_from_this<Potion> {
 	Type type = Type::Ptn;
 	// Potype potype;
 	public:
-	char getChar() override {return 'P';}
+	char getChar() const override {return 'P';}
 };
 
 class BoostDef : public Potion {

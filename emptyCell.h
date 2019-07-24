@@ -5,7 +5,7 @@
 struct EmptyCell : public Cell {
     EmptyCell(int x, int y):
         Cell{x, y}{}
-    char getChar() override {return ' ';};
+    char getChar() const override {return ' ';};
     bool checkOccupancy() override { return true; }
 };
 

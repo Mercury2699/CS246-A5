@@ -12,7 +12,7 @@ void Player::setTreasure(double t) {
 	treasure = t;
 }
 
-double Player::getTreasure() {return treasure;}
+double Player::getTreasure() const {return treasure;}
 
 void Player::setSuit(bool suit) {
 	hasSuit = suit;
@@ -31,21 +31,21 @@ void Player::setCompass(bool comp) {
 
 // int Player::getY(){return y;}
 
-bool Player::getSuit() {
+bool Player::getSuit() const {
 	return hasSuit;
 }
 
-int Player::getDefaultAtk() {
+int Player::getDefaultAtk() const {
 	return defaultAtk;
 }
 
-int Player::getDefaultDef() {
+int Player::getDefaultDef() const {
 	return defaultDef;
 }
 
-void Player::pickUpTreasure(std::shared_ptr<Treasure> t) {
-	setTreasure(t->getValue());
-}
+// void Player::pickUpTreasure(std::shared_ptr<Treasure> t) {
+// 	setTreasure(t->getValue());
+// }
 
 // void Player::attack(std::shared_ptr<Character> c) {
 // 	c->beAttacked(std::make_shared<Player> (this));
@@ -60,15 +60,15 @@ void Player::beAttacked(std::shared_ptr<Character> c) {
 	}
 }
 
-void Player::applyPotion(std::shared_ptr<Potion> p) {
-	p->effect(std::make_shared<Player> (this));
-}
+// void Player::applyPotion(std::shared_ptr<Potion> p) {
+// 	p->effect(std::make_shared<Player> (this));
+// }
 
 void Player::killedMerchant(){
 	killedMerch = true;
 }
 
-bool Player::hasKilledMerch(){
+bool Player::hasKilledMerch() const {
 	return killedMerch;
 };
 
@@ -77,11 +77,11 @@ void Player::removePotion() {
 	setDef(getDefaultDef());
 }
 
-char Player::getChar() {
+char Player::getChar() const {
 	return '@';
 }
 
-PCRace Player::getRace(){
+PCRace Player::getRace() const {
 	return race;
 }
 

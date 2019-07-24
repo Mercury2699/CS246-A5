@@ -3,7 +3,7 @@
 Passage::Passage(int x, int y):
     Cell{x, y}{}
 
-char Passage::getChar(){
+char Passage::getChar() const {
     if(checkOccupancy()){
         return getOccupant()->getChar();
     }

@@ -18,12 +18,12 @@ class Item : public Stuff {
 
 class BarrierSuit : public Item {
     void effect(std::shared_ptr<Player>) override;
-    char getChar() override;
+    char getChar() const override;
 };
 
 struct Compass : public Item {
     void effect(std::shared_ptr<Player>) override;
-    char getChar() override;
+    char getChar() const override;
 };
 
 

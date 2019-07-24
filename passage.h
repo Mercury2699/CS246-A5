@@ -8,7 +8,7 @@ class TextDisplay;
 class Passage final : public Cell {
     public:
     Passage(int x, int y);
-    char getChar() override;
+    char getChar() const override;
 };
 
 #endif

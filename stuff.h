@@ -13,7 +13,7 @@ class Stuff {
     Type type;
 
     public:
-    virtual char getChar() = 0;
+    virtual char getChar() const = 0;
     Type getType() {return type;}
 };
 

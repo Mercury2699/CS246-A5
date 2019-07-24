@@ -9,7 +9,7 @@ class TextDisplay;
 class FloorTile final : public Cell {
     public:
     FloorTile(int x, int y);
-    char getChar() override;
+    char getChar() const override;
 };
 
 #endif

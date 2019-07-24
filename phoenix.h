@@ -5,6 +5,6 @@
 class Phoenix : public Enemy {
     public:
     Phoenix(Item *i): Enemy{50, 35, 20, i}{}
-    char getChar() override;
+    char getChar() const override;
 };
 #endif

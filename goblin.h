@@ -8,7 +8,7 @@ class Item;
 class Goblin : public Enemy {
     public:
     Goblin(Item *i): Enemy{70, 5, 10, i} {}
-    char getChar() override;
+    char getChar() const override;
 };
 
 #endif

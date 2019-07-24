@@ -1,6 +1,6 @@
 #include "vampire.h"
 
-char Vampire::getChar() {
+char Vampire::getChar() const {
     return 'V';
 }
 

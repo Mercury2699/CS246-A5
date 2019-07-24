@@ -7,7 +7,7 @@ class Orc : public Player {
 	
 	public:
 	Orc(int HP = 180, int Atk = 30, int Def = 25, double treasure = 0);
-	void pickUpTreasure(Treasure *) override;
+	// void pickUpTreasure(Treasure *) override;
 };
 
 #endif

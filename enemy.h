@@ -24,7 +24,7 @@ class Enemy : public Character {
 	// void setHP(int hp) { HP = hp; } inherited from Character
 	// void setAtk(int atk) { Atk = atk; } inherited from Character
 	// void setDef(int def) { Def = def; } inherited from Character
-	virtual char getChar() = 0;
+	virtual char getChar() const = 0;
 	virtual void becomeHostile() { hostile = true; }
 	Enemy(int HP, int Atk, int Def, Item *i) : Character{HP, Atk, Def}, i{i} {
 		type = Type::Enmy;

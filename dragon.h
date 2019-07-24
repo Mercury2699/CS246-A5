@@ -8,7 +8,7 @@ class Dragon : public Enemy {
     // Dragon must be initialized with an Item (Dragon Hoard or Barrier Suit)
     Dragon(Item * it): Enemy{150, 20, 20, it} {} 
     public:
-    char getChar() override;
+    char getChar() const override;
 };
 
 #endif

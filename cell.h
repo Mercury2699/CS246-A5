@@ -13,7 +13,7 @@ class Cell {
 
 	public:
     Cell(int x, int y);
-	virtual char getChar() = 0;
+	virtual char getChar() const = 0;
     virtual bool checkOccupancy() { return (isOccupied && occupant); }
     void setObserver(TextDisplay *td) { this->td = td;};
 	void notifyObserver() { td->notify(x,y,getChar()); };

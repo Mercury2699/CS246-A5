@@ -1,6 +1,6 @@
 #include "troll.h"
 
-char Troll::getChar() {
+char Troll::getChar() const {
     return 'T';
 }
 

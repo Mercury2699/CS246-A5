@@ -9,7 +9,7 @@ class Merchant : public Enemy {
     public:
     Merchant(): Enemy{30, 70, 5, new Treasure{4}}{}
     Merchant(Item * it): Enemy{30, 70, 5, it}{}
-    char getChar() override;
+    char getChar() const override;
 };
 
 #endif

@@ -9,7 +9,7 @@
         setOccupancy(true);
     }
     bool checkOccupancy() override { return true; }
-    char getChar() override {
+    char getChar() const override {
         if (isHorizontal) return '-';
         return '|';
     }

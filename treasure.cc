@@ -12,7 +12,7 @@ int Treasure::getValue() {
     return val; 
 }
 
-char Treasure::getChar() {
+char Treasure::getChar() const {
     return 'G';
 }
 

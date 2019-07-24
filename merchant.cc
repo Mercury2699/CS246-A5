@@ -1,6 +1,6 @@
 #include "merchant.h"
 
-char Merchant::getChar() {
+char Merchant::getChar() const {
     return 'M';
 }
 

@@ -11,7 +11,7 @@ class Treasure : public Item {
 	public: 
 	Treasure(int val);
 	int getValue();
-	char getChar() override;
+	char getChar() const override;
 	void setCollect();
 	void effect(std::shared_ptr<Player>) override;
 };

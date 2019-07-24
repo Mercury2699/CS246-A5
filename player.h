@@ -10,7 +10,7 @@ class Potion;
 
 enum class PCRace {Human, Elves, Dwarf, Orc};
 
-class Player : public Character {
+class Player : public Character,  std::enable_shared_from_this<Player>{
 	protected:
 	// int HP; inherited from Character
 	// int Atk; inherited from Character
@@ -34,8 +34,8 @@ class Player : public Character {
 	// void setAtk(int atk) { Atk = atk; } inherited from Character
 	// void setDef(int def) { Def = def; } inherited from Character
 	Player(int HP, int Atk, int Def, double treasure);
-	void virtual pickUpTreasure(std::shared_ptr<Treasure>);
-	void virtual applyPotion(std::shared_ptr<Potion>);
+	// void virtual pickUpTreasure(std::shared_ptr<Treasure>);
+	// void virtual applyPotion(std::shared_ptr<Potion>);
 	void virtual removePotion();
 	// void attack(std::shared_ptr<Character>) override;
 	void beAttacked(std::shared_ptr<Character>) override;
@@ -45,14 +45,14 @@ class Player : public Character {
 	void setCompass(bool);
 	void setSuit(bool);
 	void setTreasure(double);
-	double getTreasure();
+	double getTreasure() const;
 	void killedMerchant();
-	bool hasKilledMerch();
-	char getChar() override;
-	bool getSuit();
-	PCRace getRace();
-	int getDefaultAtk();
-	int getDefaultDef();
+	bool hasKilledMerch() const;
+	char getChar() const override;
+	bool getSuit() const;
+	PCRace getRace() const;
+	int getDefaultAtk() const;
+	int getDefaultDef() const;
 	int getMaxHP() const;
 	virtual ~Player() = default;
 };

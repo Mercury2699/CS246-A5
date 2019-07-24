@@ -6,7 +6,7 @@
 class Doorway final : public Cell {
     public:
     Doorway(int x, int y);
-    char getChar() override;
+    char getChar() const override;
 };
 
 #endif

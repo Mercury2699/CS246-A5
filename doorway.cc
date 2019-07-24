@@ -3,7 +3,7 @@
 Doorway::Doorway(int x, int y):
     Cell{x, y}{}
 
-char Doorway::getChar() {
+char Doorway::getChar() const {
     if(checkOccupancy())
         return getOccupant()->getChar();
     return '.';

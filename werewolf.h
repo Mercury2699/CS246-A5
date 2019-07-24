@@ -5,6 +5,6 @@
 class Werewolf : public Enemy {
     public:
     Werewolf(Item *i): Enemy{120, 30, 5, i} {}
-    char getChar() override;
+    char getChar() const override;
 };
 #endif

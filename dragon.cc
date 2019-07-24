@@ -1,6 +1,6 @@
 #include "dragon.h"
 
-char Dragon::getChar() {
+char Dragon::getChar() const {
     return 'D';
 }
 
