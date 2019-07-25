@@ -3,7 +3,6 @@
 
 #include <memory>
 #include "item.h"
-#include "player.h"
 
 class Potion : public Item, public std::enable_shared_from_this<Potion> {
 	public:
@@ -12,63 +11,34 @@ class Potion : public Item, public std::enable_shared_from_this<Potion> {
 	// virtual void effect(std::shared_ptr<Player>) {} inherited from Stuff
 };
 
-class BoostDef : public Potion {
+class BoostDef final : public Potion {
 	public:
-	void effect(std::shared_ptr<Player> pc) override {
-		pc->setDef(pc->getDef() + 5);
-	}
+	void effect(std::shared_ptr<Player> pc) override;
 };
 
-class BoostAtk : public Potion {
+class BoostAtk final : public Potion {
 	public:
-	void effect(std::shared_ptr<Player> pc) override {
-		pc->setAtk(pc->getAtk() + 5);
-	}
+	void effect(std::shared_ptr<Player> pc) override;
 };
 
-class RestorHP : public Potion {
+class RestorHP final : public Potion {
 	public:
-	void effect(std::shared_ptr<Player> pc) override {
-		int newHP = (pc->getHP() + 10) <= pc->getMaxHP() ? (pc->getHP() + 10) : pc->getMaxHP();
-		pc->setHP(newHP);
-	}
+	void effect(std::shared_ptr<Player> pc) override;
 };
 
-class PoisonHP : public Potion {
+class PoisonHP final : public Potion {
 	public:
-	void effect(std::shared_ptr<Player> pc) override {
-		if(pc->getRace() == "Elves"){
-			int newHP = (pc->getHP() + 10) <= pc->getMaxHP() ? (pc->getHP() + 10) : pc->getMaxHP();
-			pc->setHP(newHP);
-		} else {
-			int newHP = (pc->getHP() - 10) >= 0 ? (pc->getHP() - 10) : 0;
-			pc->setHP(newHP);
-		}
-	}
+	void effect(std::shared_ptr<Player> pc) override;
 };
 
-class WoundAtk : public Potion {
+class WoundAtk final : public Potion {
 	public:
-	void effect(std::shared_ptr<Player> pc) override {
-		if(pc->getRace() == "Elves"){
-			pc->setAtk(pc->getAtk() + 5);
-		} else {
-			pc->setAtk(pc->getAtk() - 5);
-		}
-
-	}
+	void effect(std::shared_ptr<Player> pc) override;
 };
 
-class WoundDef : public Potion {
+class WoundDef final : public Potion {
 	public:
-	void effect(std::shared_ptr<Player> pc) override {
-		if(pc->getRace() == "Elves"){
-			pc->setDef(pc->getDef() + 5);
-		} else {
-			pc->setDef(pc->getDef() - 5);
-		}
-
-	}
+	void effect(std::shared_ptr<Player> pc) override;
 };
 
 

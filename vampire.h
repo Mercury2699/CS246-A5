@@ -2,7 +2,7 @@
 #define VAMPIRE_H
 #include "enemy.h"
 
-class Vampire : public Enemy {
+class Vampire final : public Enemy {
 	// protected:
 	// int HP; inherited from Character
 	// int Atk; inherited from Character

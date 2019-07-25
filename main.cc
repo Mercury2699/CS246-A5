@@ -32,6 +32,7 @@ int main(int argc, char *argv[]) {
 		if (command == "q") {
 			break;
 		}
+		std::cout << td;
 	}
 	return 0;
 }

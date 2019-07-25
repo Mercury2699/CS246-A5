@@ -2,7 +2,7 @@
 #define WEREWOLF_H
 
 #include "enemy.h"
-class Werewolf : public Enemy {
+class Werewolf final : public Enemy {
     // protected:
 	// int HP; inherited from Character
 	// int Atk; inherited from Character

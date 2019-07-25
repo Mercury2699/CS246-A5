@@ -14,6 +14,7 @@ class Item : public Stuff {
     // virtual char getChar() = 0; inherited from Stuff
     // virtual void effect(std::shared_ptr<Player>) {} inherited from Stuff
     virtual void beAttacked(std::shared_ptr<Stuff>) {}
+    virtual ~Item() = default;
 };
 
 class BarrierSuit final : public Item {

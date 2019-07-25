@@ -5,7 +5,7 @@
 
 class Item;
 
-class Goblin : public Enemy {
+class Goblin final : public Enemy {
     // protected:
 	// int HP; inherited from Character
 	// int Atk; inherited from Character

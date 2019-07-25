@@ -29,6 +29,7 @@ class Stuff {
     virtual void toggleMoved() {} 
     // for Str
     virtual void enableDisplay() {}
+    virtual ~Stuff() = default;
 };
 
 class Stair final : public Stuff {

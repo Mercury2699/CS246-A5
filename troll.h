@@ -3,7 +3,7 @@
 #include "enemy.h"
 
 
-class Troll : public Enemy {
+class Troll final : public Enemy {
     // protected:
 	// int HP; inherited from Character
 	// int Atk; inherited from Character

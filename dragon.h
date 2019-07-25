@@ -4,7 +4,7 @@
 
 class Item;
 
-class Dragon : public Enemy {
+class Dragon final : public Enemy {
     // protected:
 	// Type type; inherited from Stuff
 	// int HP; inherited from Character

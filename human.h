@@ -2,7 +2,7 @@
 #define HUMAN_H
 
 #include "player.h"
-class Human : public Player {
+class Human final : public Player {
 	// protected:
 	// Type type; inherited from Stuff
 	// int HP; inherited from Character

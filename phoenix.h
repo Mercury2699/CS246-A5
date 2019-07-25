@@ -2,7 +2,7 @@
 #define PHOENIX_H
 
 #include "enemy.h"
-class Phoenix : public Enemy {
+class Phoenix final : public Enemy {
     // protected:
 	// int HP; inherited from Character
 	// int Atk; inherited from Character

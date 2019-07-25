@@ -3,7 +3,7 @@
 #include "player.h"
 #include "potion.h"
 
-class Elves : public Player {
+class Elves final : public Player {
 	// protected:
 	// Type type; inherited from Stuff
 	// int HP; inherited from Character

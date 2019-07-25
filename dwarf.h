@@ -3,7 +3,7 @@
 #include "player.h"
 
 
-class Dwarf : public Player {
+class Dwarf final : public Player {
 	// protected:
 	// Type type; inherited from Stuff
 	// int HP; inherited from Character

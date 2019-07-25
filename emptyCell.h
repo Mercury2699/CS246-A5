@@ -2,7 +2,7 @@
 #define EMPTYCELL_H
 #include "cell.h"
 
-struct EmptyCell : public Cell {
+struct EmptyCell final : public Cell {
     // protected:
 	// int x = 0, y = 0; inherited from Cell
 	// bool isOccupied = false; inherited from Cell

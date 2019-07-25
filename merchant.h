@@ -4,7 +4,7 @@
 #include "enemy.h"
 #include "treasure.h"
 
-class Merchant : public Enemy {
+class Merchant final : public Enemy {
     // protected:
 	// int HP; inherited from Character
 	// int Atk; inherited from Character
