@@ -16,6 +16,15 @@ char Compass::getChar() const {
     return 'C'; 
 }
 
+void Stair::effect(std::shared_ptr<Player> pc) {
+}
 
+void Stair::setDisplay() {
+    canDisplay = true;
+}
+
+char Stair::getChar() const { 
+    return '/'; 
+}
 
 
