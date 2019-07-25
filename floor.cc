@@ -42,13 +42,13 @@ Floor::Floor(std::string file){
             auto p = make_shared<EmptyCell>(x, y);
             row.emplace_back(p);
         } else if (c == '-') {
-            row.emplace_back(make_shared<Cell>(new Wall(x, y, true)));
+            row.emplace_back(make_shared<Wall>(x, y, true));
         } else if (c == '|') {
-            row.emplace_back(make_shared<Cell>(new Wall(x, y, false)));
+            row.emplace_back(make_shared<Wall>(x, y, false));
         } else if (c == '+') {
-            row.emplace_back(make_shared<Cell>(new Doorway(x, y)));
+            row.emplace_back(make_shared<Doorway>(x, y));
         } else if (c == '#') {
-            row.emplace_back(make_shared<Cell>(new Passage(x, y)));
+            row.emplace_back(make_shared<Passage>(x, y));
         } else {
             shared_ptr<FloorTile> cur1 = make_shared<FloorTile>(x ,y);
             row.emplace_back(cur1);
