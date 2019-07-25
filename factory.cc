@@ -20,13 +20,13 @@ using std::make_shared;
 std::shared_ptr<Player> spawnPlayer(std::string race) {
     std::shared_ptr<Player> pc;
     if (race == "h" ) {
-        pc = make_shared<Player>(new Human{});
+        pc = make_shared<Human>();
     } else if (race == "e") {
-        pc = make_shared<Player>(new Elves{});
+        pc = make_shared<Elves>();
     } else if (race == "o") {
-        pc = make_shared<Player>(new Orc{});
+        pc = make_shared<Orc>();
     } else { // race == "d"
-        pc = make_shared<Player>(new Dwarf()});
+        pc = make_shared<Dwarf>();
     }
     return pc;
 }
@@ -46,17 +46,17 @@ std::shared_ptr<Enemy> Factory::genEnemy() {
     int NPCRand = rand() % 18;
     
     if ( NPCRand <= 3 ) { // if (NPCRand == 0, 1, 2, 3)
-        return make_shared<Enemy>(new Werewolf{});
+        return make_shared<Werewolf>();
     } else if ( NPCRand <= 6 ) { // if (NPCRand == 4, 5, 6)
-        return make_shared<Enemy>(new Vampire{});
+        return make_shared<Vampire>();
     } else if ( NPCRand <= 11) { // if (NPCRand == 7, 8, 9, 10, 11)
-        return make_shared<Enemy>(new Goblin{});
+        return make_shared<Goblin>();
     } else if ( NPCRand <= 13) { // if (NPCRand == 12,13) 
-        return make_shared<Enemy>(new Troll{});
+        return make_shared<Troll>();
     } else if ( NPCRand <= 15) { // if (NPCRand == 14,15)
-        return make_shared<Enemy>(new Phoenix{});
+        return make_shared<Phoenix>();
     } else { // if (NPCRand == 16,17)
-        return make_shared<Enemy>(new Merchant{});
+        return make_shared<Merchant>();
     }
 }
 
@@ -65,17 +65,17 @@ std::shared_ptr<Potion> Factory::genPotion() {
     int RandNum = rand() % 6;
 
     if ( RandNum == 0 ) {
-        return make_shared<Potion>(new RestorHP{});
+        return make_shared<RestorHP>();
     } else if ( RandNum == 1 ) {
-        return make_shared<Potion>(new BoostAtk{});
+        return make_shared<BoostAtk>();
     } else if ( RandNum == 2 ) {
-        return make_shared<Potion>(new BoostDef{});
+        return make_shared<BoostDef>();
     } else if ( RandNum == 3 ) {
-        return make_shared<Potion>(new PoisonHP{});
+        return make_shared<PoisonHP>();
     } else if ( RandNum == 4 ) {
-        return make_shared<Potion>(new WoundAtk{});
+        return make_shared<WoundAtk>();
     } else { // if ( RandNum == 5 )
-        return make_shared<Potion>(new WoundDef{});
+        return make_shared<WoundAtk>();
     }
 }
 
@@ -84,13 +84,13 @@ std::shared_ptr<Treasure> Factory::genTreasure(){
     int RandNum = rand() % 4;
 
     if ( RandNum == 0 ){
-        return make_shared<Treasure>(new Treasure{1});
+        return make_shared<Treasure>(1);
     } else if ( RandNum == 1 ) {
-        return make_shared<Treasure>(new Treasure{2});
+        return make_shared<Treasure>(2);
     } else if ( RandNum == 2 ) {
-        return make_shared<Treasure>(new Treasure{4});
+        return make_shared<Treasure>(4);
     } else { // if ( RandNum == 3 )
-        return make_shared<Treasure>(new Treasure{6});
+        return make_shared<Treasure>(6);
     }
 }
 
@@ -114,11 +114,8 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>> f) {
     int randStair = rand() % f[0]->getChambers()[j].size();
     std::shared_ptr<Cell> stairPos = f[0]->getChambers()[j][randStair];
     f[0]->getPlayer()->setCell( stairPos );
-    std::shared_ptr<Stair> stair = make_shared<Stair>(new Stair{});
+    std::shared_ptr<Stair> stair = make_shared<Stair>();
     f[0]->setCell(stairPos->getX(), stairPos->getY(), stair);
-
-
-
 
 
 }
