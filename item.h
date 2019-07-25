@@ -31,14 +31,4 @@ struct Compass final : public Item {
     void effect(std::shared_ptr<Player>) override; // inherited from Item
 };
 
-class Stair final : public Item {
-    // Type type; inherited from Stuff
-    bool canDisplay = false;
-
-    public:
-    char getChar() const override; // inherited from Stuff
-    void effect(std::shared_ptr<Player>) override; // inherited from Item
-};
-
-
 #endif
