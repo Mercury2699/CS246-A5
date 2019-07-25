@@ -64,11 +64,11 @@ Floor::Floor(std::string file){
     m.close();
 }
 
-Floor::ReadFile(std::string file){
+void Floor::ReadFile(std::string file){
     ifstream m(file);
     char c;
     int x = 0, y = 0;
-    vector<Cell> row;
+    vector<shared_ptr<Cell>> row;
     while (m.get(c)){
         if(c == '\n'){
             theGrid.emplace_back(row);
@@ -76,43 +76,37 @@ Floor::ReadFile(std::string file){
             x = 0;
             y++;
         } else if (c == ' ') {
-            row.emplace_back(make_shared<Cell>(new EmptyCell(x, y)));
+            row.emplace_back(make_shared<EmptyCell>(x, y));
         } else if (c == '-') {
-            row.emplace_back(make_shared<Cell>(new Wall(x, y, true)));
+            row.emplace_back(make_shared<Wall>(x, y, true));
         } else if (c == '|') {
-            row.emplace_back(make_shared<Cell>(new Wall(x, y, false)));
+            row.emplace_back(make_shared<Wall>(x, y, false));
         } else if (c == '+') {
-            row.emplace_back(make_shared<Cell>(new Doorway(x, y)));
+            row.emplace_back(make_shared<Doorway>(x, y));
         } else if (c == '#') {
-            row.emplace_back(make_shared<Cell>(new Passage(x, y)));            
+            row.emplace_back(make_shared<Passage>(x, y));            
         } else {
-            row.emplace_back(make_shared<Cell>(new FloorTile(x, y)));
+            row.emplace_back(make_shared<FloorTile>(x, y));
             if (c == '0'){
-                row[x]->setOccupant(new RestorHP{});
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<RestorHP>());
             } else if (c == '1'){
-                row[x]->setOccupant(make_shared<Item>(new BoostAtk{}));
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<BoostAtk>());
             } else if (c == '2'){
-                row[x]->setOccupant(make_shared<Item>(new BoostDef{}));
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<BoostDef>());
             } else if (c == '3'){
-                row[x]->setOccupant(make_shared<Item>(new PoisonHP{}));
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<PoisonHP>());
             } else if (c == '4'){
-                row[x]->setOccupant(make_shared<Item>(new WoundAtk{}));
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<WoundAtk>());
             } else if (c == '5'){
-                row[x]->setOccupant(make_shared<Item>(new WoundDef{}));
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<WoundDef>());
             } else if (c == '6'){
-                row[x]->setOccupant(make_shared<Item>(new Treasure{1}));
+                row[x]->attachStuff(make_shared<Treasure>(1));
             } else if (c == '7'){
-                row[x]->setOccupant(make_shared<Item>(new Treasure{2}));
+                row[x]->attachStuff(make_shared<Treasure>(2));
             } else if (c == '8'){
-                row[x]->setOccupant(make_shared<Item>(new Treasure{4}));
+                row[x]->attachStuff(make_shared<Treasure>(4));
             } else if (c == '9'){
-                row[x]->setOccupant(make_shared<Item>(new Treasure{6}));
+                row[x]->attachStuff(make_shared<Treasure>(6));
             } else if (c == 'W'){
                 row[x]->setOccupant(make_shared<Enemy>(new Werewolf{nullptr});
                 row[x]->setOccupancy(true);
@@ -202,17 +196,26 @@ bool Floor::checkEvents() {
     if (pc->getCell()->getOccupant()->getType() == Type::Trsr) {
         pc->getCell()->getOccupant()->effect(pc);
     }
-    //if (pc->getCell()->getOccupant()->)
+    if (pc->getCell()->getOccupant()->getChar() == 'C') {
+        for (auto current : floorTiles) {
+            if (current->getOccupant()->getType() == Type::Str) {
+                current->getOccupant()->enableDisplay();
+                break;
+            }
+        }
+    }
     for (auto cur : floorTiles) {
         if(cur->getOccupant()->getType() == Type::Enmy) {
             shared_ptr<Stuff> e = cur->getOccupant();
             if(!e->isDead() && isClose(cur, pc->getCell())) {
                 pc->beAttacked(e);
                 if (pc->isDead()) return true;
-            } else if(isClose(cur, pc->getCell()) && e->isDead()) {
+            } else if(e->isDead()) {
                 if (e->getChar() == 'M') {
                     cur->attachStuff(make_shared<Treasure>(3));
                     cur->setOccupancy(false);
+                } else if (e->getChar() == 'D') {
+                    continue;
                 } else {
                     pc->setTreasure(pc->getTreasure() + 1);
                 }
@@ -220,15 +223,8 @@ bool Floor::checkEvents() {
                     shared_ptr<Compass> c = make_shared<Compass>();
                     cur->attachStuff(c);
                     cur->setOccupancy(false);
-                    for (auto current : floorTiles) {
-                        if (current->getOccupant()->getType() == Type::Str) {
-                            // shared_ptr<Stair> s = reinterpret_cast<Stair *>(current->getOccupant().get());
-                            current->getOccupant()->enableDisplay();
-                            break;
-                        }
-                    }
                 }
-            } else continue;
+            }
         } 
     }
     return false;
@@ -237,9 +233,9 @@ bool Floor::checkEvents() {
 void Floor::playerAtk(std::string direction) {
     shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
     if (targetCell->getOccupant()->getType() != Type::Enmy) return;
-    e->beAttacked(pc);
+    targetCell->getOccupant()->beAttacked(pc);
     checkEvents();
-    pc->beAttacked(e);
+    pc->beAttacked(targetCell->getOccupant());
     checkEvents();
 }
 
