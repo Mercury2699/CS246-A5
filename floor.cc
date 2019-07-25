@@ -168,10 +168,18 @@ std::shared_ptr<Cell> Floor::target(std::shared_ptr<Cell> cur, std::string direc
     return theGrid[targetX][targetY];
 }
 
+shared_ptr<Cell> Floor::getCellPC() {
+    for (auto cur : floorTiles) {
+        if (cur->getOccupant()->getType() == Type::Plyr) {
+            return cur;
+        }
+    }
+}
+
 void Floor::playerMove(std::string direction) {
-    int curX = pc->getCell()->getX();
-    int curY = pc->getCell()->getY();
-    std::shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
+    int curX = getCellPC()->getX();
+    int curY = getCellPC()->getY();
+    std::shared_ptr<Cell> targetCell = target(getCellPC(), direction);
     int targetX = targetCell->getX();
     int targetY = targetCell->getY();
     if (targetCell->checkOccupancy(false)) return;
@@ -188,11 +196,11 @@ bool isClose(std::shared_ptr<Cell> c1, std::shared_ptr<Cell> c2) {
 
 bool Floor::checkEvents() {
     if (pc->isDead()) return true;
-    if (pc->getCell()->getOccupant()->getType() == Type::Str) return false;
-    if (pc->getCell()->getOccupant()->getType() == Type::Trsr) {
-        pc->getCell()->getOccupant()->effect(pc);
+    if (getCellPC()->getOccupant()->getType() == Type::Str) return false;
+    if (getCellPC()->getOccupant()->getType() == Type::Trsr) {
+        getCellPC()->getOccupant()->effect(pc);
     }
-    if (pc->getCell()->getOccupant()->getChar() == 'C') {
+    if (getCellPC()->getOccupant()->getChar() == 'C') {
         for (auto current : floorTiles) {
             if (current->getOccupant()->getType() == Type::Str) {
                 current->getOccupant()->enableDisplay();
@@ -203,7 +211,7 @@ bool Floor::checkEvents() {
     for (auto cur : floorTiles) {
         if(cur->getOccupant()->getType() == Type::Enmy) {
             shared_ptr<Stuff> e = cur->getOccupant();
-            if(!e->isDead() && isClose(cur, pc->getCell())) {
+            if(!e->isDead() && isClose(cur, getCellPC())) {
                 pc->beAttacked(e);
                 if (pc->isDead()) return true;
             } else if(e->isDead()) {
@@ -227,7 +235,7 @@ bool Floor::checkEvents() {
 }
 
 void Floor::playerAtk(std::string direction) {
-    shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
+    shared_ptr<Cell> targetCell = target(getCellPC(), direction);
     if (targetCell->getOccupant()->getType() != Type::Enmy) return;
     targetCell->getOccupant()->beAttacked(pc);
     checkEvents();
@@ -236,7 +244,7 @@ void Floor::playerAtk(std::string direction) {
 }
 
 void Floor::playerUse(std::string direction) {
-    shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
+    shared_ptr<Cell> targetCell = target(getCellPC(), direction);
     if (targetCell->getOccupant()->getType() != Type::Ptn) return;
     targetCell->getOccupant()->effect(pc);
 }

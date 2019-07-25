@@ -28,6 +28,7 @@ class Floor {
 	void playerUse(std::string direction);
 	void moveEnemies();
 	bool checkEvents();
+	std::shared_ptr<Cell> getCellPC();
 	std::shared_ptr<Cell> target(std::shared_ptr<Cell> cur, std::string direction);
 	void setCell(int x, int y, std::shared_ptr<Stuff> s);
 	std::shared_ptr<Player> getPlayer();
