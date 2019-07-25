@@ -86,9 +86,10 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>> f) {
     srand( time(nullptr) );
 
     // player spawned
-    int randChamber = rand() % f[0]->getChambers().size();
-    int randPos = rand() % f[0]->getChambers()[randChamber].size();
-    Cell *playerPos = f[0]->getChambers()[randChamber][randPos];
+    int i = rand() % f[0]->getChambers().size();
+    int x = rand() % f[0]->getChambers()[i].size();
+    int y = rand() % f[0]->getChambers()[i][x].size();
+    Cell *playerPos = f[0]->getChambers()[i][x][y];
     f[0]->getPlayer()->setCurrPos( playerPos );
     theGrid[ playerPos->getX() ][ playerPos->getY() ]->setOccupant() = f[0]->getPlayer();
 
@@ -97,7 +98,7 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>> f) {
     while (diffChamber == randChamber) {
         diffChamber = rand() % f[0]->getChambers().size();
     }
-    int randStair = rand()
+    int randStair = rand();
 
 }
 
