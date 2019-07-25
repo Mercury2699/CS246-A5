@@ -177,6 +177,7 @@ std::shared_ptr<Cell> Floor::target(std::shared_ptr<Cell> cur, std::string direc
     }
     return theGrid[targetX][targetY];
 }
+
 void Floor::playerMove(std::string direction) {
     int curX = pc->getCell()->getX();
     int curY = pc->getCell()->getY();
@@ -199,13 +200,12 @@ bool Floor::checkEvents() {
     if (pc->isDead()) return true;
     if (pc->getCell()->getOccupant()->getType() == Type::Str) return false;
     if (pc->getCell()->getOccupant()->getType() == Type::Trsr) {
-            shared_ptr<Treasure> t = make_shared<Treasure>(pc->getCell()->getOccupant().get());
-            t->effect(pc);
+        pc->getCell()->getOccupant()->effect(pc);
     }
     //if (pc->getCell()->getOccupant()->)
     for (auto cur : floorTiles) {
         if(cur->getOccupant()->getType() == Type::Enmy) {
-            shared_ptr<Enemy> e = make_shared<Enemy>(cur->getOccupant().get());
+            shared_ptr<Stuff> e = cur->getOccupant();
             if(!e->isDead() && isClose(cur, pc->getCell())) {
                 pc->beAttacked(e);
                 if (pc->isDead()) return true;
@@ -213,8 +213,9 @@ bool Floor::checkEvents() {
                 if (e->getChar() == 'M') {
                     cur->attachStuff(make_shared<Treasure>(3));
                     cur->setOccupancy(false);
+                } else {
+                    pc->setTreasure(pc->getTreasure() + 1);
                 }
-                pc->setTreasure(pc->getTreasure() + 1);
                 if (e->checkCompass()) {
                     shared_ptr<Compass> c = make_shared<Compass>();
                     cur->attachStuff(c);
@@ -222,8 +223,7 @@ bool Floor::checkEvents() {
                     for (auto current : floorTiles) {
                         if (current->getOccupant()->getType() == Type::Str) {
                             // shared_ptr<Stair> s = reinterpret_cast<Stair *>(current->getOccupant().get());
-                            Stair * s = static_cast<Stair *>(current->getOccupant().get());
-                            s->enableDisplay();
+                            current->getOccupant()->enableDisplay();
                             break;
                         }
                     }
@@ -237,7 +237,6 @@ bool Floor::checkEvents() {
 void Floor::playerAtk(std::string direction) {
     shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
     if (targetCell->getOccupant()->getType() != Type::Enmy) return;
-    shared_ptr<Enemy> e = make_shared<Enemy>(targetCell->getOccupant().get());
     e->beAttacked(pc);
     checkEvents();
     pc->beAttacked(e);
@@ -247,8 +246,7 @@ void Floor::playerAtk(std::string direction) {
 void Floor::playerUse(std::string direction) {
     shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
     if (targetCell->getOccupant()->getType() != Type::Ptn) return;
-    shared_ptr<Potion> p = make_shared<Potion>(targetCell->getOccupant().get());
-    p->effect(pc);
+    targetCell->getOccupant()->effect(pc);
 }
 
 void Floor::startGame(std::string race) {
@@ -259,17 +257,21 @@ void Floor::startGame(std::string race) {
 }
 
 void Floor::moveEnemies() {
-    for (auto cur : floorTiles) {
-        if (cur->getOccupant()->getType() == Type::Enmy) {
-            vector<shared_ptr<Cell>> validMove;
-            string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
-            for (int i = 0; i < 8; ++i) {
-                if (target(cur, directions[i])->checkOccupancy(true)) validMove.emplace_back(target(cur, directions[i]));
-            } 
-            srand(time(nullptr));
-            int index = rand() % validMove.size();
-            shared_ptr<Cell> des = validMove[index];
-            theGrid[des->getX()][des->getY()]->attachStuff(cur->getOccupant());
+    for (auto row : theGrid) {
+        for (auto col : row) {
+            if (col->getOccupant()->getType() == Type::Enmy) {
+                if (col->getOccupant()->getMoved()) continue;
+                vector<shared_ptr<Cell>> validMove;
+                string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+                for (int i = 0; i < 8; ++i) {
+                   if (target(col, directions[i])->checkOccupancy(true)) validMove.emplace_back(target(col, directions[i]));
+                } 
+                srand(time(nullptr));
+                int index = rand() % validMove.size();
+                shared_ptr<Cell> des = validMove[index];
+                theGrid[des->getX()][des->getY()]->attachStuff(theGrid[col->getX()][col->getY()]->detachStuff());
+                des->getOccupant()->toggleMoved();
+            }
         }
     }
 }
