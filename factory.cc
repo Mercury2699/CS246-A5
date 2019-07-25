@@ -15,6 +15,8 @@
 #include "merchant.h"
 #include "goblin.h"
 
+using std::make_shared;
+
 void Factory::spawnPlayer() {
     srand( time(nullptr) );
     int randNum = rand() % floorTiles.size();
@@ -22,60 +24,60 @@ void Factory::spawnPlayer() {
 }
 
 
-Enemy * Factory::genEnemy() {
+std::shared_ptr<Enemy> Factory::genEnemy() {
     srand( time(nullptr) );
     int NPCRand = rand() % 18;
     
     if ( NPCRand <= 3 ) {
-        return new Werewolf{nullptr};
+        return make_shared<Enemy>(Werewolf{nullptr});
     } else if ( NPCRand <= 6 ) {
-        return new Vampire{nullptr};
+        return make_shared<Enemy>(Vampire{nullptr});
     } else if ( NPCRand <= 11) {
-        return new Goblin{nullptr};
+        return make_shared<Enemy>(Goblin{nullptr});
     } else if ( NPCRand <= 13) {
-        return new Troll{nullptr};
+        return make_shared<Enemy>(Troll{nullptr});
     } else if ( NPCRand <= 15) {
-        return new Phoenix{nullptr};
+        return make_shared<Enemy>(Phoenix{nullptr});
     } else {
-        return new Merchant{};
+        return make_shared<Enemy>(Merchant{});
     }
 }
 
-Potion * Factory::genPotion() {
+std::shared_ptr<Potion> Factory::genPotion() {
     srand(time(0));
     int RandNum = rand() % 6;
 
     if ( RandNum == 0 ) {
-        return new RestorHP{};
+        return make_shared<Potion>(RestorHP{});
     } else if ( RandNum == 1 ) {
-        return new BoostAtk{};
+        return make_shared<Potion>(BoostAtk{});
     } else if ( RandNum == 2 ) {
-        return new BoostDef{};
+        return make_shared<Potion>(BoostDef{});
     } else if ( RandNum == 3 ) {
-        return new PoisonHP{};
+        return make_shared<Potion>(PoisonHP{});
     } else if ( RandNum == 4 ) {
-        return new WoundAtk{};
+        return make_shared<Potion>(WoundAtk{});
     } else { // if ( RandNum == 5 )
-        return new WoundDef{};
+        return make_shared<Potion>(WoundDef{});
     }
 }
 
-Treasure * Factory::genTreasure(){
+std::shared_ptr<Treasure> Factory::genTreasure(){
     srand(time(0));
     int RandNum = rand() % 4;
 
     if (RandNum == 0){
-        return new Treasure{1};
+        return make_shared<Treasure>(Treasure{1});
     } else if (RandNum == 1) {
-        return new Treasure{2};
+        return make_shared<Treasure>(Treasure{2});
     } else if (RandNum == 2) {
-        return new Treasure{4};
+        return make_shared<Treasure>(Treasure{4});
     } else { // RandNum == 3s
-        return new Treasure{6};
+        return make_shared<Treasure>(Treasure{6});
     }
 }
 
-void Factory::genFloor(Floor *){
+void Factory::genFloor(std::shared_ptr<Floor> f){
 
 }
 
