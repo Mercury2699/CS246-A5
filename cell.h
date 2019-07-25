@@ -14,6 +14,7 @@ class Cell {
 
 	public:
     Cell(int x, int y) : x{x}, y{y} {}
+	virtual ~Cell() {}
 	virtual char getChar() const = 0;
     virtual bool checkOccupancy(bool forEnemy) const {
 		return isOccupied;
