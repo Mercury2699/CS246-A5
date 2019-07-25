@@ -112,9 +112,8 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>> f) {
     }
     int y = rand() % f[0]->getChambers()[differChameber].size();
     std::shared_ptr<Cell> stairPos = f[0]->getChambers()[differChameber][y];
-    f[0]->getPlayer()->setCell( stairPos );
     std::shared_ptr<Stair> stair = make_shared<Stair>();
-    f[0]->setCell(stairPos->getX(), stairPos->getY(), stair);
+    f[0]->setCell(stairPos, stair);
 
     for ( int i = 0; i < 5; i++ ) {
         std::vector<std::shared_ptr<Cell>> tiles = f[i]->getTiles();
