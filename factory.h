@@ -13,7 +13,7 @@
 #include "cell.h"
 
 struct Factory {
-    void spawnPlayer(std::vector<std::shared_ptr<Floor>>);
+    std::shared_ptr<Player> spawnPlayer(std::string);
     std::shared_ptr<Enemy> genEnemy();
     std::shared_ptr<Potion> genPotion();
     std::shared_ptr<Treasure> genTreasure();

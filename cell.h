@@ -15,7 +15,16 @@ class Cell {
 	public:
     Cell(int x, int y);
 	virtual char getChar() const = 0;
-    virtual bool checkOccupancy() const { return isOccupied; }
+    virtual bool checkOccupancy(bool forEnemy) const {
+		if(forEnemy) {
+			if (occupant){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return isOccupied; 
+	}
     void setObserver(std::shared_ptr<TextDisplay> td) { this->td = td;};
 	void notifyObserver() { td->notify(x,y,getChar()); };
 	
