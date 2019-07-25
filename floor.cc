@@ -48,7 +48,7 @@ Floor::Floor(std::string file){
     m.close();
 }
 
-Cell *Floor::target(std::shared_ptr<Cell> cur, std::string direction) {
+std::shared_ptr<Cell> Floor::target(std::shared_ptr<Cell> cur, std::string direction) {
     int curX = cur->getX();
     int curY = cur->getY();
     int targetX = targetY = 0;
@@ -82,7 +82,7 @@ Cell *Floor::target(std::shared_ptr<Cell> cur, std::string direction) {
 void Floor::playerMove(std::string direction) {
     int curX = pc->getX();
     int curY = pc->getY();
-    Cell *targetCell = target(theGrid[curX][curY], direction);
+    std::shared_ptr<Cell> targetCell = target(theGrid[curX][curY], direction);
     int targetX = targetCell->getX();
     int targetY = targetCell->getY();
     if (targetCell->checkOccupancy()) return;
@@ -128,19 +128,6 @@ bool Floor::checkEvents(std::shared_ptr<Cell> cur) {
     return false;
 }
 
-void playerAtk(std::string direction) {
+void Floor::playerAtk(std::string direction) {
+    std::shared_ptr<Cell>
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
