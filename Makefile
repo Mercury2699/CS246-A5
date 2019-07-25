@@ -8,7 +8,7 @@ ENEMIES = vampire.o troll.o werewolf.o phoenix.o dragon.o merchant.o
 CELLS = doorway.o passage.o floorTile.o 
 ITEMS = item.o treasure.o
 CONTROLLERS = floor.o factory.o
-OBJECTS = main.o textDisplay.o floor.o ${CELLS} ${PLAYERS} ${ENEMIES} ${ITEMS} ${POTIONS}
+OBJECTS = main.o textDisplay.o ${CELLS} ${PLAYERS} ${ENEMIES} ${ITEMS} ${POTIONS}
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

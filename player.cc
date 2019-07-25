@@ -42,7 +42,7 @@ int Player::getDefaultDef() const {
 	return defaultDef;
 }
 
-void Player::beAttacked(std::shared_ptr<Character> c) {
+void Player::beAttacked(std::shared_ptr<Stuff> c) {
 	if (getSuit()) {
 		setHP(getHP() - ceil(ceil(((100 / (100 + getDef())) * c->getAtk())) / 2));
 	} else {

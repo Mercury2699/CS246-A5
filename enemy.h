@@ -27,16 +27,16 @@ class Enemy : public Character {
 	// void setAtk(int atk) { Atk = atk; } inherited from Character
 	// void setDef(int def) { Def = def; } inherited from Character
 	void assignCompass() {hasCompass = true;}
-	bool checkCompass() const {return hasCompass;}
-	bool getMoved() const {return alreadyMoved;}
-	virtual void toggleMoved() {
+	bool checkCompass() const override {return hasCompass;}
+	bool getMoved() const override {return alreadyMoved;}
+	virtual void toggleMoved() override {
 		alreadyMoved = alreadyMoved ? false : true;
 	}
 	void becomeHostile() { hostile = true; }
 	Enemy(int HP, int Atk, int Def) : Character{HP, Atk, Def} {
 		type = Type::Enmy;
 	}
-	void beAttacked(std::shared_ptr<Character> c) override {
+	void beAttacked(std::shared_ptr<Stuff> c) override {
 		setHP(getHP()-ceil((100 / (100 + getDef())) * c->getAtk()));
 	}
 };

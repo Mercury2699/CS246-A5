@@ -23,7 +23,7 @@ class Vampire : public Enemy {
 	// void setAtk(int atk) { Atk = atk; } inherited from Character
 	// void setDef(int def) { Def = def; } inherited from Character
 	// void becomeHostile(); inherited from Enemy
-	// void beAttacked(std::shared_ptr<Character> c) override; inherited from Enemy
+	// void beAttacked(std::shared_ptr<Stuff> c) override; inherited from Enemy
 	// void assignCompass(); inherited from Enemy
 	// bool checkCompass() const; inherited from Enemy
 	// bool getMoved() const; inherited from Enemy
