@@ -9,24 +9,24 @@
 #include "cell.h"
 #include "textDisplay.h"
 #include "player.h"
+#include "factory.h"
 class TextDisplay;
 
 class Floor {
 	std::vector<std::vector<std::shared_ptr<Cell>>> theGrid;
-	TextDisplay * td = nullptr;
-	Player *pc;
-	std::vector<std::shared_ptr<Cell>> enemies;
-
+	std::vector<std::shared_ptr<Cell>> floorTiles;
+	std::vector<std::vector<std::shared_ptr<Cell>>> chambers;
+	Player *pc = nullptr;
+	
 	public:
 	void startGame(std::string race);
 	void playerMove(std::string direction);
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);
 	void moveEnemies();
-	void checkEvents(Cell *);
+	bool checkEvents(Cell *);
 	Cell *target(Cell *cur, std::string direction);
 
-	void setObserver(TextDisplay *td);
 
 
 	

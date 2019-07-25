@@ -9,3 +9,10 @@ char FloorTile::getChar() const {
     return '.';
 }
 
+bool FloorTile::checkOccupancy() {
+    if (getOccupant() == nullptr) return false;
+    else if (getOccupant()->getType() == Type::Trsr || getOccupant()->getChar() == 'B' ||
+    getOccupant()->getType() == Type::Stair ) return false;
+    else return true;
+}
+

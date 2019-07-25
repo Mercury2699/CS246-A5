@@ -10,6 +10,7 @@ class FloorTile final : public Cell {
     public:
     FloorTile(int x, int y);
     char getChar() const override;
+    bool checkOccupancy() override;
 };
 
 #endif
