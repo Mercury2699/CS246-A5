@@ -27,7 +27,8 @@
 
 using namespace std;
 
-Floor::Floor(std::string file){
+Floor::Floor(shared_ptr<Player> pc, string file)
+: pc{pc} {
     ifstream m(file);
     char c;
     int x = 0, y = 0;
@@ -67,15 +68,16 @@ Floor::Floor(std::string file){
 }
 
 void Floor::ReadFile(ifstream s, shared_ptr<Player> pc){
+    this->pc = pc;
     char c;
-    int x = 0, y = 0;
+    int x = 79, y = 25;
     vector<shared_ptr<Cell>> row;
     while (s.get(c)){
         if(c == '\n'){
             theGrid.emplace_back(row);
             row.clear();
-            x = 0;
-            y++;
+            x = 79;
+            y--;
         } else if (c == ' ') {
             row.emplace_back(make_shared<EmptyCell>(x, y));
         } else if (c == '-') {

@@ -20,9 +20,8 @@ class Floor {
 	std::shared_ptr<Player> pc = nullptr;
 	
 	public:
-	Floor(std::string file = "map.txt");
+	Floor(std::shared_ptr<Player> pc, std::string file = "map.txt");
 	void ReadFile(std::ifstream, std::shared_ptr<Player> pc);
-	void startGame(std::string race);
 	void playerMove(std::string direction);
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);

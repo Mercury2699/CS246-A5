@@ -5,8 +5,12 @@
 
 int main(int argc, char *argv[]) {
 	Game g;
-	if(argc > 1) {
-		
+	if(argc > 1) { // optional command line argument that speficies the layout
+		if (std::string(argv[1]) == "-layout") {
+			g = Game(true);
+		} else if (std::string(argv[1]) == "-map" ){
+			g = Game(argv[2]);
+		}
 	} 
 	
 	std::string command;
@@ -15,17 +19,17 @@ int main(int argc, char *argv[]) {
 	std::cout << "h: Human, e: Elves, d: Dwarf, o: Orc" << std::endl;
 	std::cin >> command;
 	if(command == "h" || command == "e" || command == "d" || command == "o") {
-		g->startGame(command);
+		g.startGame(command);
 	} else {
 		std::cout << "Invalid! Please reselect your character." << std::endl;
 	}
 	while(1){
 		std::cin >> command;
 		if(command == "r") {
-			g->resetGame();
+			g.resetGame();
 			break;
 		} else if (command == "q") break;
-		g->takeCommand(command);
+		g.takeCommand(command);
 	}
 	return 0;
 }

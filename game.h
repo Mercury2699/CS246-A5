@@ -10,6 +10,7 @@
 class Game{
     std::shared_ptr<Player> pc;
     std::shared_ptr<TextDisplay> td;
+    std::shared_ptr<Factory> f;
     std::vector<std::shared_ptr<Floor>> allFloors;
     int levelCount = 0;
     bool specifiedLayout = false;
@@ -21,7 +22,6 @@ class Game{
     void startGame(std::string race);
     void takeCommand(std::string);
     void resetGame();
-    void playerAction(std::string action);
     
 };
 
