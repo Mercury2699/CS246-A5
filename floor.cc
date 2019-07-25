@@ -30,17 +30,17 @@ Floor::Floor(std::string file){
             x = 0;
             y++;
         } else if (c == ' ') {
-            row.emplace_back(make_shared<EmptyCell>(x, y));
+            row.emplace_back(make_shared<Cell>(new EmptyCell(x, y)));
         } else if (c == '-') {
-            row.emplace_back(make_shared<Wall>(x, y, true));
+            row.emplace_back(make_shared<Cell>(new Wall(x, y, true)));
         } else if (c == '|') {
-            row.emplace_back(make_shared<Wall>(x, y, false));
+            row.emplace_back(make_shared<Cell>(new Wall(x, y, false)));
         } else if (c == '+') {
-            row.emplace_back(make_shared<Doorway>(x, y));
+            row.emplace_back(make_shared<Cell>(new Doorway(x, y)));
         } else if (c == '#') {
-            row.emplace_back(make_shared<Passage>(x, y));
+            row.emplace_back(make_shared<Cell>(new Passage(x, y)));
         } else {
-            shared_ptr<Cell> cur1 = make_shared<FloorTile>(x ,y);
+            shared_ptr<Cell> cur1 = make_shared<Cell>(new FloorTile(x ,y));
             row.emplace_back(cur1);
             shared_ptr<Cell> cur2 = cur1;
             floorTiles.emplace_back(cur2);
@@ -52,6 +52,88 @@ Floor::Floor(std::string file){
             else chambers[4].emplace_back(cur3);
         }
         x++;
+    }
+    m.close();
+}
+
+Floor::ReadFile(std::string file){
+    ifstream m(file);
+    char c;
+    int x = 0, y = 0;
+    vector<Cell> row;
+    while (m.get(c)){
+        if(c == '\n'){
+            theGrid.emplace_back(row);
+            row.clear();
+            x = 0;
+            y++;
+        } else if (c == ' ') {
+            row.emplace_back(make_shared<Cell>(new EmptyCell(x, y)));
+        } else if (c == '-') {
+            row.emplace_back(make_shared<Cell>(new Wall(x, y, true)));
+        } else if (c == '|') {
+            row.emplace_back(make_shared<Cell>(new Wall(x, y, false)));
+        } else if (c == '+') {
+            row.emplace_back(make_shared<Cell>(new Doorway(x, y)));
+        } else if (c == '#') {
+            row.emplace_back(make_shared<Cell>(new Passage(x, y)));            
+        } else {
+            row.emplace_back(make_shared<Cell>(new floorTile(x, y)));
+            if (c == '0'){
+                row[x][y]->setOccupant(new RestorHP{});
+                row[x][y]->setOccupancy(true);
+            } else if (c == '1'){
+                row[x][y]->setOccupant(make_shared<Item>(new BoostAtk{}));
+                row[x][y]->setOccupancy(true);
+            } else if (c == '2'){
+                row[x][y]->setOccupant(make_shared<Item>(new BoostDef{}));
+                row[x][y]->setOccupancy(true);
+            } else if (c == '3'){
+                row[x][y]->setOccupant(make_shared<Item>(new PoisonHP{}));
+                row[x][y]->setOccupancy(true);
+            } else if (c == '4'){
+                row[x][y]->setOccupant(make_shared<Item>(new WoundAtk{}));
+                row[x][y]->setOccupancy(true);
+            } else if (c == '5'){
+                row[x][y]->setOccupant(make_shared<Item>(new WoundDef{}));
+                row[x][y]->setOccupancy(true);
+            } else if (c == '6'){
+                row[x][y]->setOccupant(make_shared<Item>(new Treasure{1}));
+            } else if (c == '7'){
+                row[x][y]->setOccupant(make_shared<Item>(new Treasure{2}));
+            } else if (c == '8'){
+                row[x][y]->setOccupant(make_shared<Item>(new Treasure{4}));
+            } else if (c == '9'){
+                row[x][y]->setOccupant(make_shared<Item>(new Treasure{6}));
+            } else if (c == 'W'){
+                row[x][y]->setOccupant(make_shared<Enemy>(new Werewolf{nullptr});
+                row[x][y]->setOccupancy(true);
+            } else if (c == 'V'){
+                row[x][y]->setOccupant(make_shared<Enemy>(new Vampire{nullptr});
+                row[x][y]->setOccupancy(true);
+            } else if (c == 'N'){
+                row[x][y]->setOccupant(make_shared<Enemy>(new Goblin{nullptr});
+                row[x][y]->setOccupancy(true);
+            } else if (c == 'T'){
+                row[x][y]->setOccupant(make_shared<Enemy>(new Troll{nullptr});
+                row[x][y]->setOccupancy(true);
+            } else if (c == 'X'){
+                row[x][y]->setOccupant(make_shared<Enemy>(new Phoenix{nullptr});
+                row[x][y]->setOccupancy(true);
+            } else if (c == 'M'){
+                row[x][y]->setOccupant(make_shared<Enemy>(new Merchant{});
+                row[x][y]->setOccupancy(true);
+            } else if (c == 'D'){
+                row[x][y]->setOccupant(make_shared<Enemy>(new Dragon{nullptr}});
+                row[x][y]->setOccupancy(true);
+            } else if (c == '@'){
+                row[x][y]->setOccupant(make_shared<Player>(new Player));
+                row[x][y]->setOccupancy(true);
+            } else if (c == '\\'){
+                row[x][y]->setOccupant(make_shared<Stair>(new Stair);
+            } else //do nothing
+        }
+       
     }
     m.close();
 }
@@ -167,21 +249,17 @@ void Floor::startGame(std::string race) {
 }
 
 void Floor::moveEnemies() {
-    for (auto row : theGrid) {
-        for (auto col : row) {
-            if (col->getOccupant()->getType() == Type::Enmy) {
-                vector<shared_ptr<Cell>> validMove;
-                string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
-                for (int i = 0; i < 8; ++i) {
-                   if (target(col, directions[i])->checkOccupancy(true)) validMove.emplace_back(target(col, directions[i]));
-                } 
+    for (auto cur : floorTiles) {
+        if (cur->getOccupant()->getType() == Type::Enmy) {
+            vector<shared_ptr<Cell>> validMove;
+            string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+            for (int i = 0; i < 8; ++i) {
+                if (target(cur, directions[i])->checkOccupancy(true)) validMove.emplace_back(target(cur, directions[i]));
+            } 
             srand(time(nullptr));
             int index = rand() % validMove.size();
             shared_ptr<Cell> des = validMove[index];
-            theGrid[des->getX()][des->getY()]->attachStuff(col->getOccupant());
-            shared_ptr<Enemy> e = make_shared<Enemy>(col->getOccupant().get());
-            e->toggleMoved();
-            }
+            theGrid[des->getX()][des->getY()]->attachStuff(cur->getOccupant());
         }
     }
 }
