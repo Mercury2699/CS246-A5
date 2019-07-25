@@ -16,6 +16,13 @@
 #include "dwarf.h"
 #include "orc.h"
 
+#include "vampire.h"
+#include "werewolf.h"
+#include "dragon.h"
+#include "phoenix.h"
+#include "troll.h"
+#include "goblin.h"
+
 using namespace std;
 
 Floor::Floor(std::string file){
@@ -79,59 +86,59 @@ Floor::ReadFile(std::string file){
         } else if (c == '#') {
             row.emplace_back(make_shared<Cell>(new Passage(x, y)));            
         } else {
-            row.emplace_back(make_shared<Cell>(new floorTile(x, y)));
+            row.emplace_back(make_shared<Cell>(new FloorTile(x, y)));
             if (c == '0'){
-                row[x][y]->setOccupant(new RestorHP{});
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(new RestorHP{});
+                row[x]->setOccupancy(true);
             } else if (c == '1'){
-                row[x][y]->setOccupant(make_shared<Item>(new BoostAtk{}));
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Item>(new BoostAtk{}));
+                row[x]->setOccupancy(true);
             } else if (c == '2'){
-                row[x][y]->setOccupant(make_shared<Item>(new BoostDef{}));
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Item>(new BoostDef{}));
+                row[x]->setOccupancy(true);
             } else if (c == '3'){
-                row[x][y]->setOccupant(make_shared<Item>(new PoisonHP{}));
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Item>(new PoisonHP{}));
+                row[x]->setOccupancy(true);
             } else if (c == '4'){
-                row[x][y]->setOccupant(make_shared<Item>(new WoundAtk{}));
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Item>(new WoundAtk{}));
+                row[x]->setOccupancy(true);
             } else if (c == '5'){
-                row[x][y]->setOccupant(make_shared<Item>(new WoundDef{}));
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Item>(new WoundDef{}));
+                row[x]->setOccupancy(true);
             } else if (c == '6'){
-                row[x][y]->setOccupant(make_shared<Item>(new Treasure{1}));
+                row[x]->setOccupant(make_shared<Item>(new Treasure{1}));
             } else if (c == '7'){
-                row[x][y]->setOccupant(make_shared<Item>(new Treasure{2}));
+                row[x]->setOccupant(make_shared<Item>(new Treasure{2}));
             } else if (c == '8'){
-                row[x][y]->setOccupant(make_shared<Item>(new Treasure{4}));
+                row[x]->setOccupant(make_shared<Item>(new Treasure{4}));
             } else if (c == '9'){
-                row[x][y]->setOccupant(make_shared<Item>(new Treasure{6}));
+                row[x]->setOccupant(make_shared<Item>(new Treasure{6}));
             } else if (c == 'W'){
-                row[x][y]->setOccupant(make_shared<Enemy>(new Werewolf{nullptr});
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Enemy>(new Werewolf{nullptr});
+                row[x]->setOccupancy(true);
             } else if (c == 'V'){
-                row[x][y]->setOccupant(make_shared<Enemy>(new Vampire{nullptr});
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Enemy>(new Vampire{nullptr});
+                row[x]->setOccupancy(true);
             } else if (c == 'N'){
-                row[x][y]->setOccupant(make_shared<Enemy>(new Goblin{nullptr});
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Enemy>(new Goblin{nullptr});
+                row[x]->setOccupancy(true);
             } else if (c == 'T'){
-                row[x][y]->setOccupant(make_shared<Enemy>(new Troll{nullptr});
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Enemy>(new Troll{nullptr});
+                row[x]->setOccupancy(true);
             } else if (c == 'X'){
-                row[x][y]->setOccupant(make_shared<Enemy>(new Phoenix{nullptr});
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Enemy>(new Phoenix{nullptr});
+                row[x]->setOccupancy(true);
             } else if (c == 'M'){
-                row[x][y]->setOccupant(make_shared<Enemy>(new Merchant{});
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Enemy>(new Merchant{});
+                row[x]->setOccupancy(true);
             } else if (c == 'D'){
-                row[x][y]->setOccupant(make_shared<Enemy>(new Dragon{nullptr}});
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Enemy>(new Dragon{nullptr}});
+                row[x]->setOccupancy(true);
             } else if (c == '@'){
-                row[x][y]->setOccupant(make_shared<Player>(new Player));
-                row[x][y]->setOccupancy(true);
+                row[x]->setOccupant(make_shared<Player>(new Player));
+                row[x]->setOccupancy(true);
             } else if (c == '\\'){
-                row[x][y]->setOccupant(make_shared<Stair>(new Stair);
+                row[x]->setOccupant(make_shared<Stair>(new Stair);
             } else //do nothing
         }
        
