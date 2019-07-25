@@ -22,7 +22,7 @@ Floor::Floor(std::string file){
     ifstream m(file);
     char c;
     int x = 0, y = 0;
-    vector<Cell> row;
+    vector<shared_ptr<Cell>> row;
     while (m.get(c)){
         if(c == '\n'){
             theGrid.emplace_back(row);
@@ -30,7 +30,8 @@ Floor::Floor(std::string file){
             x = 0;
             y++;
         } else if (c == ' ') {
-            row.emplace_back(make_shared<Cell>(new EmptyCell(x, y)));
+            auto p = make_shared<EmptyCell>(x, y);
+            row.emplace_back(p);
         } else if (c == '-') {
             row.emplace_back(make_shared<Cell>(new Wall(x, y, true)));
         } else if (c == '|') {
@@ -40,11 +41,11 @@ Floor::Floor(std::string file){
         } else if (c == '#') {
             row.emplace_back(make_shared<Cell>(new Passage(x, y)));
         } else {
-            shared_ptr<Cell> cur1 = make_shared<Cell>(new FloorTile(x ,y));
+            shared_ptr<FloorTile> cur1 = make_shared<FloorTile>(x ,y);
             row.emplace_back(cur1);
-            shared_ptr<Cell> cur2 = cur1;
+            shared_ptr<FloorTile> cur2 = cur1;
             floorTiles.emplace_back(cur2);
-            shared_ptr<Cell> cur3 = cur1;
+            shared_ptr<FloorTile> cur3 = cur1;
             if (c == 'A') chambers[0].emplace_back(cur3);
             else if (c == 'B') chambers[1].emplace_back(cur3);
             else if (c == 'C') chambers[2].emplace_back(cur3);
@@ -194,6 +195,7 @@ bool Floor::checkEvents() {
             shared_ptr<Treasure> t = make_shared<Treasure>(pc->getCell()->getOccupant().get());
             t->effect(pc);
     }
+    //if (pc->getCell()->getOccupant()->)
     for (auto cur : floorTiles) {
         if(cur->getOccupant()->getType() == Type::Enmy) {
             shared_ptr<Enemy> e = make_shared<Enemy>(cur->getOccupant().get());
