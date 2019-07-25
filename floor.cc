@@ -66,12 +66,11 @@ Floor::Floor(std::string file){
     m.close();
 }
 
-void Floor::ReadFile(std::string file){
-    ifstream m(file);
+void Floor::ReadFile(std::ifstream s, shared_ptr<Player> pc){
     char c;
     int x = 0, y = 0;
     vector<shared_ptr<Cell>> row;
-    while (m.get(c)){
+    while (s.get(c)){
         if(c == '\n'){
             theGrid.emplace_back(row);
             row.clear();
@@ -124,7 +123,7 @@ void Floor::ReadFile(std::string file){
             } else if (c == 'D'){
                 row[x]->attachStuff(make_shared<Dragon>());
             } else if (c == '@'){
-                // 记下Player位置
+                row[x]->attachStuff(make_shared<Player>(pc));
             } else if (c == '\\'){
                 row[x]->attachStuff(make_shared<Stair>());
             } else {
@@ -133,7 +132,6 @@ void Floor::ReadFile(std::string file){
         }
        
     }
-    m.close();
 }
 
 std::shared_ptr<Cell> Floor::target(std::shared_ptr<Cell> cur, std::string direction) {

@@ -21,7 +21,7 @@ class Floor {
 	
 	public:
 	Floor(std::string file = "map.txt");
-	void ReadFile(std::ifstream);
+	void ReadFile(std::ifstream, std::shared_ptr<Player> pc);
 	void startGame(std::string race);
 	void playerMove(std::string direction);
 	void playerAtk(std::string direction);
