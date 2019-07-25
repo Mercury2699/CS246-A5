@@ -6,6 +6,9 @@
 #include "floorTile.h"
 #include "wall.h"
 #include "passage.h"
+#include "item.h"
+#include "treasure.h"
+#include "enemy.h"
 
 
 using namespace std;
@@ -22,21 +25,21 @@ Floor::Floor(std::string file){
             x = 0;
             y++;
         } else if (c == ' ') {
-            row.emplace_back(std::make_shared<Cell>(new EmptyCell(x, y)));
+            row.emplace_back(make_shared<Cell>(new EmptyCell(x, y)));
         } else if (c == '-') {
-            row.emplace_back(std::make_shared<Cell>(new Wall(x, y, true)));
+            row.emplace_back(make_shared<Cell>(new Wall(x, y, true)));
         } else if (c == '|') {
-            row.emplace_back(std::make_shared<Cell>(new Wall(x, y, false)));
+            row.emplace_back(make_shared<Cell>(new Wall(x, y, false)));
         } else if (c == '+') {
-            row.emplace_back(std::make_shared<Cell>(new Doorway(x, y)));
+            row.emplace_back(make_shared<Cell>(new Doorway(x, y)));
         } else if (c == '#') {
-            row.emplace_back(std::make_shared<Cell>(new Passage(x, y)));
+            row.emplace_back(make_shared<Cell>(new Passage(x, y)));
         } else {
-            std::shared_ptr<Cell> cur1 = std::make_shared<Cell>Cell(new FloorTile(x ,y));
-            row.emplace_back(cur);
-            std::shared_ptr<Cell> cur2 = cur1;
+            shared_ptr<Cell> cur1 = make_shared<Cell>(new FloorTile(x ,y));
+            row.emplace_back(cur1);
+            shared_ptr<Cell> cur2 = cur1;
             floorTiles.emplace_back(cur2);
-            std::shared_ptr<Cell> cur3 = cur1;
+            shared_ptr<Cell> cur3 = cur1;
             if (c == 'A') chambers[0].emplace_back(cur3);
             else if (c == 'B') chambers[1].emplace_back(cur3);
             else if (c == 'C') chambers[2].emplace_back(cur3);
@@ -51,7 +54,7 @@ Floor::Floor(std::string file){
 std::shared_ptr<Cell> Floor::target(std::shared_ptr<Cell> cur, std::string direction) {
     int curX = cur->getX();
     int curY = cur->getY();
-    int targetX = targetY = 0;
+    int targetX, targetY = 0;
     if (direction == "N") {
         targetX = curX;
         targetY = curY - 1;
@@ -80,9 +83,9 @@ std::shared_ptr<Cell> Floor::target(std::shared_ptr<Cell> cur, std::string direc
     return theGrid[targetX][targetY];
 }
 void Floor::playerMove(std::string direction) {
-    int curX = pc->getX();
-    int curY = pc->getY();
-    std::shared_ptr<Cell> targetCell = target(theGrid[curX][curY], direction);
+    int curX = pc->getCell()->getX();
+    int curY = pc->getCell()->getY();
+    std::shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
     int targetX = targetCell->getX();
     int targetY = targetCell->getY();
     if (targetCell->checkOccupancy()) return;
@@ -91,7 +94,7 @@ void Floor::playerMove(std::string direction) {
     pc->setCell(theGrid[targetX][targetY]);
     theGrid[targetX][targetY]->setOccupant(pc);
     theGrid[targetX][targetY]->notifyObserver();
-    checkEvents(theGrid[targetX][targetY]);
+    checkEvents();
 }
 
 bool isClose(std::shared_ptr<Cell> c1, std::shared_ptr<Cell> c2) {
@@ -99,35 +102,47 @@ bool isClose(std::shared_ptr<Cell> c1, std::shared_ptr<Cell> c2) {
     else return false;
 }
 
-bool Floor::checkEvents(std::shared_ptr<Cell> cur) {
+bool Floor::checkEvents() {
     if (pc->isDead()) return true;
-    if (cur->getOccupant()->getType() == Type::Stair) return false;
+    if (pc->getCell()->getOccupant()->getType() == Type::Str) return false;
+    if (pc->getCell()->getOccupant()->getType() == Type::Trsr) {
+            shared_ptr<Treasure> t = make_shared<Treasure>(pc->getCell()->getOccupant().get());
+            t->effect(pc);
+    }
     for (auto cur : floorTiles) {
         if(cur->getOccupant()->getType() == Type::Enmy) {
-            Enemy *e = std::static_cast<Enemy*>(cur->getOccupant());
+            shared_ptr<Enemy> e = make_shared<Enemy>(cur->getOccupant().get());
             if(!e->isDead() && isClose(cur, pc->getCell())) {
                 pc->beAttacked(e);
                 if (pc->isDead()) return true;
-            } else if(e->isDead()) {
+            } else if(isClose(cur, pc->getCell()) && e->isDead()) {
+                if (e->getChar() == 'M') {
+                    cur->setOccupant(make_shared<Treasure>(3));
+                }
                 pc->setTreasure(pc->getTreasure() + 1);
-                if (e->hasCompass()) {
+                if (e->checkCompass()) {
+                    shared_ptr<Compass> c = make_shared<Compass>();
+                    cur->setOccupant(c);
                     for (auto current : floorTiles) {
-                        if (current->getOccupant()->getType == Type::Stair) {
-                            Stair *s = std::static_cast<Stair*>(current->getOccupant());
-                            s->setDisplay(true);
+                        if (current->getOccupant()->getType == Type::Str) {
+                            shared_ptr<Stair> s = make_shared<Stair>(current->getOccupant().get());
+                            s->enableDisplay();
                             break;
                         }
                     }
                 }
             } else continue;
-        } else if (cur->getOccupant()->getType == Type::Trsr) {
-            Treasure *t = std::static_cast<Treasure*>(cur->getOccupant());
-            t->effect(pc);
-        }
+        } 
     }
     return false;
 }
 
 void Floor::playerAtk(std::string direction) {
-    std::shared_ptr<Cell>
+    shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
+    if (targetCell->getOccupant()->getType() != Type::Enmy) return;
+    shared_ptr<Enemy> e = make_shared<Enemy>(targetCell->getOccupant().get());
+    e->beAttacked(pc);
+    checkEvents();
+    pc->beAttacked(e);
+    checkEvents();
 }

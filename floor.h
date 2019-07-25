@@ -26,8 +26,8 @@ class Floor {
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);
 	void moveEnemies();
-	bool checkEvents(std::shared_ptr<Cell>);
-	Cell *target(std::shared_ptr<Cell> cur, std::string direction);
+	bool checkEvents();
+	std::shared_ptr<Cell> target(std::shared_ptr<Cell> cur, std::string direction);
 
 
 
