@@ -17,6 +17,7 @@ struct Factory {
     Potion * genPotion();
     Treasure * genTreasure();
     void genFloor(Floor *);
+    Stair * genStair();
 };
 
 

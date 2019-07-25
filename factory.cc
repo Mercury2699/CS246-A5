@@ -17,8 +17,11 @@
 
 void Factory::spawnPlayer() {
     srand( time(nullptr) );
-    int randNum = rand() % floorTiles.size();
-    pc->setCurrPos( floorTiles[randNum] );
+    int randChamber = rand() % getChambers.size();
+    int randPos = rand() % chambers[randChamber].size();
+    Cell *playerPos = floorTiles[randPos];
+    pc->setCurrPos(playerPos);
+    theGrid[playerPos.getX]
 }
 
 
@@ -36,32 +39,32 @@ Enemy * Factory::genEnemy() {
         return new Troll{nullptr};
     } else if ( NPCRand <= 15) {
         return new Phoenix{nullptr};
-    } else {
+    } else { // if (NPCRand == 16, 17)
         return new Merchant{};
     }
 }
 
 Potion * Factory::genPotion() {
-    srand(time(0));
+    srand( time(nullptr) );
     int RandNum = rand() % 6;
 
     if ( RandNum == 0 ) {
-        return new RestorHP{};
+        return new RestorHP;
     } else if ( RandNum == 1 ) {
-        return new BoostAtk{};
+        return new BoostAtk;
     } else if ( RandNum == 2 ) {
-        return new BoostDef{};
+        return new BoostDef;
     } else if ( RandNum == 3 ) {
-        return new PoisonHP{};
+        return new PoisonHP;
     } else if ( RandNum == 4 ) {
-        return new WoundAtk{};
+        return new WoundAtk;
     } else { // if ( RandNum == 5 )
-        return new WoundDef{};
+        return new WoundDef;
     }
 }
 
 Treasure * Factory::genTreasure(){
-    srand(time(0));
+    srand( time(nullptr) );
     int RandNum = rand() % 4;
 
     if (RandNum == 0){
