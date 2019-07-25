@@ -8,7 +8,7 @@
 #include "floorTile.h"
 #include "wall.h"
 #include "passage.h"
-
+// items
 #include "item.h"
 #include "treasure.h"
 // player char

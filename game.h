@@ -2,16 +2,27 @@
 #define GAME_H
 
 #include <vector>
-#include <string>
 #include <memory>
-#include "floor.h"
-#include "player.h"
+#include "factory.h"
+#include "textDisplay.h"
+
 
 class Game{
     std::shared_ptr<Player> pc;
+    std::shared_ptr<TextDisplay> td;
     std::vector<std::shared_ptr<Floor>> allFloors;
+    int levelCount = 0;
+    bool specifiedLayout = false;
+    void nextFloor();
 
-    Game();
+    public:
+    Game(std::string file = "map.txt");
+    Game(bool isSpecified, std::string file = "layout.txt");
+    void startGame(std::string race);
+    void takeCommand(std::string);
+    void resetGame();
+    void playerAction(std::string action);
+    
 };
 
 

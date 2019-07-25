@@ -25,20 +25,11 @@ std::shared_ptr<Player> spawnPlayer(std::string race) {
         pc = make_shared<Elves>();
     } else if (race == "o") {
         pc = make_shared<Orc>();
-    } else { // race == "d"
+    } else if (race == "d") {
         pc = make_shared<Dwarf>();
     }
     return pc;
 }
-
-// void Factory::spawnPlayer(std::vector<std::shared_ptr<Floor>> f) {
-//     srand( time(nullptr) );
-//     int randChamber = rand() % f[0]->getChambers().size();
-//     int randPos = rand() % f[0]->getChambers()[randChamber].size();
-//     Cell *playerPos = f[0]->getChambers()[randPos];
-//     f[0]->getPlayer()->setCurrPos( playerPos );
-//     theGrid[playerPos.getX]
-// }
 
 
 std::shared_ptr<Enemy> Factory::genEnemy() {
