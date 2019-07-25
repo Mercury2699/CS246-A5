@@ -30,6 +30,8 @@ class Stuff {
     // for Str
     virtual void enableDisplay() {}
     virtual ~Stuff() = default;
+    // for Treasure{6}
+    virtual bool isDragonHoard() {return false;}
 };
 
 class Stair final : public Stuff {

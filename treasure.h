@@ -13,7 +13,7 @@ class Treasure final : public Item {
 	int getValue();
 	char getChar() const override;
 	void setCollect();
-	bool isDragonHoard();
+	bool isDragonHoard() override;
 	void effect(std::shared_ptr<Player>) override;
 };
 
