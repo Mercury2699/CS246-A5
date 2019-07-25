@@ -99,23 +99,44 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>> f) {
     // set random seed
     srand( time(nullptr) );
 
-    // player spawned
-    int i = rand() % f[0]->getChambers().size();
-    int x = rand() % f[0]->getChambers()[i].size();
-    std::shared_ptr<Cell> playerPos = f[0]->getChambers()[i][x];
-    f[0]->getPlayer()->setCell( playerPos );
-    f[0]->setCell(playerPos->getX(), playerPos->getY(), f[0]->getPlayer());
+    // player spawned -- first floor
+    int randChamber = rand() % f[0]->getChambers().size();
+    int x = rand() % f[0]->getChambers()[randChamber].size();
+    std::shared_ptr<Cell> playerPos = f[0]->getChambers()[randChamber][x];
+    f[0]->setCell(playerPos, f[0]->getPlayer());
 
-    // stair spawned
-    int j = rand() % f[0]->getChambers().size();
-    while (j == i) {
-        j = rand() % f[0]->getChambers().size();
+    // stair spawned -- first floor
+    int differChameber = rand() % f[0]->getChambers().size();
+    while (differChameber == randChamber) {
+        differChameber = rand() % f[0]->getChambers().size();
     }
-    int randStair = rand() % f[0]->getChambers()[j].size();
-    std::shared_ptr<Cell> stairPos = f[0]->getChambers()[j][randStair];
+    int y = rand() % f[0]->getChambers()[differChameber].size();
+    std::shared_ptr<Cell> stairPos = f[0]->getChambers()[differChameber][y];
     f[0]->getPlayer()->setCell( stairPos );
     std::shared_ptr<Stair> stair = make_shared<Stair>();
     f[0]->setCell(stairPos->getX(), stairPos->getY(), stair);
+
+    for ( int i = 0; i < 5; i++ ) {
+        std::vector<std::shared_ptr<Cell>> tiles = f[i]->getTiles();
+        for (int j = 0; j < 10; j++) {
+            int randPotion = rand() % tiles.size();
+            while(f[i]->setCell(tiles[randPotion], genPotion())) {
+                randPotion = rand() % tiles.size();
+            }
+        }
+        for (int k = 0; k < 10; k++) {
+            int randTreasure = rand() % tiles.size();
+            while(f[i]->setCell(tiles[randTreasure], genTreasure())) {
+                randTreasure = rand() % tiles.size();
+            }
+        }
+        for (int l = 0; l < 20; l++) {
+            int randEnemy = rand() % tiles.size();
+            while(f[i]->setCell(tiles[randEnemy], genEnemy())) {
+                randEnemy = rand() % tiles.size();
+            }
+        }
+    }
 
 
 }
