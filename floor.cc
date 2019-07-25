@@ -200,14 +200,6 @@ bool Floor::checkEvents() {
     if (getCellPC()->getOccupant()->getType() == Type::Trsr) {
         getCellPC()->getOccupant()->effect(pc);
     }
-    if (getCellPC()->getOccupant()->getChar() == 'C') {
-        for (auto current : floorTiles) {
-            if (current->getOccupant()->getType() == Type::Str) {
-                current->getOccupant()->enableDisplay();
-                break;
-            }
-        }
-    }
     for (auto cur : floorTiles) {
         if(cur->getOccupant()->getType() == Type::Enmy) {
             shared_ptr<Stuff> e = cur->getOccupant();
@@ -272,7 +264,15 @@ void Floor::playerUse(std::string direction) {
             targetCell->getOccupant()->effect(pc);
             playerMove(getDirection(getCellPC(), targetCell));
         }
-    } else return;
+    } else if (targetCell->getOccupant()->getChar() == 'C') {
+        for (auto current : floorTiles) {
+            if (current->getOccupant()->getType() == Type::Str) {
+                current->getOccupant()->enableDisplay();
+                break;
+            }
+        }
+        playerMove(getDirection(getCellPC(), targetCell));
+    }
 }
 
 void Floor::startGame(std::string race) {
