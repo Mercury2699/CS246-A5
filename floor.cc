@@ -1,5 +1,7 @@
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
+#include <ctime>
 #include "floor.h"
 #include "emptyCell.h"
 #include "doorway.h"
@@ -9,7 +11,10 @@
 #include "item.h"
 #include "treasure.h"
 #include "enemy.h"
-
+#include "human.h"
+#include "elves.h"
+#include "dwarf.h"
+#include "orc.h"
 
 using namespace std;
 
@@ -88,12 +93,10 @@ void Floor::playerMove(std::string direction) {
     std::shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
     int targetX = targetCell->getX();
     int targetY = targetCell->getY();
-    if (targetCell->checkOccupancy()) return;
-    theGrid[curX][curY]->setOccupant(nullptr);
-    theGrid[curX][curY]->setOccupancy(false);
+    if (targetCell->checkOccupancy(false)) return;
+    std::shared_ptr<Stuff> s = theGrid[curX][curY]->detachStuff();
     pc->setCell(theGrid[targetX][targetY]);
-    theGrid[targetX][targetY]->setOccupant(pc);
-    theGrid[targetX][targetY]->notifyObserver();
+    theGrid[targetX][targetY]->attachStuff(pc);
     checkEvents();
 }
 
@@ -117,12 +120,14 @@ bool Floor::checkEvents() {
                 if (pc->isDead()) return true;
             } else if(isClose(cur, pc->getCell()) && e->isDead()) {
                 if (e->getChar() == 'M') {
-                    cur->setOccupant(make_shared<Treasure>(3));
+                    cur->attachStuff(make_shared<Treasure>(3));
+                    cur->setOccupancy(false);
                 }
                 pc->setTreasure(pc->getTreasure() + 1);
                 if (e->checkCompass()) {
                     shared_ptr<Compass> c = make_shared<Compass>();
-                    cur->setOccupant(c);
+                    cur->attachStuff(c);
+                    cur->setOccupancy(false);
                     for (auto current : floorTiles) {
                         if (current->getOccupant()->getType == Type::Str) {
                             shared_ptr<Stair> s = make_shared<Stair>(current->getOccupant().get());
@@ -146,3 +151,53 @@ void Floor::playerAtk(std::string direction) {
     pc->beAttacked(e);
     checkEvents();
 }
+
+void Floor::playerUse(std::string direction) {
+    shared_ptr<Cell> targetCell = target(pc->getCell(), direction);
+    if (targetCell->getOccupant()->getType() != Type::Ptn) return;
+    shared_ptr<Potion> p = make_shared<Potion>(targetCell->getOccupant().get());
+    p->effect(pc);
+}
+
+void Floor::startGame(std::string race) {
+    if (race == "h") pc = make_shared<Human>();
+    else if (race == "e") pc = make_shared<Elves>();
+    else if (race == "d") pc = make_shared<Dwarf>();
+    else pc = make_shared<Orc>();
+}
+
+void Floor::moveEnemies() {
+    for (auto cur : floorTiles) {
+        if (cur->getOccupant()->getType() == Type::Enmy) {
+            vector<shared_ptr<Cell>> validMove;
+            string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+            for (int i = 0; i < 8; ++i) {
+                if (target(cur, directions[i])->checkOccupancy(true)) validMove.emplace_back(target(cur, directions[i]));
+            } 
+            srand(time(nullptr));
+            int index = rand() % validMove.size();
+            shared_ptr<Cell> des = validMove[index];
+            theGrid[des->getX()][des->getY()]->attachStuff(cur->getOccupant());
+        }
+    }
+}
+
+void Floor::setCell(int x, int y, std::shared_ptr<Stuff> s) {
+    theGrid[x][y]->attachStuff(s);
+    if (s->getType() == Type::Trsr || s->getType() == Type::Str || s->getChar() == 'c') {
+        theGrid[x][y]->setOccupancy(false); // lets the user step on
+    }
+}
+
+std::shared_ptr<Player> Floor::getPlayer() {
+    return pc;
+}
+
+std::vector<std::shared_ptr<Cell>> Floor::getTiles() {
+    return floorTiles;
+}
+
+std::vector<std::vector<std::shared_ptr<Cell>>> Floor::getChambers() {
+    return chambers;
+}
+
