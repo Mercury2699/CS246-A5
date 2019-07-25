@@ -21,7 +21,7 @@ using namespace std;
 Floor::Floor(std::string file){
     ifstream m(file);
     char c;
-    int x, y;
+    int x = 0, y = 0;
     vector<Cell> row;
     while (m.get(c)){
         if(c == '\n'){
@@ -129,7 +129,7 @@ bool Floor::checkEvents() {
                     cur->attachStuff(c);
                     cur->setOccupancy(false);
                     for (auto current : floorTiles) {
-                        if (current->getOccupant()->getType == Type::Str) {
+                        if (current->getOccupant()->getType() == Type::Str) {
                             shared_ptr<Stair> s = make_shared<Stair>(current->getOccupant().get());
                             s->enableDisplay();
                             break;
