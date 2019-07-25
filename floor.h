@@ -9,7 +9,8 @@
 #include "cell.h"
 #include "textDisplay.h"
 #include "player.h"
-#include "factory.h"
+
+
 class TextDisplay;
 
 class Floor {

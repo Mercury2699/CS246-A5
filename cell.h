@@ -14,7 +14,7 @@ class Cell {
 	public:
     Cell(int x, int y);
 	virtual char getChar() const = 0;
-    virtual bool checkOccupancy() { return (isOccupied && occupant); }
+    virtual bool checkOccupancy() const { return isOccupied; }
     void setObserver(TextDisplay *td) { this->td = td;};
 	void notifyObserver() { td->notify(x,y,getChar()); };
 	
@@ -34,10 +34,10 @@ class Cell {
 	};
 	void setOccupancy(bool occupied) { isOccupied = occupied; };
 	void setOccupant(Stuff *occupant) { this->occupant = occupant; };
-	int getX() {return x;}
-	int getY() {return y;}
-	void setX(int x) {this->x = x;}
-	void setY(int y) {this->y = y;}
+	int getX() const {return x;}
+	int getY() const {return y;}
+	// void setX(int x) {this->x = x;}
+	// void setY(int y) {this->y = y;}
 	};
 
 
