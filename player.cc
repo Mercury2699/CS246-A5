@@ -22,14 +22,6 @@ void Player::setCompass(bool comp) {
 	hasCompass = comp;
 }
 
-void Player::setCell(std::shared_ptr<Cell> c){
-	currPos = c;
-}
-
-std::shared_ptr<Cell> Player::getCell(){
-	return currPos;
-}
-
 bool Player::getSuit() const {
 	return hasSuit;
 }

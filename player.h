@@ -17,7 +17,6 @@ class Player : public Character{
 	// int Atk; inherited from Character
 	// int Def; inherited from Character
 	// Type type; inherited from Stuff
-	std::shared_ptr<Cell> currPos;
 	double treasure = 0;
 	bool hasSuit = false, hasCompass = false, killedMerch = false;
 	const int maxHP;
@@ -37,8 +36,6 @@ class Player : public Character{
 	Player(int HP, int Atk, int Def);
 	void removePotion();
 	void beAttacked(std::shared_ptr<Stuff>) override;
-	void setCell(std::shared_ptr<Cell>);
-	std::shared_ptr<Cell> getCell();
 	void setCompass(bool);
 	void setSuit(bool);
 	void setTreasure(double);
