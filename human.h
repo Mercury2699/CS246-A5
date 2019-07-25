@@ -14,7 +14,7 @@ class Human : public Player {
 	// const int maxHP; inherited from Player
 	// const int defaultAtk; inherited from Player
 	// const int defaultDef; inherited from Player
-	// PCRace race; inherited from Player
+	// std::string race; inherited from Player
 
 	public:
 	Human(int HP = 140, int Atk = 20, int Def = 20);
@@ -36,7 +36,7 @@ class Human : public Player {
 	// bool hasKilledMerch() const; inherited from Player
 	// char getChar() const override; inherited from Player
 	// bool getSuit() const; inherited from Player
-	// PCRace getRace() const; inherited from Player
+	// std::string getRace() const; inherited from Player
 	// int getDefaultAtk() const; inherited from Player
 	// int getDefaultDef() const; inherited from Player
 	// int getMaxHP() const; inherited from Player

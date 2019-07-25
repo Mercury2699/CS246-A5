@@ -5,11 +5,8 @@
 #include "item.h"
 #include "player.h"
 
-// enum Potype { BoostAtk, BoostDef, RestoreHP, WoundAtk, WoundDef, PoisonHP };
-
 class Potion : public Item, public std::enable_shared_from_this<Potion> {
 	Type type = Type::Ptn;
-	// Potype potype;
 	public:
 	char getChar() const override {return 'P';}
 };
@@ -39,7 +36,7 @@ class RestorHP : public Potion {
 class PoisonHP : public Potion {
 	public:
 	void effect(std::shared_ptr<Player> pc) override {
-		if(pc->getRace() == PCRace::Elves){
+		if(pc->getRace() == "Elves"){
 			int newHP = (pc->getHP() + 10) <= pc->getMaxHP() ? (pc->getHP() + 10) : pc->getMaxHP();
 			pc->setHP(newHP);
 		} else {
@@ -52,7 +49,7 @@ class PoisonHP : public Potion {
 class WoundAtk : public Potion {
 	public:
 	void effect(std::shared_ptr<Player> pc) override {
-		if(pc->getRace() == PCRace::Elves){
+		if(pc->getRace() == "Elves"){
 			pc->setAtk(pc->getAtk() + 5);
 		} else {
 			pc->setAtk(pc->getAtk() - 5);
@@ -64,7 +61,7 @@ class WoundAtk : public Potion {
 class WoundDef : public Potion {
 	public:
 	void effect(std::shared_ptr<Player> pc) override {
-		if(pc->getRace() == PCRace::Elves){
+		if(pc->getRace() == "Elves"){
 			pc->setDef(pc->getDef() + 5);
 		} else {
 			pc->setDef(pc->getDef() - 5);

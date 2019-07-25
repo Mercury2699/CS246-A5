@@ -2,13 +2,14 @@
 #define PLAYER_H
 
 #include <memory>
+#include <string>
 #include "character.h"
 
 class Cell;
 class Treasure;
 class Potion;
 
-enum class PCRace {Human, Elves, Dwarf, Orc};
+// enum class PCRace {Human, Elves, Dwarf, Orc};
 
 class Player : public Character{
 	protected:
@@ -22,7 +23,7 @@ class Player : public Character{
 	const int maxHP;
 	const int defaultAtk;
 	const int defaultDef;
-	PCRace race;
+	std::string race;
 	
 	public:
 	// Type getType(); inherited from Stuff
@@ -45,7 +46,7 @@ class Player : public Character{
 	bool hasKilledMerch() const;
 	char getChar() const override;
 	bool getSuit() const;
-	PCRace getRace() const;
+	std::string getRace() const;
 	int getDefaultAtk() const;
 	int getDefaultDef() const;
 	int getMaxHP() const;

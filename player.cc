@@ -64,7 +64,7 @@ char Player::getChar() const {
 	return '@';
 }
 
-PCRace Player::getRace() const {
+std::string Player::getRace() const {
 	return race;
 }
 

@@ -1,6 +1,7 @@
 #include <fstream>
 #include <sstream>
 #include "textDisplay.h"
+#include "player.h"
 
 using namespace std;
 
@@ -23,6 +24,14 @@ void TextDisplay::notify(int x, int y, char type){
     theDisplay[x][y] = type;
 }
 
+void TextDisplay::addAction(std::string a){
+    action += a;
+}
+
+void TextDisplay::clearAction(){
+    action = "";
+}
+
 ostream &operator<<(ostream & out, const TextDisplay & td){
     for (auto i : td.theDisplay){
         for (auto j : i){
@@ -30,6 +39,11 @@ ostream &operator<<(ostream & out, const TextDisplay & td){
         }
         out << endl;
     }
+    out << "Race: " << td.pc->getRace() << " Gold: " << td.pc->getTreasure() << endl;
+    out << "HP: " << td.pc->getHP() << endl;
+    out << "Atk: " << td.pc->getAtk() << endl;
+    out << "Def: " << td.pc->getDef() << endl;
+    out << "Action: " << td.action << endl;
     return out;
 }
 
