@@ -15,7 +15,7 @@ class Item : public Stuff {
     virtual void effect(std::shared_ptr<Player>) = 0;
 };
 
-class BarrierSuit : public Item {
+class BarrierSuit final : public Item {
     // protected:
     // Type type; inherited from Stuff
     public:
@@ -23,7 +23,7 @@ class BarrierSuit : public Item {
     void effect(std::shared_ptr<Player>) override; // inherited from Item
 };
 
-struct Compass : public Item {
+struct Compass final : public Item {
     // protected:
     // Type type; inherited from Stuff
     // public:
@@ -31,14 +31,12 @@ struct Compass : public Item {
     void effect(std::shared_ptr<Player>) override; // inherited from Item
 };
 
-class Stair : public Item {
-    protected:
+class Stair final : public Item {
     // Type type; inherited from Stuff
     bool canDisplay = false;
 
     public:
     char getChar() const override; // inherited from Stuff
-    void setDisplay();
     void effect(std::shared_ptr<Player>) override; // inherited from Item
 };
 
