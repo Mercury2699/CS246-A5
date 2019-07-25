@@ -36,15 +36,15 @@ std::shared_ptr<Enemy> Factory::genEnemy() {
     int NPCRand = rand() % 18;
     
     if ( NPCRand <= 3 ) { // if (NPCRand == 0, 1, 2, 3)
-        return make_shared<Enemy>(Werewolf{nullptr});
+        return make_shared<Enemy>(Werewolf{});
     } else if ( NPCRand <= 6 ) { // if (NPCRand == 4, 5, 6)
-        return make_shared<Enemy>(Vampire{nullptr});
+        return make_shared<Enemy>(Vampire{});
     } else if ( NPCRand <= 11) { // if (NPCRand == 7, 8, 9, 10, 11)
-        return make_shared<Enemy>(Goblin{nullptr});
+        return make_shared<Enemy>(Goblin{});
     } else if ( NPCRand <= 13) { // if (NPCRand == 12,13) 
-        return make_shared<Enemy>(Troll{nullptr});
+        return make_shared<Enemy>(Troll{});
     } else if ( NPCRand <= 15) { // if (NPCRand == 14,15)
-        return make_shared<Enemy>(Phoenix{nullptr});
+        return make_shared<Enemy>(Phoenix{});
     } else { // if (NPCRand == 16,17)
         return make_shared<Enemy>(Merchant{});
     }
@@ -92,17 +92,20 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>> f) {
     // player spawned
     int i = rand() % f[0]->getChambers().size();
     int x = rand() % f[0]->getChambers()[i].size();
-    int y = rand() % f[0]->getChambers()[i][x].size();
-    Cell *playerPos = f[0]->getChambers()[i][x][y];
+    std::shared_ptr<Cell> playerPos = f[0]->getChambers()[i][x];
     f[0]->getPlayer()->setCell( playerPos );
-    Grid[ playerPos->getX() ][ playerPos->getY() ]->setOccupant() = f[0]->getPlayer();
+    f[0]->setCell(playerPos->getX(), playerPos->getY()), f[0]->getPlayer());
 
     // stair spawned
-    int diffChamber = rand() % f[0]->getChambers().size();
-    while (diffChamber == randChamber) {
-        diffChamber = rand() % f[0]->getChambers().size();
+    int j = rand() % f[0]->getChambers().size();
+    while (j == i) {
+        j = rand() % f[0]->getChambers().size();
     }
-    int randStair = rand();
+    int randStair = rand() % getChambers()[j].size();
+    std::shared_ptr<Cell> stairPos = f[0]->getChambers()[j][randStair];
+    f[0]->getPlayer()->setCell( stairPos );
+    std::shared_ptr<Stair> stair = make_shared<Stair>(new Stair{});
+    f[0]->setCell(stairPos->getX(), stairPos->getY(), stair);
 
 }
 
