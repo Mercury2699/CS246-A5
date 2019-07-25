@@ -174,6 +174,7 @@ shared_ptr<Cell> Floor::getCellPC() {
             return cur;
         }
     }
+    return nullptr;
 }
 
 void Floor::playerMove(std::string direction) {
@@ -184,7 +185,6 @@ void Floor::playerMove(std::string direction) {
     int targetY = targetCell->getY();
     if (targetCell->checkOccupancy(false)) return;
     std::shared_ptr<Stuff> s = theGrid[curX][curY]->detachStuff();
-    pc->setCell(theGrid[targetX][targetY]);
     theGrid[targetX][targetY]->attachStuff(pc);
     checkEvents();
 }
