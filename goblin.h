@@ -11,12 +11,12 @@ class Goblin : public Enemy {
 	// int Atk; inherited from Character
 	// int Def; inherited from Character
 	// Type type; inherited from Stuff
-	// std::shared_ptr<Item> i; inherited from Enemy
-        // Item includes Suit, Compass, and Treasuress
+	// bool alreadyMoved = false; inherited from Enemy
+	// bool hasCompass = false; inherited from Enemy
 	// bool hostile = false; inherited from Enemy
 
     public:
-    Goblin(std::shared_ptr<Item> i = nullptr): Enemy{70, 5, 10, i} {}
+    Goblin(): Enemy{70, 5, 10} {}
     char getChar() const override; // inherited from Stuff
     // int getHP() { return HP; } inherited from Character
 	// int getAtk() { return Atk; } inherited from Character
@@ -27,6 +27,10 @@ class Goblin : public Enemy {
 	// void setDef(int def) { Def = def; } inherited from Character
 	// void becomeHostile(); inherited from Enemy
 	// void beAttacked(std::shared_ptr<Character> c) override; inherited from Enemy
+	// void assignCompass(); inherited from Enemy
+	// bool checkCompass() const; inherited from Enemy
+	// bool getMoved() const; inherited from Enemy
+	// virtual void toggleMoved(); inherited from Enemy
 };
 
 #endif

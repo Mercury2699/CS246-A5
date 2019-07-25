@@ -37,6 +37,7 @@ class Player : public Character,  std::enable_shared_from_this<Player>{
 	void removePotion();
 	void beAttacked(std::shared_ptr<Character>) override;
 	void setCell(std::shared_ptr<Cell>);
+	std::shared_ptr<Cell> getCell();
 	void setCompass(bool);
 	void setSuit(bool);
 	void setTreasure(double);

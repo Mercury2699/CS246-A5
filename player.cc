@@ -26,14 +26,9 @@ void Player::setCell(std::shared_ptr<Cell> c){
 	currPos = c;
 }
 
-// void Player::setPosn(int x, int y){
-// 	this->x = x;
-// 	this->y = y;
-// }
-
-// int Player::getX(){return x;}
-
-// int Player::getY(){return y;}
+std::shared_ptr<Cell> Player::getCell(){
+	return currPos;
+}
 
 bool Player::getSuit() const {
 	return hasSuit;
@@ -47,15 +42,6 @@ int Player::getDefaultDef() const {
 	return defaultDef;
 }
 
-// void Player::pickUpTreasure(std::shared_ptr<Treasure> t) {
-// 	setTreasure(t->getValue());
-// }
-
-// void Player::attack(std::shared_ptr<Character> c) {
-// 	c->beAttacked(std::make_shared<Player> (this));
-// 	c->attack(std::make_shared<Player> (this));
-// }
-
 void Player::beAttacked(std::shared_ptr<Character> c) {
 	if (getSuit()) {
 		setHP(getHP() - ceil(ceil(((100 / (100 + getDef())) * c->getAtk())) / 2));
@@ -63,10 +49,6 @@ void Player::beAttacked(std::shared_ptr<Character> c) {
 		setHP(getHP()- ceil((100 / (100 + getDef())) * c->getAtk()));
 	}
 }
-
-// void Player::applyPotion(std::shared_ptr<Potion> p) {
-// 	p->effect(std::make_shared<Player> (this));
-// }
 
 void Player::killedMerchant(){
 	killedMerch = true;
