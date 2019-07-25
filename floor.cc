@@ -214,7 +214,8 @@ bool Floor::checkEvents() {
                     cur->setOccupancy(false);
                     for (auto current : floorTiles) {
                         if (current->getOccupant()->getType() == Type::Str) {
-                            shared_ptr<Stair> s = make_shared<Stair>(current->getOccupant().get());
+                            // shared_ptr<Stair> s = reinterpret_cast<Stair *>(current->getOccupant().get());
+                            Stair * s = static_cast<Stair *>(current->getOccupant().get());
                             s->enableDisplay();
                             break;
                         }
