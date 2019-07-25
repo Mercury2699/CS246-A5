@@ -13,12 +13,12 @@
 #include "cell.h"
 
 struct Factory {
-    void spawnPlayer();
+    void spawnPlayer(std::vector<std::shared_ptr<Floor>>);
     std::shared_ptr<Enemy> genEnemy();
     std::shared_ptr<Potion> genPotion();
     std::shared_ptr<Treasure> genTreasure();
-    void genFloor(std::shared_ptr<Floor>);
-    std::shared_ptr<Stair> genStair();
+    void genFloor(std::vector<std::shared_ptr<Floor>>);
+    std::shared_ptr<Stair> genStair(std::vector<std::shared_ptr<Floor>>);
 };
 
 
