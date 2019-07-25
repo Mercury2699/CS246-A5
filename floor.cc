@@ -1,24 +1,26 @@
 #include <fstream>
 #include <sstream>
-#include <cstdlib>
-#include <ctime>
+#include <cstdlib> // includes ctime
+// cells
 #include "floor.h"
 #include "emptyCell.h"
 #include "doorway.h"
 #include "floorTile.h"
 #include "wall.h"
 #include "passage.h"
+
 #include "item.h"
 #include "treasure.h"
-#include "enemy.h"
+// player char
 #include "human.h"
 #include "elves.h"
 #include "dwarf.h"
 #include "orc.h"
-
+// enemies
 #include "vampire.h"
 #include "werewolf.h"
 #include "dragon.h"
+#include "merchant.h"
 #include "phoenix.h"
 #include "troll.h"
 #include "goblin.h"
@@ -108,32 +110,26 @@ void Floor::ReadFile(std::string file){
             } else if (c == '9'){
                 row[x]->attachStuff(make_shared<Treasure>(6));
             } else if (c == 'W'){
-                row[x]->setOccupant(make_shared<Enemy>(new Werewolf{nullptr});
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<Werewolf>());
             } else if (c == 'V'){
-                row[x]->setOccupant(make_shared<Enemy>(new Vampire{nullptr});
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<Vampire>());
             } else if (c == 'N'){
-                row[x]->setOccupant(make_shared<Enemy>(new Goblin{nullptr});
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<Goblin>());
             } else if (c == 'T'){
-                row[x]->setOccupant(make_shared<Enemy>(new Troll{nullptr});
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<Troll>());
             } else if (c == 'X'){
-                row[x]->setOccupant(make_shared<Enemy>(new Phoenix{nullptr});
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<Phoenix>());
             } else if (c == 'M'){
-                row[x]->setOccupant(make_shared<Enemy>(new Merchant{});
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<Merchant>());
             } else if (c == 'D'){
-                row[x]->setOccupant(make_shared<Enemy>(new Dragon{nullptr}});
-                row[x]->setOccupancy(true);
+                row[x]->attachStuff(make_shared<Dragon>());
             } else if (c == '@'){
-                row[x]->setOccupant(make_shared<Player>(new Player));
-                row[x]->setOccupancy(true);
+                // 记下Player位置
             } else if (c == '\\'){
-                row[x]->setOccupant(make_shared<Stair>(new Stair);
-            } else //do nothing
+                row[x]->attachStuff(make_shared<Stair>());
+            } else {
+                
+            }
         }
        
     }
