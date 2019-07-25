@@ -10,7 +10,7 @@ class Potion;
 
 enum class PCRace {Human, Elves, Dwarf, Orc};
 
-class Player : public Character,  std::enable_shared_from_this<Player>{
+class Player : public Character{
 	protected:
 	// int HP; inherited from Character
 	// int Atk; inherited from Character
@@ -33,7 +33,7 @@ class Player : public Character,  std::enable_shared_from_this<Player>{
 	// void setHP(int hp) { HP = hp; } inherited from Character
 	// void setAtk(int atk) { Atk = atk; } inherited from Character
 	// void setDef(int def) { Def = def; } inherited from Character
-	Player(int HP, int Atk, int Def, double treasure);
+	Player(int HP, int Atk, int Def);
 	void removePotion();
 	void beAttacked(std::shared_ptr<Character>) override;
 	void setCell(std::shared_ptr<Cell>);
@@ -42,7 +42,6 @@ class Player : public Character,  std::enable_shared_from_this<Player>{
 	void setSuit(bool);
 	void setTreasure(double);
 	double getTreasure() const;
-	void killedMerchant();
 	bool hasKilledMerch() const;
 	char getChar() const override;
 	bool getSuit() const;

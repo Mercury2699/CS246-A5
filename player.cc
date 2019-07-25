@@ -3,8 +3,8 @@
 #include "potion.h"
 #include "treasure.h"
 
-Player::Player(int HP, int Atk, int Def, double treasure):
-	Character{HP, Atk, Def}, treasure{treasure}, maxHP{HP}, defaultAtk{Atk}, defaultDef{Def}{
+Player::Player(int HP, int Atk, int Def):
+	Character{HP, Atk, Def}, maxHP{HP}, defaultAtk{Atk}, defaultDef{Def}{
 		type = Type::Plyr;
 	}
 
@@ -50,9 +50,6 @@ void Player::beAttacked(std::shared_ptr<Character> c) {
 	}
 }
 
-void Player::killedMerchant(){
-	killedMerch = true;
-}
 
 bool Player::hasKilledMerch() const {
 	return killedMerch;

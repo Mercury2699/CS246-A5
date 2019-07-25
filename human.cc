@@ -1,6 +1,6 @@
 #include "human.h"
 
-Human::Human(int HP, int Atk, int Def, double treasure): Player{HP, Atk, Def, treasure}{
+Human::Human(int HP, int Atk, int Def): Player{HP, Atk, Def}{
 	race = PCRace::Human;
 }
 

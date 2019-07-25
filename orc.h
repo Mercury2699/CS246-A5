@@ -18,7 +18,7 @@ class Orc : public Player {
 	// PCRace race; inherited from Player
 
 	public:
-	Orc(int HP = 180, int Atk = 30, int Def = 25, double treasure = 0);
+	Orc(int HP = 180, int Atk = 30, int Def = 25);
 	// Type getType(); inherited from Stuff
 	// int getHP() { return HP; } inherited from Character
 	// int getAtk() { return Atk; } inherited from Character
@@ -34,7 +34,6 @@ class Orc : public Player {
 	// void setSuit(bool); inherited from Player
 	// void setTreasure(double); inherited from Player
 	// double getTreasure() const; inherited from Player
-	// void killedMerchant(); inherited from Player
 	// bool hasKilledMerch() const; inherited from Player
 	// char getChar() const override; inherited from Player
 	// bool getSuit() const; inherited from Player

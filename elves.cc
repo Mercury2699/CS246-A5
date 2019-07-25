@@ -1,6 +1,6 @@
 #include "elves.h"
 
-Elves::Elves(int HP, int Atk, int Def, double treasure) : Player {HP, Atk, Def, treasure} {
+Elves::Elves(int HP, int Atk, int Def) : Player {HP, Atk, Def} {
 	race = PCRace::Elves;
 }
 

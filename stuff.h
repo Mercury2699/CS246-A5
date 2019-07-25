@@ -25,6 +25,8 @@ class Stair final : public Stuff {
     Stair() {this->type = Type::Str;}
     char getChar() const override {return '/';} // inherited from Stuff
     Type getType() {return type;} // inherited from Stuff
+    bool checkDisplay() const {return canDisplay;}
+    void enableDisplay() {canDisplay = true;}
 };
 
 
