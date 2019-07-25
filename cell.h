@@ -13,22 +13,16 @@ class Cell {
 	std::shared_ptr<TextDisplay> td = nullptr;
 
 	public:
-    Cell(int x, int y);
+    Cell(int x, int y) : x{x}, y{y} {}
 	virtual char getChar() const = 0;
     virtual bool checkOccupancy(bool forEnemy) const {
-		if(forEnemy) {
-			if (occupant){
-				return true;
-			} else {
-				return false;
-			}
-		}
-		return isOccupied; 
+		return isOccupied;
 	}
     void setObserver(std::shared_ptr<TextDisplay> td) { this->td = td;};
 	void notifyObserver() { td->notify(x,y,getChar()); };
 	
 	std::shared_ptr<Stuff> getOccupant() { return occupant; };
+
     void attachStuff(std::shared_ptr<Stuff> s) { 
 		isOccupied = true;
     	occupant = s;
@@ -42,12 +36,16 @@ class Cell {
     	notifyObserver();
    		return temp;
 	};
-	void setOccupancy(bool occupied) { isOccupied = occupied; };
-	void setOccupant(std::shared_ptr<Stuff> occupant) { this->occupant = occupant; };
+	/* setOccupancy should be used to set occupancy when attaching 
+	 * items that can be stepped on, e.g. Treasure and floor
+	 */
+	void setOccupancy(bool occupied) {
+		isOccupied = occupied; 
+		notifyObserver();
+	};
+
 	int getX() const {return x;}
 	int getY() const {return y;}
-	// void setX(int x) {this->x = x;}
-	// void setY(int y) {this->y = y;}
 	};
 
 

@@ -4,10 +4,13 @@ Doorway::Doorway(int x, int y):
     Cell{x, y}{}
 
 char Doorway::getChar() const {
-    if(checkOccupancy())
-        return getOccupant()->getChar();
+    if(isOccupied)
+        return occupant->getChar();
     return '.';
 }
 
+bool Doorway::checkOccupancy(bool forEnemy) const{
+    return isOccupied;
+}
 
 

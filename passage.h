@@ -15,7 +15,7 @@ class Passage final : public Cell {
     public:
     Passage(int x, int y);
     char getChar() const override; // inherited from Cell
-    // virtual bool checkOccupancy() const { return isOccupied; } inherited from Cell
+    bool checkOccupancy(bool forEnemy) const override;
     // void setObserver(TextDisplay *td) { this->td = td;}; inherited from Cell
 	// void notifyObserver() { td->notify(x,y,getChar()); }; inherited from Cell
     // Stuff * getOccupant(); inherited from Cell

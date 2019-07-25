@@ -16,7 +16,7 @@ class FloorTile final : public Cell {
     public:
     FloorTile(int x, int y);
     char getChar() const override; // inherited from Cell
-    bool checkOccupancy() const override; // inherited from Cell
+    bool checkOccupancy(bool forEnemy) const override; // inherited from Cell
     // virtual bool checkOccupancy() const { return isOccupied; } inherited from Cell
     // void setObserver(TextDisplay *td) { this->td = td;}; inherited from Cell
 	// void notifyObserver() { td->notify(x,y,getChar()); }; inherited from Cell

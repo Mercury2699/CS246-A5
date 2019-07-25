@@ -11,7 +11,7 @@ struct EmptyCell : public Cell {
     public: 
     EmptyCell(int x, int y) : Cell{x, y} {}
     char getChar() const override {return ' ';} // inherited from Cell
-    bool checkOccupancy() const override { return true;} // inherited from Cell
+    bool checkOccupancy(bool forEnemy) const override { return true;} // inherited from Cell
     // void setObserver(TextDisplay *td) { this->td = td;}; inherited from Cell
 	// void notifyObserver() { td->notify(x,y,getChar()); }; inherited from Cell
     // Stuff * getOccupant(); inherited from Cell
