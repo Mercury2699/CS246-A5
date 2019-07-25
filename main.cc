@@ -26,10 +26,12 @@ int main(int argc, char *argv[]) {
 	} else if (command == "o"){
 		// orc
 	}
-	floors[0];
 	while(1){
 		std::cin >> command;
 		//if command is valid...
+		if (command == "q") {
+			break;
+		}
 	}
 	return 0;
 }

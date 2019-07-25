@@ -12,7 +12,8 @@ class Item : public Stuff {
     Item(){ this->type = Type::Itm;}
     // Type getType(); inherited from Stuff
     // virtual char getChar() = 0; inherited from Stuff
-    virtual void effect(std::shared_ptr<Player>) = 0;
+    // virtual void effect(std::shared_ptr<Player>) {} inherited from Stuff
+    virtual void beAttacked(std::shared_ptr<Stuff>) {}
 };
 
 class BarrierSuit final : public Item {

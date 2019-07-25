@@ -28,7 +28,7 @@ class Dwarf : public Player {
 	// void setAtk(int atk) { Atk = atk; } inherited from Character
 	// void setDef(int def) { Def = def; } inherited from Character
 	// void removePotion(); inherited from Player
-	// void beAttacked(std::shared_ptr<Character>) override; inherited from Player
+	// void beAttacked(std::shared_ptr<Stuff>) override; inherited from Player
 	// void setCell(std::shared_ptr<Cell>); inherited from Player
 	// void setCompass(bool); inherited from Player
 	// void setSuit(bool); inherited from Player

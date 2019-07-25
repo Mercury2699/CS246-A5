@@ -36,7 +36,7 @@ class Player : public Character{
 	// void setDef(int def) { Def = def; } inherited from Character
 	Player(int HP, int Atk, int Def);
 	void removePotion();
-	void beAttacked(std::shared_ptr<Character>) override;
+	void beAttacked(std::shared_ptr<Stuff>) override;
 	void setCell(std::shared_ptr<Cell>);
 	std::shared_ptr<Cell> getCell();
 	void setCompass(bool);

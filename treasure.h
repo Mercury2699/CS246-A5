@@ -4,7 +4,7 @@
 #include "item.h"
 #include "player.h"
 
-class Treasure : public Item {
+class Treasure final : public Item {
 	int val;
 	bool canCollect = true; // for DragonHoard should be false
 

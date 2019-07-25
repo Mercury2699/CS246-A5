@@ -15,11 +15,11 @@ class Character : public Stuff {
 	// Type getType(); inherited from Stuff
 	// virtual char getChar() const = 0; inherited from Stuff
 	Character(int HP, int Atk, int Def) : HP{HP}, Atk{Atk}, Def{Def}{}
-	int getHP() { return HP; }
-	int getAtk() { return Atk; }
-	int getDef() { return Def; }
-	bool isDead() { return (HP <= 0); }
-    virtual void beAttacked(std::shared_ptr<Character>) = 0;
+	int getHP() const override { return HP; } // inherited from Stuff
+	int getAtk() const override { return Atk; } // inherited from Stuff
+	int getDef() const override { return Def; } // inherited from Stuff
+	bool isDead() const override { return (HP <= 0); } // inherited from Stuff
+    
 	void setHP(int hp) { HP = hp; }
 	void setAtk(int atk) { Atk = atk; }
 	void setDef(int def) { Def = def; }

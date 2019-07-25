@@ -6,9 +6,10 @@
 #include "player.h"
 
 class Potion : public Item, public std::enable_shared_from_this<Potion> {
-	Type type = Type::Ptn;
 	public:
-	char getChar() const override {return 'P';}
+	Potion() {this->type = Type::Ptn;}
+	char getChar() const override {return 'P';} // inherited from Stuff
+	// virtual void effect(std::shared_ptr<Player>) {} inherited from Stuff
 };
 
 class BoostDef : public Potion {
