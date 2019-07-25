@@ -20,6 +20,11 @@ void Treasure::setCollect() {
 	canCollect = true;
 }
 
+bool Treasure::isDragonHoard() {
+	if (canCollect) return false;
+	return true;
+}
+
 void Treasure::effect(std::shared_ptr<Player> pc) {
 	pc->setTreasure(pc->getTreasure() + val);
 }
