@@ -30,7 +30,7 @@ class Floor {
 	bool checkEvents();
 	std::shared_ptr<Cell> getCellPC();
 	std::shared_ptr<Cell> target(std::shared_ptr<Cell> cur, std::string direction);
-	void setCell(int x, int y, std::shared_ptr<Stuff> s);
+	bool setCell(std::shared_ptr<Cell> c, std::shared_ptr<Stuff> s);
 	std::shared_ptr<Player> getPlayer();
 	std::vector<std::shared_ptr<Cell>> getTiles();
 	std::vector<std::vector<std::shared_ptr<Cell>>> getChambers();

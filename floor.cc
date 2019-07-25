@@ -183,7 +183,7 @@ void Floor::playerMove(std::string direction) {
     std::shared_ptr<Cell> targetCell = target(getCellPC(), direction);
     int targetX = targetCell->getX();
     int targetY = targetCell->getY();
-    if (targetCell->checkOccupancy(false)) return;
+    if (targetCell->checkOccupancy()) return;
     std::shared_ptr<Stuff> s = theGrid[curX][curY]->detachStuff();
     theGrid[targetX][targetY]->attachStuff(pc);
     checkEvents();
@@ -243,10 +243,36 @@ void Floor::playerAtk(std::string direction) {
     checkEvents();
 }
 
+string getDirection(shared_ptr<Cell> c1, shared_ptr<Cell> c2) {
+    int x1 = c1->getX();
+    int y1 = c1->getY();
+    int x2 = c2->getX();
+    int y2 = c2->getY();
+    if (x1 == x2) {
+        if (y2 == y1 + 1) return "S";
+        else if (y2 == y1 - 1) return "N";
+    } else if (x2 == x1 + 1) {
+        if (y2 == y1) return "E";
+        else if (y2 == y1 + 1) return "SE";
+        else return "NE";
+    } else {
+        if (y2 == y1) return "W";
+        else if (y2 == y1 + 1) return "SW";
+        else return "NW";
+    }
+    return "";
+}
 void Floor::playerUse(std::string direction) {
     shared_ptr<Cell> targetCell = target(getCellPC(), direction);
-    if (targetCell->getOccupant()->getType() != Type::Ptn) return;
-    targetCell->getOccupant()->effect(pc);
+    if (targetCell->getOccupant()->getType() == Type::Ptn) {
+        targetCell->getOccupant()->effect(pc);
+    } else if (targetCell->getOccupant()->getType() == Type::Trsr) {
+        if (targetCell->getOccupant()->isDragonHoard()) return;
+        else {
+            targetCell->getOccupant()->effect(pc);
+            playerMove(getDirection(getCellPC(), targetCell));
+        }
+    } else return;
 }
 
 void Floor::startGame(std::string race) {
@@ -264,7 +290,7 @@ void Floor::moveEnemies() {
                 vector<shared_ptr<Cell>> validMove;
                 string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
                 for (int i = 0; i < 8; ++i) {
-                   if (target(col, directions[i])->checkOccupancy(true)) validMove.emplace_back(target(col, directions[i]));
+                   if (target(col, directions[i])->checkOccupancy()) validMove.emplace_back(target(col, directions[i]));
                 } 
                 srand(time(nullptr));
                 int index = rand() % validMove.size();
@@ -276,11 +302,15 @@ void Floor::moveEnemies() {
     }
 }
 
-void Floor::setCell(int x, int y, std::shared_ptr<Stuff> s) {
+bool Floor::setCell(shared_ptr<Cell> c, shared_ptr<Stuff> s) {
+    int x = c->getX();
+    int y = c->getY();
+    if (c->checkOccupancy()) return false;
     theGrid[x][y]->attachStuff(s);
     if (s->getType() == Type::Trsr || s->getType() == Type::Str || s->getChar() == 'c') {
         theGrid[x][y]->setOccupancy(false); // lets the user step on
     }
+    return true;
 }
 
 std::shared_ptr<Player> Floor::getPlayer() {

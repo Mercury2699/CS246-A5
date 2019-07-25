@@ -15,7 +15,7 @@
     Wall(int x, int y, bool isHor) : Cell{x, y}, isHorizontal{isHor} {
         setOccupancy(true);
     }
-    bool checkOccupancy(bool forEnemy) const override { return true; } // inherited from Cell
+    bool checkOccupancy() const override { return true; } // inherited from Cell
     char getChar() const override {
         if (isHorizontal) return '-';
         return '|';

@@ -9,7 +9,7 @@ char Doorway::getChar() const {
     return '.';
 }
 
-bool Doorway::checkOccupancy(bool forEnemy) const{
+bool Doorway::checkOccupancy() const{
     return isOccupied;
 }
 

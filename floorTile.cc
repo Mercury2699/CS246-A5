@@ -9,14 +9,7 @@ char FloorTile::getChar() const {
     return '.';
 }
 
-bool FloorTile::checkOccupancy(bool forEnemy) const {
-    if(forEnemy) {
-		if (occupant){
-			return true;
-		} else {
-			return false;
-		}
-	}
+bool FloorTile::checkOccupancy() const {
 	return isOccupied; 
 }
 

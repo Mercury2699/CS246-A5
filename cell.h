@@ -16,7 +16,7 @@ class Cell {
     Cell(int x, int y) : x{x}, y{y} {}
 	virtual ~Cell() = default;
 	virtual char getChar() const = 0;
-    virtual bool checkOccupancy(bool forEnemy) const {
+    virtual bool checkOccupancy() const {
 		return isOccupied;
 	}
     void setObserver(std::shared_ptr<TextDisplay> td) { this->td = td;};

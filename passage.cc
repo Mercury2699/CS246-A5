@@ -10,7 +10,7 @@ char Passage::getChar() const {
     return '#';
 }
 
-bool Passage::checkOccupancy(bool forEnemy) const{
+bool Passage::checkOccupancy() const{
     return isOccupied;
 }
 
