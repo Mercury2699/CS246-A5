@@ -18,7 +18,17 @@
 using std::make_shared;
 
 std::shared_ptr<Player> spawnPlayer(std::string race) {
-    
+    std::shared_ptr<Player> pc;
+    if (race == "h" ) {
+        pc = make_shared<Player>(new Human{});
+    } else if (race == "e") {
+        pc = make_shared<Player>(new Elves{});
+    } else if (race == "o") {
+        pc = make_shared<Player>(new Orc{});
+    } else { // race == "d"
+        pc = make_shared<Player>(new Dwarf()});
+    }
+    return pc;
 }
 
 // void Factory::spawnPlayer(std::vector<std::shared_ptr<Floor>> f) {
@@ -36,17 +46,17 @@ std::shared_ptr<Enemy> Factory::genEnemy() {
     int NPCRand = rand() % 18;
     
     if ( NPCRand <= 3 ) { // if (NPCRand == 0, 1, 2, 3)
-        return make_shared<Enemy>(Werewolf{});
+        return make_shared<Enemy>(new Werewolf{});
     } else if ( NPCRand <= 6 ) { // if (NPCRand == 4, 5, 6)
-        return make_shared<Enemy>(Vampire{});
+        return make_shared<Enemy>(new Vampire{});
     } else if ( NPCRand <= 11) { // if (NPCRand == 7, 8, 9, 10, 11)
-        return make_shared<Enemy>(Goblin{});
+        return make_shared<Enemy>(new Goblin{});
     } else if ( NPCRand <= 13) { // if (NPCRand == 12,13) 
-        return make_shared<Enemy>(Troll{});
+        return make_shared<Enemy>(new Troll{});
     } else if ( NPCRand <= 15) { // if (NPCRand == 14,15)
-        return make_shared<Enemy>(Phoenix{});
+        return make_shared<Enemy>(new Phoenix{});
     } else { // if (NPCRand == 16,17)
-        return make_shared<Enemy>(Merchant{});
+        return make_shared<Enemy>(new Merchant{});
     }
 }
 
@@ -55,17 +65,17 @@ std::shared_ptr<Potion> Factory::genPotion() {
     int RandNum = rand() % 6;
 
     if ( RandNum == 0 ) {
-        return make_shared<Potion>(RestorHP{});
+        return make_shared<Potion>(new RestorHP{});
     } else if ( RandNum == 1 ) {
-        return make_shared<Potion>(BoostAtk{});
+        return make_shared<Potion>(new BoostAtk{});
     } else if ( RandNum == 2 ) {
-        return make_shared<Potion>(BoostDef{});
+        return make_shared<Potion>(new BoostDef{});
     } else if ( RandNum == 3 ) {
-        return make_shared<Potion>(PoisonHP{});
+        return make_shared<Potion>(new PoisonHP{});
     } else if ( RandNum == 4 ) {
-        return make_shared<Potion>(WoundAtk{});
+        return make_shared<Potion>(new WoundAtk{});
     } else { // if ( RandNum == 5 )
-        return make_shared<Potion>(WoundDef{});
+        return make_shared<Potion>(new WoundDef{});
     }
 }
 
@@ -74,13 +84,13 @@ std::shared_ptr<Treasure> Factory::genTreasure(){
     int RandNum = rand() % 4;
 
     if ( RandNum == 0 ){
-        return make_shared<Treasure>(Treasure{1});
+        return make_shared<Treasure>(new Treasure{1});
     } else if ( RandNum == 1 ) {
-        return make_shared<Treasure>(Treasure{2});
+        return make_shared<Treasure>(new Treasure{2});
     } else if ( RandNum == 2 ) {
-        return make_shared<Treasure>(Treasure{4});
+        return make_shared<Treasure>(new Treasure{4});
     } else { // if ( RandNum == 3 )
-        return make_shared<Treasure>(Treasure{6});
+        return make_shared<Treasure>(new Treasure{6});
     }
 }
 
@@ -94,18 +104,22 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>> f) {
     int x = rand() % f[0]->getChambers()[i].size();
     std::shared_ptr<Cell> playerPos = f[0]->getChambers()[i][x];
     f[0]->getPlayer()->setCell( playerPos );
-    f[0]->setCell(playerPos->getX(), playerPos->getY()), f[0]->getPlayer());
+    f[0]->setCell(playerPos->getX(), playerPos->getY(), f[0]->getPlayer());
 
     // stair spawned
     int j = rand() % f[0]->getChambers().size();
     while (j == i) {
         j = rand() % f[0]->getChambers().size();
     }
-    int randStair = rand() % getChambers()[j].size();
+    int randStair = rand() % f[0]->getChambers()[j].size();
     std::shared_ptr<Cell> stairPos = f[0]->getChambers()[j][randStair];
     f[0]->getPlayer()->setCell( stairPos );
     std::shared_ptr<Stair> stair = make_shared<Stair>(new Stair{});
     f[0]->setCell(stairPos->getX(), stairPos->getY(), stair);
+
+
+
+
 
 }
 
