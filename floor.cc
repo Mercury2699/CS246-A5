@@ -30,17 +30,18 @@ Floor::Floor(std::string file){
             x = 0;
             y++;
         } else if (c == ' ') {
-            row.emplace_back(make_shared<EmptyCell>(x, y));
+            auto p = make_shared<EmptyCell>(x, y);
+            row.emplace_back(p);
         } else if (c == '-') {
-            row.emplace_back(make_shared<Wall>(x, y, true));
+            row.emplace_back(make_shared<Cell>(Wall(x, y, true)));
         } else if (c == '|') {
-            row.emplace_back(make_shared<Wall>(x, y, false));
+            row.emplace_back(make_shared<Cell>(Wall(x, y, false)));
         } else if (c == '+') {
-            row.emplace_back(make_shared<Doorway>(x, y));
+            row.emplace_back(make_shared<Cell>(Doorway(x, y)));
         } else if (c == '#') {
-            row.emplace_back(make_shared<Passage>(x, y));
+            row.emplace_back(make_shared<Cell>(Passage(x, y)));
         } else {
-            shared_ptr<Cell> cur1 = make_shared<FloorTile>(x ,y);
+            shared_ptr<Cell> cur1 = make_shared<Cell>(FloorTile(x ,y));
             row.emplace_back(cur1);
             shared_ptr<Cell> cur2 = cur1;
             floorTiles.emplace_back(cur2);
