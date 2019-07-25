@@ -32,6 +32,7 @@ class Stuff {
     virtual ~Stuff() = default;
     // for Treasure{6}
     virtual bool isDragonHoard() {return false;}
+    virtual void setCollect() {}
 };
 
 class Stair final : public Stuff {

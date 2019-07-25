@@ -10,7 +10,8 @@
 class Game{
     std::shared_ptr<Player> pc;
     std::vector<std::shared_ptr<Floor>> allFloors;
-    
+
+    Game();
 };
 
 

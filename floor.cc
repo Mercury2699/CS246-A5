@@ -194,36 +194,36 @@ bool isClose(std::shared_ptr<Cell> c1, std::shared_ptr<Cell> c2) {
     else return false;
 }
 
-bool Floor::checkEvents() {
-    if (pc->isDead()) return true;
-    if (getCellPC()->getOccupant()->getType() == Type::Str) return false;
-    if (getCellPC()->getOccupant()->getType() == Type::Trsr) {
-        getCellPC()->getOccupant()->effect(pc);
-    }
+int Floor::checkEvents() {
+    if (pc->isDead()) return 0;
+    if (getCellPC()->getOccupant()->getType() == Type::Str) return 1;
     for (auto cur : floorTiles) {
         if(cur->getOccupant()->getType() == Type::Enmy) {
             shared_ptr<Stuff> e = cur->getOccupant();
             if(!e->isDead() && isClose(cur, getCellPC())) {
                 pc->beAttacked(e);
-                if (pc->isDead()) return true;
+                if (pc->isDead()) return 0;
             } else if(e->isDead()) {
                 if (e->getChar() == 'M') {
                     cur->attachStuff(make_shared<Treasure>(3));
-                    cur->setOccupancy(false);
                 } else if (e->getChar() == 'D') {
-                    continue;
+                    string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+                    for (int i = 0; i < 8; ++i) {
+                        if (target(cur, directions[i])->getOccupant()->isDragonHoard()) {
+                            target(cur, directions[i])->getOccupant()->setCollect();
+                        }
+                    } 
                 } else {
                     pc->setTreasure(pc->getTreasure() + 1);
                 }
                 if (e->checkCompass()) {
                     shared_ptr<Compass> c = make_shared<Compass>();
                     cur->attachStuff(c);
-                    cur->setOccupancy(false);
                 }
             }
         } 
     }
-    return false;
+    return 2;
 }
 
 void Floor::playerAtk(std::string direction) {
