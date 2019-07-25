@@ -66,7 +66,7 @@ Floor::Floor(std::string file){
     m.close();
 }
 
-void Floor::ReadFile(std::ifstream s, shared_ptr<Player> pc){
+void Floor::ReadFile(ifstream s, shared_ptr<Player> pc){
     char c;
     int x = 0, y = 0;
     vector<shared_ptr<Cell>> row;
@@ -126,15 +126,12 @@ void Floor::ReadFile(std::ifstream s, shared_ptr<Player> pc){
                 row[x]->attachStuff(make_shared<Player>(pc));
             } else if (c == '\\'){
                 row[x]->attachStuff(make_shared<Stair>());
-            } else {
-                
             }
         }
-       
     }
 }
 
-std::shared_ptr<Cell> Floor::target(std::shared_ptr<Cell> cur, std::string direction) {
+shared_ptr<Cell> Floor::target(shared_ptr<Cell> cur, string direction) {
     int curX = cur->getX();
     int curY = cur->getY();
     int targetX, targetY = 0;
