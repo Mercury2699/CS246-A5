@@ -17,7 +17,7 @@
 
 using std::make_shared;
 
-std::shared_ptr<Player> spawnPlayer(std::string race) {
+std::shared_ptr<Player> Factory::spawnPlayer(std::string race) {
     std::shared_ptr<Player> pc;
     if (race == "h" ) {
         pc = make_shared<Human>();

@@ -21,7 +21,7 @@ class Floor {
 	
 	public:
 	Floor(std::shared_ptr<Player> pc, std::string file = "map.txt");
-	void ReadFile(std::ifstream, std::shared_ptr<Player> pc);
+	Floor(std::shared_ptr<Player> pc, std::ifstream &fs);
 	void playerMove(std::string direction);
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);

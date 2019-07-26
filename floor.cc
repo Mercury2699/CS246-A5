@@ -67,67 +67,67 @@ Floor::Floor(shared_ptr<Player> pc, string file)
     m.close();
 }
 
-void Floor::ReadFile(ifstream s, shared_ptr<Player> pc){
+Floor::Floor(shared_ptr<Player> pc, ifstream &s){
     this->pc = pc;
-    char c;
-    int x = 79, y = 25;
     vector<shared_ptr<Cell>> row;
-    while (s.get(c)){
-        if(c == '\n'){
-            theGrid.emplace_back(row);
-            row.clear();
-            x = 79;
-            y--;
-        } else if (c == ' ') {
-            row.emplace_back(make_shared<EmptyCell>(x, y));
-        } else if (c == '-') {
-            row.emplace_back(make_shared<Wall>(x, y, true));
-        } else if (c == '|') {
-            row.emplace_back(make_shared<Wall>(x, y, false));
-        } else if (c == '+') {
-            row.emplace_back(make_shared<Doorway>(x, y));
-        } else if (c == '#') {
-            row.emplace_back(make_shared<Passage>(x, y));            
-        } else {
-            row.emplace_back(make_shared<FloorTile>(x, y));
-            if (c == '0'){
-                row[x]->attachStuff(make_shared<RestorHP>());
-            } else if (c == '1'){
-                row[x]->attachStuff(make_shared<BoostAtk>());
-            } else if (c == '2'){
-                row[x]->attachStuff(make_shared<BoostDef>());
-            } else if (c == '3'){
-                row[x]->attachStuff(make_shared<PoisonHP>());
-            } else if (c == '4'){
-                row[x]->attachStuff(make_shared<WoundAtk>());
-            } else if (c == '5'){
-                row[x]->attachStuff(make_shared<WoundDef>());
-            } else if (c == '6'){
-                row[x]->attachStuff(make_shared<Treasure>(1));
-            } else if (c == '7'){
-                row[x]->attachStuff(make_shared<Treasure>(2));
-            } else if (c == '8'){
-                row[x]->attachStuff(make_shared<Treasure>(4));
-            } else if (c == '9'){
-                row[x]->attachStuff(make_shared<Treasure>(6));
-            } else if (c == 'W'){
-                row[x]->attachStuff(make_shared<Werewolf>());
-            } else if (c == 'V'){
-                row[x]->attachStuff(make_shared<Vampire>());
-            } else if (c == 'N'){
-                row[x]->attachStuff(make_shared<Goblin>());
-            } else if (c == 'T'){
-                row[x]->attachStuff(make_shared<Troll>());
-            } else if (c == 'X'){
-                row[x]->attachStuff(make_shared<Phoenix>());
-            } else if (c == 'M'){
-                row[x]->attachStuff(make_shared<Merchant>());
-            } else if (c == 'D'){
-                row[x]->attachStuff(make_shared<Dragon>());
-            } else if (c == '@'){
-                row[x]->attachStuff(make_shared<Player>(pc));
-            } else if (c == '\\'){
-                row[x]->attachStuff(make_shared<Stair>());
+    for (int y = 0; y < 25; ++y) {
+        for (int x = 0; x < 79; ++x) {
+            char c;
+            s.get(c);
+            if(c == '\n'){
+                theGrid.emplace_back(row);
+                row.clear();
+            } else if (c == ' ') {
+                row.emplace_back(make_shared<EmptyCell>(x, y));
+            } else if (c == '-') {
+                row.emplace_back(make_shared<Wall>(x, y, true));
+            } else if (c == '|') {
+                row.emplace_back(make_shared<Wall>(x, y, false));
+            } else if (c == '+') {
+                row.emplace_back(make_shared<Doorway>(x, y));
+            } else if (c == '#') {
+                row.emplace_back(make_shared<Passage>(x, y));            
+            } else {
+                row.emplace_back(make_shared<FloorTile>(x, y));
+                if (c == '0'){
+                    row[x]->attachStuff(make_shared<RestorHP>());
+                } else if (c == '1'){
+                    row[x]->attachStuff(make_shared<BoostAtk>());
+                } else if (c == '2'){
+                    row[x]->attachStuff(make_shared<BoostDef>());
+                } else if (c == '3'){
+                    row[x]->attachStuff(make_shared<PoisonHP>());
+                } else if (c == '4'){
+                    row[x]->attachStuff(make_shared<WoundAtk>());
+                } else if (c == '5'){
+                    row[x]->attachStuff(make_shared<WoundDef>());
+                } else if (c == '6'){
+                    row[x]->attachStuff(make_shared<Treasure>(1));
+                } else if (c == '7'){
+                    row[x]->attachStuff(make_shared<Treasure>(2));
+                } else if (c == '8'){
+                    row[x]->attachStuff(make_shared<Treasure>(4));
+                } else if (c == '9'){
+                    row[x]->attachStuff(make_shared<Treasure>(6));
+                } else if (c == 'W'){
+                    row[x]->attachStuff(make_shared<Werewolf>());
+                } else if (c == 'V'){
+                    row[x]->attachStuff(make_shared<Vampire>());
+                } else if (c == 'N'){
+                    row[x]->attachStuff(make_shared<Goblin>());
+                } else if (c == 'T'){
+                    row[x]->attachStuff(make_shared<Troll>());
+                } else if (c == 'X'){
+                    row[x]->attachStuff(make_shared<Phoenix>());
+                } else if (c == 'M'){
+                    row[x]->attachStuff(make_shared<Merchant>());
+                } else if (c == 'D'){
+                    row[x]->attachStuff(make_shared<Dragon>());
+                } else if (c == '@'){
+                    row[x]->attachStuff(pc);
+                } else if (c == '\\'){
+                    row[x]->attachStuff(make_shared<Stair>());
+                }
             }
         }
     }
@@ -270,13 +270,6 @@ void Floor::playerUse(std::string direction) {
         }
         playerMove(getDirection(getCellPC(), targetCell));
     }
-}
-
-void Floor::startGame(std::string race) {
-    if (race == "h") pc = make_shared<Human>();
-    else if (race == "e") pc = make_shared<Elves>();
-    else if (race == "d") pc = make_shared<Dwarf>();
-    else pc = make_shared<Orc>();
 }
 
 void Floor::moveEnemies() {

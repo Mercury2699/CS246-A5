@@ -7,7 +7,7 @@ POTIONS = potion.o
 ENEMIES = vampire.o troll.o goblin.o werewolf.o phoenix.o dragon.o merchant.o
 CELLS = doorway.o passage.o floorTile.o 
 ITEMS = item.o treasure.o
-CONTROLLERS = game.o floor.o factory.o
+CONTROLLERS = game.o factory.o floor.o
 INTERFACE = main.o textDisplay.o
 OBJECTS = ${INTERFACE} ${CONTROLLERS} ${CELLS} ${PLAYERS} ${ENEMIES} ${ITEMS} ${POTIONS}
 DEPENDS = ${OBJECTS:.o=.d}
