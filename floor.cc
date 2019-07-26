@@ -27,7 +27,8 @@
 
 using namespace std;
 
-Floor::Floor(string file){
+Floor::Floor(string file) : 
+    chambers(5) {
     ifstream m(file);
     char c;
     int x = 0, y = 0;
