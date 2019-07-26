@@ -76,6 +76,6 @@ void Game::resetGame(){
     std::cin >> race;
     levelCount = 0;
     // startGame(race);
-    f->genFloor(allFloors);
+    // f->genFloor(allFloors);
 }
 

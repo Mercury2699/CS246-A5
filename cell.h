@@ -27,14 +27,14 @@ class Cell {
     void attachStuff(std::shared_ptr<Stuff> s) { 
 		isOccupied = true;
     	occupant = s;
-    	notifyObserver(); 
+		if (td) notifyObserver(); 
 	};
 
     std::shared_ptr<Stuff> detachStuff() {
 		std::shared_ptr<Stuff> temp = occupant;
     	isOccupied = false;
     	occupant = nullptr;
-    	notifyObserver();
+    	if (td) notifyObserver();
    		return temp;
 	};
 	/* setOccupancy should be used to set occupancy when attaching 
@@ -42,7 +42,7 @@ class Cell {
 	 */
 	void setOccupancy(bool occupied) {
 		isOccupied = occupied; 
-		notifyObserver();
+		if (td) notifyObserver();
 	};
 
 	int getX() const {return x;}
