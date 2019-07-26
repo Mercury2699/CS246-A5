@@ -27,6 +27,7 @@
 
 using namespace std;
 
+
 Floor::Floor(string file) : 
     chambers(5) {
     ifstream m(file);
@@ -35,9 +36,6 @@ Floor::Floor(string file) :
     vector<shared_ptr<Cell>> row;
     while (m.get(c)){
         if(c == '\n'){
-            for(auto i : row){
-                i->setObserver(td);
-            }
             theGrid.emplace_back(row);
             row.clear();
             x = 0;
@@ -77,7 +75,6 @@ Floor::Floor(ifstream &s) {
             char c;
             s.get(c);
             if(c == '\n'){
-                for(auto i : row) i->setObserver(td);
                 theGrid.emplace_back(row);
                 row.clear();
             } else if (c == ' ') {
@@ -143,6 +140,14 @@ void Floor::setTD(std::shared_ptr<TextDisplay> t){
 void Floor::setPC(std::shared_ptr<Player> p){
     this->pc = p;
 }
+
+void Floor::notifyObserver(){
+    for ( auto i : theGrid) {
+        for ( auto j : i) {
+            j->notifyObserver();
+        }
+    }
+} 
 
 shared_ptr<Cell> Floor::target(shared_ptr<Cell> cur, string direction) {
     int curX = cur->getX();

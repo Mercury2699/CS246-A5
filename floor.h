@@ -32,6 +32,7 @@ class Floor {
 	void setPC(std::shared_ptr<Player>);
 	std::shared_ptr<Cell> getCellPC();
 	std::shared_ptr<Cell> target(std::shared_ptr<Cell> cur, std::string direction);
+	void notifyObserver();
 	bool setCell(std::shared_ptr<Cell> c, std::shared_ptr<Stuff> s);
 	std::shared_ptr<Player> getPlayer();
 	std::vector<std::shared_ptr<Cell>> getTiles();
