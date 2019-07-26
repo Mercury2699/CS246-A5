@@ -13,17 +13,27 @@ TextDisplay::TextDisplay(string map){
         if(c == '\n'){
             theDisplay.emplace_back(row);
             row.clear();
-        } else if (c == 'A' ||c == 'B' ||c == 'C' ||c == 'D' ||c == 'E' ) {
+        } else if (c >= 65 && c <= 97 ) {
             row.emplace_back('.');
         } else {
             row.emplace_back(c);
         }
     }
     m.close();
+    for (auto i : theDisplay){
+        for (auto j : i){
+            std::cout << j;
+        }
+        std::cout << endl;
+    }
 }
 
 void TextDisplay::notify(int x, int y, char type){
     theDisplay[x][y] = type;
+}
+
+void TextDisplay::setPC(Player * p){
+    pc = p;
 }
 
 void TextDisplay::addAction(std::string a){

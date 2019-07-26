@@ -12,9 +12,8 @@ const std::string restart = "r", quit = "q";
 
 Game::Game(std::string race, std::string file){
     td = std::make_unique<TextDisplay>();
-    std::cout << &td;
-    std::cout << td.get();
     pc = f->spawnPlayer(race);
+    td->setPC(pc.get());
     for (int count = 0; count < 5; count++){
         allFloors.emplace_back(std::make_shared<Floor>(td.get(), pc, file));
         f->genFloor(allFloors);
@@ -27,6 +26,7 @@ Game::Game(std::string race, bool isSpecified, std::string file)
     std::cout << &td;
     std::cout << td.get();
     pc = f->spawnPlayer(race);
+    td->setPC(pc.get());
     std::ifstream fs{file};
     for (int count = 0; count < 5; count++){
         allFloors.emplace_back(std::make_shared<Floor>(td.get(), pc, fs));
