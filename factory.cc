@@ -153,7 +153,7 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f, int i = 0) {
         while(!f[i]->setCell(tiles[randTreasure], t)) {
             randTreasure = rand() % tiles.size();
         }
-        if (t->isDragonHoard) {
+        if (t->isDragonHoard()) {
             genDragon(tiles[randTreasure], f[i]);
             dragonNum++;
         }   

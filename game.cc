@@ -20,7 +20,7 @@ Game::Game(std::string race, std::string file){
         allFloors[count]->setPC(pc);
         allFloors[count]->setTD(td);
     }
-    f.genFloor(allFloors);
+    f.genFloor(allFloors, 0);
     allFloors[levelCount]->notifyObserver();
     std::cout << *td;
     td->clearAction();
