@@ -135,6 +135,11 @@ Floor::Floor(ifstream &s) {
 
 void Floor::setTD(std::shared_ptr<TextDisplay> t){
     this->td = t;
+    for ( auto i : theGrid) {
+        for ( auto j : i) {
+            j->setObserver(t);
+        }
+    }
 }
 
 void Floor::setPC(std::shared_ptr<Player> p){

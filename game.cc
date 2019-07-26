@@ -21,6 +21,7 @@ Game::Game(std::string race, std::string file){
         allFloors[count]->setTD(td);
     }
     f.genFloor(allFloors);
+    allFloors[levelCount]->notifyObserver();
     std::cout << *td;
     td->clearAction();
 }
@@ -36,6 +37,7 @@ Game::Game(std::string race, bool isSpecified, std::string file)
         allFloors[count]->setPC(pc);
         allFloors[count]->setTD(td);
     }
+    allFloors[levelCount]->notifyObserver();
     // f.genFloor(allFloors);
     td->addAction("Game Started!");
     std::cout << *td;
