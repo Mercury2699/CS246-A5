@@ -4,7 +4,7 @@
 #include "game.h"
 
 int main(int argc, char *argv[]) {
-	std::shared_ptr<Game> g = nullptr;
+	std::unique_ptr<Game> g = nullptr;
 
 	std::string command;
 	
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 	std::cout << "h: Human, e: Elves, d: Dwarf, o: Orc" << std::endl;
 	while(std::cin >> command) {
 		if(command == "h" || command == "e" || command == "d" || command == "o") {
-			g = std::make_shared<Game>(command);
+			g = std::make_unique<Game>(command);
 			break;
 		} else {
 			std::cout << "Invalid! Please reselect your character." << std::endl;
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 		if(command == "r") {
 			while(std::cin >> command) {
 				if(command == "h" || command == "e" || command == "d" || command == "o") {
-					g = std::make_shared<Game>(command);
+					g = std::make_unique<Game>(command);
 					break;
 				} else {
 					std::cout << "Invalid! Please reselect your character." << std::endl;
