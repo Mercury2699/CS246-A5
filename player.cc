@@ -35,10 +35,12 @@ int Player::getDefaultDef() const {
 }
 
 void Player::beAttacked(std::shared_ptr<Stuff> c) {
+	double damage = ceil((100 / (100 + static_cast<double>(this->getDef()))) * c->getAtk());
 	if (getSuit()) {
-		setHP(getHP() - ceil(ceil(((100 / (100 + getDef())) * c->getAtk())) / 2));
+		setHP(getHP() - ceil(damage / 2));
 	} else {
-		setHP(getHP()- ceil((100 / (100 + getDef())) * c->getAtk()));
+		setHP(getHP() - damage);
+		std::cout << "Setting HP to:" << (getHP()- damage) << std::endl;
 	}
 }
 

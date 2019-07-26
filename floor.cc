@@ -229,8 +229,9 @@ int Floor::checkEvents() {
                 shared_ptr<Stuff> e = cur->getOccupant();
                 if(!e->isDead() && isClose(cur, getCellPC())) {
                     pc->beAttacked(e);
+                    td->addAction(e->getChar() + " deals " + std::to_string(e->getAtk()) + " damages to PC");
                     if (pc->isDead()) return 0;
-                } else if(e->isDead()) {
+                } else if(e->isDead()) { // Some enemy is dead
                     if (e->getChar() == 'M') { // Merchant Died
                         cur->attachStuff(make_shared<Treasure>(3));
                         pc->setKilledMerch(true);
@@ -268,9 +269,6 @@ void Floor::playerAtk(std::string direction) {
         targetCell->getOccupant()->beAttacked(pc);
         td->addAction("PC deals " + std::to_string(pc->getAtk()) + " damages to " + targetCell->getOccupant()->getChar());
         checkEvents();
-        pc->beAttacked(targetCell->getOccupant());
-        td->addAction(targetCell->getOccupant()->getChar() + " deals " + std::to_string(targetCell->getOccupant()->getAtk()) + " damages to PC");
-        checkEvents();
     } else {
         td->addAction("PC cannot attack an Empty Cell!");
     }
@@ -307,14 +305,13 @@ void Floor::playerUse(std::string direction) {
              targetCell->detachStuff();
         } else if (targetCell->getOccupant()->getType() == Type::Trsr) {
             if (targetCell->getOccupant()->isDragonHoard()) {
-                    td->addAction("PC cannot take a DragonHoard without killing the Dragon!");
-                    return;
+                    return td->addAction("PC cannot take a DragonHoard without killing the Dragon!");
             } else {
                 td->addAction("PC collected a " + targetCell->getOccupant()->getName());
                 targetCell->detachStuff()->effect(pc);
             }
         } else if (targetCell->getOccupant()->getChar() == 'C') {
-            for (auto current : floorTiles) { // find Stair
+            for (auto current : floorTiles) { // find the Stair
                 if(current->getOccupant()){
                     if (current->getOccupant()->getType() == Type::Str) {
                         current->getOccupant()->enableDisplay();
