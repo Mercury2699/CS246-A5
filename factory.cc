@@ -87,10 +87,10 @@ std::shared_ptr<Treasure> Factory::genTreasure(){
     }
 }
 
-void Factory::genFloor(std::vector<std::shared_ptr<Floor>> f) {
+void Factory::genFloor(std::vector<std::unique_ptr<Floor>>& f) {
 
     // set random seed
-    srand( time(nullptr) );
+    srand( time(0) );
     std::cout << rand() ;
     // player spawned -- first floor
     std::cout << f[0]->getChambers().size();

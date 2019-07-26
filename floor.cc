@@ -27,8 +27,7 @@
 
 using namespace std;
 
-Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, string file)
-: pc{pc}, td{td} {
+Floor::Floor(string file){
     ifstream m(file);
     char c;
     int x = 0, y = 0;
@@ -70,8 +69,7 @@ Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, string file)
     m.close();
 }
 
-Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, ifstream &s) 
-    : pc{pc}, td{td} {
+Floor::Floor(ifstream &s) {
     vector<shared_ptr<Cell>> row;
     for (int y = 0; y < 25; ++y) {
         for (int x = 0; x < 79; ++x) {
@@ -135,6 +133,14 @@ Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, ifstream &s)
             }
         }
     }
+}
+
+void Floor::setTD(TextDisplay * t){
+    this->td = t;
+}
+
+void Floor::setPC(Player * p){
+    this->pc = p;
 }
 
 shared_ptr<Cell> Floor::target(shared_ptr<Cell> cur, string direction) {

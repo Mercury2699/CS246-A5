@@ -11,7 +11,7 @@ class Game{
     std::shared_ptr<Player> pc;
     std::unique_ptr<TextDisplay> td = nullptr;
     std::shared_ptr<Factory> f;
-    std::vector<std::shared_ptr<Floor>> allFloors;
+    std::vector<std::unique_ptr<Floor>> allFloors;
     int levelCount = 0;
     bool specifiedLayout = false;
     void nextFloor();

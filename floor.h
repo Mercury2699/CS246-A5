@@ -17,17 +17,19 @@ class Floor {
 	std::vector<std::vector<std::shared_ptr<Cell>>> theGrid;
 	std::vector<std::shared_ptr<Cell>> floorTiles;
 	std::vector<std::vector<std::shared_ptr<Cell>>> chambers;
-	std::shared_ptr<Player> pc = nullptr;
+	Player * pc = nullptr;
 	TextDisplay * td;
 	
 	public:
-	Floor(TextDisplay *, std::shared_ptr<Player> pc, std::string file = "map.txt");
-	Floor(TextDisplay *, std::shared_ptr<Player> pc, std::ifstream &fs);
+	Floor(std::string file = "map.txt");
+	Floor(std::ifstream &fs);
 	void playerMove(std::string direction);
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);
 	void moveEnemies();
 	int checkEvents();
+	void setTD(TextDisplay *);
+	void setPC(Player *);
 	std::shared_ptr<Cell> getCellPC();
 	std::shared_ptr<Cell> target(std::shared_ptr<Cell> cur, std::string direction);
 	bool setCell(std::shared_ptr<Cell> c, std::shared_ptr<Stuff> s);

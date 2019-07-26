@@ -17,8 +17,8 @@ struct Factory {
     std::shared_ptr<Enemy> genEnemy();
     std::shared_ptr<Potion> genPotion();
     std::shared_ptr<Treasure> genTreasure();
-    void genFloor(std::vector<std::shared_ptr<Floor>>);
-    std::shared_ptr<Stair> genStair(std::vector<std::shared_ptr<Floor>>);
+    void genFloor(std::vector<std::unique_ptr<Floor>>&);
+    std::shared_ptr<Stair> genStair(std::vector<std::unique_ptr<Floor>> &);
 };
 
 

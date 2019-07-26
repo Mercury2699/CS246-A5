@@ -15,9 +15,12 @@ Game::Game(std::string race, std::string file){
     pc = f->spawnPlayer(race);
     td->setPC(pc.get());
     for (int count = 0; count < 5; count++){
-        allFloors.emplace_back(std::make_shared<Floor>(td.get(), pc, file));
-        f->genFloor(allFloors);
+        allFloors.emplace_back(std::make_unique<Floor>(file));
+        allFloors[count]->setPC(pc.get());
+        allFloors[count]->setTD(td.get());
     }
+    f->genFloor(allFloors);
+    
 }
 
 Game::Game(std::string race, bool isSpecified, std::string file) 
@@ -29,7 +32,9 @@ Game::Game(std::string race, bool isSpecified, std::string file)
     td->setPC(pc.get());
     std::ifstream fs{file};
     for (int count = 0; count < 5; count++){
-        allFloors.emplace_back(std::make_shared<Floor>(td.get(), pc, fs));
+        allFloors.emplace_back(std::make_unique<Floor>(fs));
+        allFloors[count]->setPC(pc.get());
+        allFloors[count]->setTD(td.get());
     }
     f->genFloor(allFloors);
 }
