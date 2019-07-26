@@ -27,6 +27,7 @@
 *.lib
 
 # Executables
+cc3k
 *.exe
 *.out
 *.app
