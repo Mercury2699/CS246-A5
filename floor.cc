@@ -51,7 +51,7 @@ Floor::Floor(string file) :
             row.emplace_back(make_shared<Doorway>(x, y));
         } else if (c == '#') {
             row.emplace_back(make_shared<Passage>(x, y));
-        } else {
+        } else if (c >= 65 && c <= 97) { // c is A-Z
             shared_ptr<FloorTile> cur1 = make_shared<FloorTile>(x ,y);
             row.emplace_back(cur1);
             shared_ptr<FloorTile> cur2 = cur1;
@@ -61,7 +61,7 @@ Floor::Floor(string file) :
             else if (c == 'B') chambers[1].emplace_back(cur3);
             else if (c == 'C') chambers[2].emplace_back(cur3);
             else if (c == 'D') chambers[3].emplace_back(cur3);
-            else chambers[4].emplace_back(cur3);
+            else chambers[4].emplace_back(cur3); // c == 'E'
         }
         x++;
     }
@@ -318,8 +318,6 @@ void Floor::moveEnemies() {
 }
 
 bool Floor::setCell(shared_ptr<Cell> c, shared_ptr<Stuff> s) {
-    int x = c->getX();
-    int y = c->getY();
     if (c->checkOccupancy()) return false;
     c->attachStuff(s);
     if (s->getType() == Type::Trsr || s->getType() == Type::Str || s->getChar() == 'c') {

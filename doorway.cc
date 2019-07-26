@@ -6,7 +6,7 @@ Doorway::Doorway(int x, int y):
 char Doorway::getChar() const {
     if(isOccupied)
         return occupant->getChar();
-    return '.';
+    return '+';
 }
 
 bool Doorway::checkOccupancy() const{
