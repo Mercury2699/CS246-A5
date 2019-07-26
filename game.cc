@@ -14,6 +14,7 @@ Game::Game(std::string race, std::string file){
     td = std::make_shared<TextDisplay>();
     pc = f.spawnPlayer(race);
     td->setPC(pc);
+    td->addAction("Game Started!");
     for (int count = 0; count < 5; count++){
         allFloors.emplace_back(std::make_shared<Floor>(file));
         allFloors[count]->setPC(pc);
@@ -36,6 +37,7 @@ Game::Game(std::string race, bool isSpecified, std::string file)
         allFloors[count]->setTD(td);
     }
     // f.genFloor(allFloors);
+    td->addAction("Game Started!");
     std::cout << *td;
     td->clearAction();
 }

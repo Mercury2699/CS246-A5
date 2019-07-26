@@ -28,13 +28,9 @@ int main(int argc, char *argv[]) {
 		} else {
 			std::cout << "Invalid! Please reselect your character." << std::endl;
 		}
-	}
-
+	}	
 	
-	
-	
-	while(1){
-		std::cin >> command;
+	while(std::cin >> command){
 		if(command == "r") {
 			while(std::cin >> command) {
 				if(command == "h" || command == "e" || command == "d" || command == "o") {
@@ -50,3 +46,4 @@ int main(int argc, char *argv[]) {
 	}
 	return 0;
 }
+

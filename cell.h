@@ -34,7 +34,9 @@ class Cell {
 		std::shared_ptr<Stuff> temp = occupant;
     	isOccupied = false;
     	occupant = nullptr;
-    	if (td) notifyObserver();
+    	if (td) {
+			notifyObserver();
+		}
    		return temp;
 	};
 	/* setOccupancy should be used to set occupancy when attaching 
