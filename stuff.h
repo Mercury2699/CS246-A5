@@ -17,6 +17,7 @@ class Stuff {
     Type getType() {return type;}
     // for Itm and Ptn
     virtual void effect(std::shared_ptr<Player>) {}
+    virtual std::string getName() const {return "Stuff";}
     // for Plyr and Enmy
     virtual int getHP() const {return 0;};
     virtual int getAtk() const {return 0;};

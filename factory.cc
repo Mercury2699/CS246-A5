@@ -88,8 +88,8 @@ std::shared_ptr<Treasure> Factory::genTreasure(){
 }
 
 
-void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f, int i = 0) {
-
+void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
+    int i = 0;
     // set random seed
     srand( time(0) );
 

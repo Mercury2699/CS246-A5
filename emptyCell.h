@@ -9,7 +9,9 @@ struct EmptyCell final : public Cell {
 	// Stuff *occupant = nullptr; inherited from Cell
 	// TextDisplay *td = nullptr; inherited from Cell
     public: 
-    EmptyCell(int x, int y) : Cell{x, y} {}
+    EmptyCell(int x, int y) : Cell{x, y} {
+        isOccupied = true;
+    }
     char getChar() const override {return ' ';} // inherited from Cell
     bool checkOccupancy() const override { return true;} // inherited from Cell
     // void setObserver(TextDisplay *td) { this->td = td;}; inherited from Cell

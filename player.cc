@@ -42,6 +42,9 @@ void Player::beAttacked(std::shared_ptr<Stuff> c) {
 	}
 }
 
+void Player::setKilledMerch(bool has){
+	killedMerch = has;
+}
 
 bool Player::hasKilledMerch() const {
 	return killedMerch;

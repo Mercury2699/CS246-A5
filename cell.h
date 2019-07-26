@@ -39,13 +39,6 @@ class Cell {
 		}
    		return temp;
 	};
-	/* setOccupancy should be used to set occupancy when attaching 
-	 * items that can be stepped on, e.g. Treasure and floor
-	 */
-	void setOccupancy(bool occupied) {
-		isOccupied = occupied; 
-		if (td) notifyObserver();
-	};
 
 	int getX() const {return x;}
 	int getY() const {return y;}

@@ -22,8 +22,10 @@ class BarrierSuit final : public Item {
     // Type type; inherited from Stuff
     public:
     // Type getType(); inherited from Stuff
+    std::string getName() const override; // inherited from Stuff
     char getChar() const override; // inherited from Stuff
     void effect(std::shared_ptr<Player>) override; // inherited from Item
+    
 };
 
 struct Compass final : public Item {
@@ -32,6 +34,7 @@ struct Compass final : public Item {
     // public:
     // Type getType(); inherited from Stuff
     char getChar() const override; // inherited from Stuff
+    std::string getName() const override; // inherited from Stuff
     void effect(std::shared_ptr<Player>) override; // inherited from Item
 };
 
