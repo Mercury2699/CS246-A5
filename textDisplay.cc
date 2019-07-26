@@ -23,7 +23,10 @@ TextDisplay::TextDisplay(string map){
 }
 
 void TextDisplay::notify(int x, int y, char type){
-    theDisplay[y][x] = type;
+    if (y <= theDisplay.size()){
+        if (x <= theDisplay[y].size())
+            theDisplay[y][x] = type;
+    }
 }
 
 void TextDisplay::setPC(std::shared_ptr<Player> p){

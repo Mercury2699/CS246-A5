@@ -40,6 +40,7 @@ Floor::Floor(string file) :
             row.clear();
             x = 0;
             y++;
+            continue;
         } else if (c == ' ') {
             auto p = make_shared<EmptyCell>(x, y);
             row.emplace_back(p);
@@ -65,6 +66,7 @@ Floor::Floor(string file) :
         }
         x++;
     }
+    std::cout << x << y << std::endl;
     m.close();
 }
 
