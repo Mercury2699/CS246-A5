@@ -27,8 +27,8 @@
 
 using namespace std;
 
-Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, string file)
-: pc{pc}, td{td} {
+Floor::Floor(string file) : 
+    chambers(5) {
     ifstream m(file);
     char c;
     int x = 0, y = 0;
@@ -70,8 +70,7 @@ Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, string file)
     m.close();
 }
 
-Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, ifstream &s) 
-    : pc{pc}, td{td} {
+Floor::Floor(ifstream &s) {
     vector<shared_ptr<Cell>> row;
     for (int y = 0; y < 25; ++y) {
         for (int x = 0; x < 79; ++x) {
@@ -137,6 +136,14 @@ Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, ifstream &s)
     }
 }
 
+void Floor::setTD(std::shared_ptr<TextDisplay> t){
+    this->td = t;
+}
+
+void Floor::setPC(std::shared_ptr<Player> p){
+    this->pc = p;
+}
+
 shared_ptr<Cell> Floor::target(shared_ptr<Cell> cur, string direction) {
     int curX = cur->getX();
     int curY = cur->getY();
@@ -166,27 +173,31 @@ shared_ptr<Cell> Floor::target(shared_ptr<Cell> cur, string direction) {
         targetX = curX - 1;
         targetY = curY + 1;
     }
-    return theGrid[targetX][targetY];
+    return theGrid[targetY][targetX];
 }
 
 shared_ptr<Cell> Floor::getCellPC() {
-    for (auto cur : floorTiles) {
-        if (cur->getOccupant()->getType() == Type::Plyr) {
-            return cur;
+    for (auto row : theGrid) {
+        for (auto cur : row) { 
+            if (cur->getOccupant()) {
+                if (cur->getOccupant()->getType() == Type::Plyr) {
+                    return cur;
+                }
+            }
         }
     }
     return nullptr;
 }
 
 void Floor::playerMove(std::string direction) {
-    int curX = getCellPC()->getX();
-    int curY = getCellPC()->getY();
+    // int curX = getCellPC()->getX();
+    // int curY = getCellPC()->getY();
     std::shared_ptr<Cell> targetCell = target(getCellPC(), direction);
-    int targetX = targetCell->getX();
-    int targetY = targetCell->getY();
+    // int targetX = targetCell->getX();
+    // int targetY = targetCell->getY();
     if (targetCell->checkOccupancy()) return;
-    std::shared_ptr<Stuff> s = theGrid[curX][curY]->detachStuff();
-    theGrid[targetX][targetY]->attachStuff(pc);
+    std::shared_ptr<Stuff> s = getCellPC()->detachStuff();
+    targetCell->attachStuff(pc);
     checkEvents();
 }
 
@@ -300,9 +311,9 @@ bool Floor::setCell(shared_ptr<Cell> c, shared_ptr<Stuff> s) {
     int x = c->getX();
     int y = c->getY();
     if (c->checkOccupancy()) return false;
-    theGrid[x][y]->attachStuff(s);
+    c->attachStuff(s);
     if (s->getType() == Type::Trsr || s->getType() == Type::Str || s->getChar() == 'c') {
-        theGrid[x][y]->setOccupancy(false); // lets the user step on
+        c->setOccupancy(false); // lets the user step on
     }
     return true;
 }

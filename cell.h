@@ -9,8 +9,8 @@ class Cell {
 	protected:
 	int x = 0, y = 0;
 	bool isOccupied = false;
-	std::shared_ptr<Stuff> occupant = nullptr;
-	TextDisplay * td = nullptr;
+	std::shared_ptr<Stuff> occupant;
+	std::shared_ptr<TextDisplay> td;
 
 	public:
     Cell(int x, int y) : x{x}, y{y} {}
@@ -19,7 +19,7 @@ class Cell {
     virtual bool checkOccupancy() const {
 		return isOccupied;
 	}
-    void setObserver(TextDisplay * td) { this->td = td;}
+    void setObserver(std::shared_ptr<TextDisplay> td) { this->td = td;}
 	void notifyObserver() { td->notify(x,y,getChar()); }
 	
 	std::shared_ptr<Stuff> getOccupant() { return occupant; }
@@ -27,14 +27,14 @@ class Cell {
     void attachStuff(std::shared_ptr<Stuff> s) { 
 		isOccupied = true;
     	occupant = s;
-    	notifyObserver(); 
+		if (td) notifyObserver(); 
 	};
 
     std::shared_ptr<Stuff> detachStuff() {
 		std::shared_ptr<Stuff> temp = occupant;
     	isOccupied = false;
     	occupant = nullptr;
-    	notifyObserver();
+    	if (td) notifyObserver();
    		return temp;
 	};
 	/* setOccupancy should be used to set occupancy when attaching 
@@ -42,7 +42,7 @@ class Cell {
 	 */
 	void setOccupancy(bool occupied) {
 		isOccupied = occupied; 
-		notifyObserver();
+		if (td) notifyObserver();
 	};
 
 	int getX() const {return x;}

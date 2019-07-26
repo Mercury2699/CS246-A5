@@ -16,6 +16,7 @@ class TextDisplay {
     TextDisplay(std::string map = "map.txt");
     void notify(int x, int y, char type);
     void addAction(std::string);
+    void setPC(std::shared_ptr<Player>);
     void clearAction();
     friend std::ostream &operator<<(std::ostream &out, const TextDisplay &);
 };

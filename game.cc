@@ -11,21 +11,33 @@ const std::string AtkNE = "a<ne>", AtkNW = "a<nw>", AtkSE = "a<se>", AtkSW = "a<
 const std::string restart = "r", quit = "q";
 
 Game::Game(std::string race, std::string file){
-    pc = f->spawnPlayer(race);
+    td = std::make_shared<TextDisplay>();
+    pc = f.spawnPlayer(race);
+    td->setPC(pc);
     for (int count = 0; count < 5; count++){
-        allFloors.emplace_back(std::make_shared<Floor>(td.get(), pc, file));
-        f->genFloor(allFloors);
+        allFloors.emplace_back(std::make_shared<Floor>(file));
+        allFloors[count]->setPC(pc);
+        allFloors[count]->setTD(td);
     }
+    f.genFloor(allFloors);
+    std::cout << *td;
+    td->clearAction();
 }
 
 Game::Game(std::string race, bool isSpecified, std::string file) 
     : specifiedLayout{isSpecified} {
-    pc = f->spawnPlayer(race);
+    td = std::make_shared<TextDisplay>();
+    pc = f.spawnPlayer(race);
+    td->setPC(pc);
     std::ifstream fs{file};
     for (int count = 0; count < 5; count++){
-        allFloors.emplace_back(std::make_shared<Floor>(td.get(), pc, fs));
+        allFloors.emplace_back(std::make_shared<Floor>(fs));
+        allFloors[count]->setPC(pc);
+        allFloors[count]->setTD(td);
     }
-    f->genFloor(allFloors);
+    // f.genFloor(allFloors);
+    std::cout << *td;
+    td->clearAction();
 }
 
 // void Game::startGame(std::string race){
@@ -56,8 +68,9 @@ void Game::takeCommand(std::string action){
     else if (action == AtkNW) allFloors[levelCount]->playerAtk("NW");
     else if (action == AtkSE) allFloors[levelCount]->playerAtk("SE");
     else if (action == AtkSW) allFloors[levelCount]->playerAtk("SW");
-    else if (action == restart) resetGame();
-    else if (action == quit) return;
+    else td->addAction("Invalid Operation!");
+    std::cout << *td;
+    td->clearAction();
 }
 
 void Game::resetGame(){
@@ -65,6 +78,6 @@ void Game::resetGame(){
     std::cin >> race;
     levelCount = 0;
     // startGame(race);
-    f->genFloor(allFloors);
+    // f->genFloor(allFloors);
 }
 
