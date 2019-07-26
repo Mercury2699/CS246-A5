@@ -17,8 +17,8 @@ class Floor {
 	std::vector<std::vector<std::shared_ptr<Cell>>> theGrid;
 	std::vector<std::shared_ptr<Cell>> floorTiles;
 	std::vector<std::vector<std::shared_ptr<Cell>>> chambers;
-	Player * pc = nullptr;
-	TextDisplay * td;
+	std::shared_ptr<Player> pc;
+	std::shared_ptr<TextDisplay> td;
 	
 	public:
 	Floor(std::string file = "map.txt");
@@ -28,8 +28,8 @@ class Floor {
 	void playerUse(std::string direction);
 	void moveEnemies();
 	int checkEvents();
-	void setTD(TextDisplay *);
-	void setPC(Player *);
+	void setTD(std::shared_ptr<TextDisplay>);
+	void setPC(std::shared_ptr<Player>);
 	std::shared_ptr<Cell> getCellPC();
 	std::shared_ptr<Cell> target(std::shared_ptr<Cell> cur, std::string direction);
 	bool setCell(std::shared_ptr<Cell> c, std::shared_ptr<Stuff> s);

@@ -32,7 +32,7 @@ void TextDisplay::notify(int x, int y, char type){
     theDisplay[x][y] = type;
 }
 
-void TextDisplay::setPC(Player * p){
+void TextDisplay::setPC(std::shared_ptr<Player> p){
     pc = p;
 }
 

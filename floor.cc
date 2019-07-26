@@ -135,11 +135,11 @@ Floor::Floor(ifstream &s) {
     }
 }
 
-void Floor::setTD(TextDisplay * t){
+void Floor::setTD(std::shared_ptr<TextDisplay> t){
     this->td = t;
 }
 
-void Floor::setPC(Player * p){
+void Floor::setPC(std::shared_ptr<Player> p){
     this->pc = p;
 }
 

@@ -13,11 +13,11 @@ const std::string restart = "r", quit = "q";
 Game::Game(std::string race, std::string file){
     td = std::make_unique<TextDisplay>();
     pc = f->spawnPlayer(race);
-    td->setPC(pc.get());
+    td->setPC(pc);
     for (int count = 0; count < 5; count++){
         allFloors.emplace_back(std::make_unique<Floor>(file));
-        allFloors[count]->setPC(pc.get());
-        allFloors[count]->setTD(td.get());
+        allFloors[count]->setPC(pc);
+        allFloors[count]->setTD(td);
     }
     f->genFloor(allFloors);
     
@@ -27,14 +27,14 @@ Game::Game(std::string race, bool isSpecified, std::string file)
     : specifiedLayout{isSpecified} {
     td = std::make_unique<TextDisplay>();
     std::cout << &td;
-    std::cout << td.get();
+    std::cout << td;
     pc = f->spawnPlayer(race);
-    td->setPC(pc.get());
+    td->setPC(pc);
     std::ifstream fs{file};
     for (int count = 0; count < 5; count++){
         allFloors.emplace_back(std::make_unique<Floor>(fs));
-        allFloors[count]->setPC(pc.get());
-        allFloors[count]->setTD(td.get());
+        allFloors[count]->setPC(pc);
+        allFloors[count]->setTD(td);
     }
     f->genFloor(allFloors);
 }

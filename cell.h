@@ -9,8 +9,8 @@ class Cell {
 	protected:
 	int x = 0, y = 0;
 	bool isOccupied = false;
-	std::shared_ptr<Stuff> occupant = nullptr;
-	TextDisplay * td = nullptr;
+	std::shared_ptr<Stuff> occupant;
+	std::shared_ptr<TextDisplay> td;
 
 	public:
     Cell(int x, int y) : x{x}, y{y} {}
@@ -19,7 +19,7 @@ class Cell {
     virtual bool checkOccupancy() const {
 		return isOccupied;
 	}
-    void setObserver(TextDisplay * td) { this->td = td;}
+    void setObserver(std::shared_ptr<TextDisplay> td) { this->td = td;}
 	void notifyObserver() { td->notify(x,y,getChar()); }
 	
 	std::shared_ptr<Stuff> getOccupant() { return occupant; }
