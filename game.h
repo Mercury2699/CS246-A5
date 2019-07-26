@@ -9,9 +9,9 @@
 
 class Game{
     std::shared_ptr<Player> pc;
-    std::shared_ptr<TextDisplay> td;
-    std::shared_ptr<Factory> f;
     std::vector<std::shared_ptr<Floor>> allFloors;
+    std::shared_ptr<TextDisplay> td;
+    Factory f;
     int levelCount = 0;
     bool specifiedLayout = false;
     void nextFloor();

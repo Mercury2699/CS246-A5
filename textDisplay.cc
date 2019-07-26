@@ -20,12 +20,6 @@ TextDisplay::TextDisplay(string map){
         }
     }
     m.close();
-    for (auto i : theDisplay){
-        for (auto j : i){
-            std::cout << j;
-        }
-        std::cout << endl;
-    }
 }
 
 void TextDisplay::notify(int x, int y, char type){

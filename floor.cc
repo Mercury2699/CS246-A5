@@ -173,27 +173,31 @@ shared_ptr<Cell> Floor::target(shared_ptr<Cell> cur, string direction) {
         targetX = curX - 1;
         targetY = curY + 1;
     }
-    return theGrid[targetX][targetY];
+    return theGrid[targetY][targetX];
 }
 
 shared_ptr<Cell> Floor::getCellPC() {
-    for (auto cur : floorTiles) {
-        if (cur->getOccupant()->getType() == Type::Plyr) {
-            return cur;
+    for (auto row : theGrid) {
+        for (auto cur : row) { 
+            if (cur->getOccupant()) {
+                if (cur->getOccupant()->getType() == Type::Plyr) {
+                    return cur;
+                }
+            }
         }
     }
     return nullptr;
 }
 
 void Floor::playerMove(std::string direction) {
-    int curX = getCellPC()->getX();
-    int curY = getCellPC()->getY();
+    // int curX = getCellPC()->getX();
+    // int curY = getCellPC()->getY();
     std::shared_ptr<Cell> targetCell = target(getCellPC(), direction);
-    int targetX = targetCell->getX();
-    int targetY = targetCell->getY();
+    // int targetX = targetCell->getX();
+    // int targetY = targetCell->getY();
     if (targetCell->checkOccupancy()) return;
-    std::shared_ptr<Stuff> s = theGrid[curX][curY]->detachStuff();
-    theGrid[targetX][targetY]->attachStuff(pc);
+    std::shared_ptr<Stuff> s = getCellPC()->detachStuff();
+    targetCell->attachStuff(pc);
     checkEvents();
 }
 
@@ -307,9 +311,9 @@ bool Floor::setCell(shared_ptr<Cell> c, shared_ptr<Stuff> s) {
     int x = c->getX();
     int y = c->getY();
     if (c->checkOccupancy()) return false;
-    theGrid[x][y]->attachStuff(s);
+    c->attachStuff(s);
     if (s->getType() == Type::Trsr || s->getType() == Type::Str || s->getChar() == 'c') {
-        theGrid[x][y]->setOccupancy(false); // lets the user step on
+        c->setOccupancy(false); // lets the user step on
     }
     return true;
 }
