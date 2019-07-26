@@ -11,11 +11,11 @@ const std::string AtkNE = "a<ne>", AtkNW = "a<nw>", AtkSE = "a<se>", AtkSW = "a<
 const std::string restart = "r", quit = "q";
 
 Game::Game(std::string race, std::string file){
-    td = std::make_unique<TextDisplay>();
+    td = std::make_shared<TextDisplay>();
     pc = f->spawnPlayer(race);
     td->setPC(pc);
     for (int count = 0; count < 5; count++){
-        allFloors.emplace_back(std::make_unique<Floor>(file));
+        allFloors.emplace_back(std::make_shared<Floor>(file));
         allFloors[count]->setPC(pc);
         allFloors[count]->setTD(td);
     }
@@ -25,14 +25,14 @@ Game::Game(std::string race, std::string file){
 
 Game::Game(std::string race, bool isSpecified, std::string file) 
     : specifiedLayout{isSpecified} {
-    td = std::make_unique<TextDisplay>();
+    td = std::make_shared<TextDisplay>();
     std::cout << &td;
     std::cout << td;
     pc = f->spawnPlayer(race);
     td->setPC(pc);
     std::ifstream fs{file};
     for (int count = 0; count < 5; count++){
-        allFloors.emplace_back(std::make_unique<Floor>(fs));
+        allFloors.emplace_back(std::make_shared<Floor>(fs));
         allFloors[count]->setPC(pc);
         allFloors[count]->setTD(td);
     }
