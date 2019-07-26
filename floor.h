@@ -18,10 +18,11 @@ class Floor {
 	std::vector<std::shared_ptr<Cell>> floorTiles;
 	std::vector<std::vector<std::shared_ptr<Cell>>> chambers;
 	std::shared_ptr<Player> pc = nullptr;
+	TextDisplay * td;
 	
 	public:
-	Floor(std::shared_ptr<Player> pc, std::string file = "map.txt");
-	Floor(std::shared_ptr<Player> pc, std::ifstream &fs);
+	Floor(TextDisplay *, std::shared_ptr<Player> pc, std::string file = "map.txt");
+	Floor(TextDisplay *, std::shared_ptr<Player> pc, std::ifstream &fs);
 	void playerMove(std::string direction);
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);

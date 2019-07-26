@@ -9,7 +9,7 @@
 
 class Game{
     std::shared_ptr<Player> pc;
-    std::shared_ptr<TextDisplay> td;
+    std::unique_ptr<TextDisplay> td = std::make_unique<TextDisplay>();
     std::shared_ptr<Factory> f;
     std::vector<std::shared_ptr<Floor>> allFloors;
     int levelCount = 0;
@@ -17,9 +17,9 @@ class Game{
     void nextFloor();
 
     public:
-    Game(std::string file = "map.txt");
-    Game(bool isSpecified, std::string file = "layout.txt");
-    void startGame(std::string race);
+    Game(std::string race, std::string file = "map.txt");
+    Game(std::string race, bool isSpecified, std::string file = "layout.txt");
+    // void startGame();
     void takeCommand(std::string);
     void resetGame();
     

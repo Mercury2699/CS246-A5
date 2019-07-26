@@ -10,25 +10,26 @@ const std::string AtkN = "a<no>", AtkS = "a<so>", AtkE = "a<ea>", AtkW = "a<we>"
 const std::string AtkNE = "a<ne>", AtkNW = "a<nw>", AtkSE = "a<se>", AtkSW = "a<sw>";
 const std::string restart = "r", quit = "q";
 
-Game::Game(std::string file){
+Game::Game(std::string race, std::string file){
+    pc = f->spawnPlayer(race);
     for (int count = 0; count < 5; count++){
-        allFloors.emplace_back(std::make_shared<Floor>(pc, file));
+        allFloors.emplace_back(std::make_shared<Floor>(td.get(), pc, file));
         f->genFloor(allFloors);
     }
 }
 
-Game::Game(bool isSpecified, std::string file) 
+Game::Game(std::string race, bool isSpecified, std::string file) 
     : specifiedLayout{isSpecified} {
+    pc = f->spawnPlayer(race);
     std::ifstream fs{file};
     for (int count = 0; count < 5; count++){
-        allFloors.emplace_back(std::make_shared<Floor>(pc, fs));
+        allFloors.emplace_back(std::make_shared<Floor>(td.get(), pc, fs));
     }
     f->genFloor(allFloors);
 }
 
-void Game::startGame(std::string race){
-    pc = f->spawnPlayer(race);
-}
+// void Game::startGame(std::string race){
+// }
 
 void Game::takeCommand(std::string action){
     if (action == N) allFloors[levelCount]->playerMove("N");
@@ -63,7 +64,7 @@ void Game::resetGame(){
     std::string race;
     std::cin >> race;
     levelCount = 0;
-    startGame(race);
+    // startGame(race);
     f->genFloor(allFloors);
 }
 

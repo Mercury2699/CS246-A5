@@ -13,6 +13,8 @@ TextDisplay::TextDisplay(string map){
         if(c == '\n'){
             theDisplay.emplace_back(row);
             row.clear();
+        } else if (c == 'A' ||c == 'B' ||c == 'C' ||c == 'D' ||c == 'E' ) {
+            row.emplace_back('.');
         } else {
             row.emplace_back(c);
         }

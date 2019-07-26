@@ -27,14 +27,17 @@
 
 using namespace std;
 
-Floor::Floor(shared_ptr<Player> pc, string file)
-: pc{pc} {
+Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, string file)
+: pc{pc}, td{td} {
     ifstream m(file);
     char c;
     int x = 0, y = 0;
     vector<shared_ptr<Cell>> row;
     while (m.get(c)){
         if(c == '\n'){
+            for(auto i : row){
+                i->setObserver(td);
+            }
             theGrid.emplace_back(row);
             row.clear();
             x = 0;
@@ -67,14 +70,15 @@ Floor::Floor(shared_ptr<Player> pc, string file)
     m.close();
 }
 
-Floor::Floor(shared_ptr<Player> pc, ifstream &s){
-    this->pc = pc;
+Floor::Floor(TextDisplay * td, shared_ptr<Player> pc, ifstream &s) 
+    : pc{pc}, td{td} {
     vector<shared_ptr<Cell>> row;
     for (int y = 0; y < 25; ++y) {
         for (int x = 0; x < 79; ++x) {
             char c;
             s.get(c);
             if(c == '\n'){
+                for(auto i : row) i->setObserver(td);
                 theGrid.emplace_back(row);
                 row.clear();
             } else if (c == ' ') {
