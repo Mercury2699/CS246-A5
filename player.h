@@ -41,6 +41,7 @@ class Player : public Character{
 	void setTreasure(double);
 	double getTreasure() const;
 	bool hasKilledMerch() const;
+	void setKilledMerch(bool);
 	char getChar() const override;
 	bool getSuit() const;
 	std::string getRace() const;

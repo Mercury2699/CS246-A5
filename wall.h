@@ -13,7 +13,7 @@
     
     public:
     Wall(int x, int y, bool isHor) : Cell{x, y}, isHorizontal{isHor} {
-        setOccupancy(true);
+        isOccupied = true;
     }
     bool checkOccupancy() const override { return true; } // inherited from Cell
     char getChar() const override {
