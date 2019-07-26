@@ -66,7 +66,6 @@ Floor::Floor(string file) :
         }
         x++;
     }
-    std::cout << x << y << std::endl;
     m.close();
 }
 

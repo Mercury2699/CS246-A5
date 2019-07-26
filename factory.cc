@@ -127,6 +127,7 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
                 randEnemy = rand() % tiles.size();
             }
         }
+        f[i]->notifyObserver();
     }
 
 
