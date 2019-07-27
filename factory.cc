@@ -160,8 +160,10 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
     for (int l = 0; l < 20 - dragonNum - hasBarrier; l++) {
         int randEnemy = rand() % tiles.size();
         std::shared_ptr<Enemy> newEnemy = genEnemy();
-        if (l == randNum) {
+        if (l == randNum && newEnemy->getChar() != 'M') {
             newEnemy->assignCompass();
+        } else if (l == randNum) {
+            randNum++;
         }
         while(!f[i]->setCell(tiles[randEnemy], newEnemy)) {
             randEnemy = rand() % tiles.size();
