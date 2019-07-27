@@ -232,7 +232,8 @@ void Floor::checkEvents() {
                 shared_ptr<Stuff> e = cur->getOccupant();
                 if(!e->isDead() && isClose(cur, getCellPC())) {
                     pc->beAttacked(e);
-                    td->addAction(e->getChar() + " deals " + std::to_string(e->getAtk()) + " damages to PC. ");
+                    s << e->getChar() << " deals " << e->getAtk() << " damages to PC. ";
+                    td->addAction(s.str());
                     // if (pc->isDead()) return;
                 } else if(e->isDead()) { // Some enemy is dead
                     if (e->getChar() == 'M') { // Merchant Died
