@@ -231,7 +231,6 @@ void Floor::checkEvents() {
             if(cur->getOccupant()->getType() == Type::Enmy) {
                 shared_ptr<Stuff> e = cur->getOccupant();
                 if(!e->isDead() && isClose(cur, getCellPC())) {
-                    if (!pc->hasKilledMerch()) continue;
                     pc->beAttacked(e);
                     s << e->getChar() << " deals " << e->getAtk() << " damages to PC. ";
                     td->addAction(s.str());
@@ -277,7 +276,6 @@ void Floor::playerAtk(std::string direction) {
             return td->addAction("PC cannot attack non-Enemy stuff!");
         }
         targetCell->getOccupant()->beAttacked(pc);
-        if (targetCell->getOccupant()->getChar() == 'M') pc->setKilledMerch(true);
         td->addAction("PC deals " + std::to_string(pc->getAtk()) + " damages to " + targetCell->getOccupant()->getChar() + ". ");
         checkEvents();
     } else {
