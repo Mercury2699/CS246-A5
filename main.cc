@@ -19,7 +19,6 @@ int main(int argc, char *argv[]) {
 				} else if (std::string(argv[1]) == "-map" ){
 					g = std::make_unique<Game>(command, argv[2]);
 				}
-				g = std::make_unique<Game>(command, true, argv[1]);
 			} else {
 				g = std::make_unique<Game>(command);
 			}
