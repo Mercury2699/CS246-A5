@@ -127,7 +127,7 @@ Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
                     row[x]->attachStuff(make_shared<Dragon>());
                 } else if (c == '@'){
                     row[x]->attachStuff(pc);
-                } else if (c == '\\'){
+                } else if (c == '/'){
                     row[x]->attachStuff(make_shared<Stair>());
                 }
             }
