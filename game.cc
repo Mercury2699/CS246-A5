@@ -4,10 +4,10 @@
 
 // Valid commands during game
 const std::string N = "no", S = "so", E = "ea", W = "we", NE = "ne", NW = "nw", SE = "se", SW = "sw";
-const std::string UseN = "u<no>", UseS = "u<so>", UseE = "u<ea>", UseW = "u<we>";
-const std::string UseNE = "u<ne>", UseNW = "u<nw>", UseSE = "u<se>", UseSW = "u<sw>";
-const std::string AtkN = "a<no>", AtkS = "a<so>", AtkE = "a<ea>", AtkW = "a<we>";
-const std::string AtkNE = "a<ne>", AtkNW = "a<nw>", AtkSE = "a<se>", AtkSW = "a<sw>";
+const std::string UseN = "uno", UseS = "uso", UseE = "uea", UseW = "uwe";
+const std::string UseNE = "une", UseNW = "unw", UseSE = "use", UseSW = "usw";
+const std::string AtkN = "ano", AtkS = "aso", AtkE = "aea", AtkW = "awe";
+const std::string AtkNE = "ane", AtkNW = "anw", AtkSE = "ase", AtkSW = "asw";
 const std::string restart = "r", quit = "q";
 
 Game::Game(std::string race, std::string file){
