@@ -13,6 +13,7 @@
 #include "cell.h"
 
 struct Factory {
+    Factory();
     std::shared_ptr<Player> spawnPlayer(std::string);
     std::shared_ptr<Enemy> genEnemy();
     std::shared_ptr<Potion> genPotion();
