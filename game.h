@@ -13,7 +13,7 @@ class Game{
     std::shared_ptr<TextDisplay> td;
     Factory f;
     int levelCount = 0;
-    void nextFloor();
+    int nextFloor();
 
     public:
     Game(std::string race, std::string file = "map.txt");
@@ -21,7 +21,8 @@ class Game{
     // void startGame();
     int takeCommand(std::string);
     void resetGame();
-    
+    void gameOver();
+    void gameWon();
 };
 
 

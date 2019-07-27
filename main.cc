@@ -44,7 +44,6 @@ int main(int argc, char *argv[]) {
 		} else if (command == "q") break;
 		int state = g->takeCommand(command);
 		if (state == 1) {
-			std::cout << "PC is dead!" << std::endl;
 			break;
 		}
 	}
