@@ -127,13 +127,6 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
         genDragon(tempTiles[randBarrier], f[randFloor]);
         hasBarrier++;
     }
-    
-    // random generate compass
-    int randCompass = rand() % tiles.size();
-    std::shared_ptr<Compass> newCompass = make_shared<Compass>();
-    while(!f[i]->setCell(tiles[randCompass], newCompass)) {
-        randCompass = rand() % tiles.size();
-    }
 
     // random generate potion
     for (int j = 0; j < 10; j++) {
@@ -159,12 +152,23 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
     }
 
     // random generate enemy
+    int randNum = rand() % (20 - dragonNum - hasBarrier);
     for (int l = 0; l < 20 - dragonNum - hasBarrier; l++) {
         int randEnemy = rand() % tiles.size();
         std::shared_ptr<Enemy> newEnemy = genEnemy();
+        if (l == randNum) {
+            newEnemy->assignCompass();
+        }
         while(!f[i]->setCell(tiles[randEnemy], newEnemy)) {
             randEnemy = rand() % tiles.size();
         }
+    }
+       
+    // random generate compass
+    int randCompass = rand() % tiles.size();
+    std::shared_ptr<Compass> newCompass = make_shared<Compass>();
+    while(!f[i]->setCell(tiles[randCompass], newCompass)) {
+        randCompass = rand() % tiles.size();
     }
    }
 }
