@@ -27,7 +27,7 @@ Game::Game(std::string race, std::string file){
 }
 
 Game::Game(std::string race, bool isSpecified, std::string file) 
-    : specifiedLayout{isSpecified} {
+    /*: specifiedLayout{isSpecified} */ {
     td = std::make_shared<TextDisplay>();
     pc = f.spawnPlayer(race);
     td->setPC(pc);

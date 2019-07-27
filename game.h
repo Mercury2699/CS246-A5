@@ -13,7 +13,6 @@ class Game{
     std::shared_ptr<TextDisplay> td;
     Factory f;
     int levelCount = 0;
-    bool specifiedLayout = false;
     void nextFloor();
 
     public:
