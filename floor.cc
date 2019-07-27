@@ -256,8 +256,8 @@ void Floor::checkEvents() {
                         td->addAction(s.str());
                     }
                     if (e->checkCompass()) {
-                        shared_ptr<Compass> c = make_shared<Compass>();
-                        cur->attachStuff(c);
+                        cur->detachStuff();
+                        cur->attachStuff(make_shared<Compass>());
                     }
                     if (cur->checkOccupancy()) {
                         if (cur->getOccupant()->getType() == Type::Enmy) {
