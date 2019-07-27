@@ -257,7 +257,7 @@ void Floor::checkEvents() {
                         }
                         td->addAction("Wow! PC has slained a Dragon! ");
                     } else {
-                        pc->setTreasure(pc->getTreasure() + 1);
+                        pc->addTreasure(1);
                         s << "PC has slained a " << e->getChar() << ". ";
                         td->addAction(s.str());
                     }

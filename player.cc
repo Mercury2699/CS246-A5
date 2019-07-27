@@ -8,8 +8,8 @@ Player::Player(int HP, int Atk, int Def):
 		type = Type::Plyr;
 	}
 
-void Player::setTreasure(double t) {
-	treasure = t;
+void Player::addTreasure(double t) {
+	treasure += t;
 }
 
 double Player::getTreasure() const {return treasure;}

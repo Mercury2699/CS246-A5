@@ -34,9 +34,6 @@ bool Treasure::isDragonHoard() {
 }
 
 void Treasure::effect(std::shared_ptr<Player> pc) {
-	pc->setTreasure(pc->getTreasure() + val);
+	pc->addTreasure(val);
 }
-
-
-
 
