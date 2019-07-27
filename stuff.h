@@ -42,7 +42,12 @@ class Stair final : public Stuff {
 
     public:
     Stair() {this->type = Type::Str;}
-    char getChar() const override {return '/';} // inherited from Stuff
+    char getChar() const override {
+        // if (canDisplay) 
+            return '/';
+        // else
+        //     return '.';
+    } // inherited from Stuff
     Type getType() {return type;} // inherited from Stuff
     void beAttacked(std::shared_ptr<Stuff>) override {}
     bool checkDisplay() const {return canDisplay;}

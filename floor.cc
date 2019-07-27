@@ -216,6 +216,7 @@ int Floor::playerMove(std::string direction) {
     std::shared_ptr<Stuff> s = getCellPC()->detachStuff();
     targetCell->attachStuff(pc);
     checkEvents();
+    return 0;
 }
 
 bool isClose(std::shared_ptr<Cell> c1, std::shared_ptr<Cell> c2) {

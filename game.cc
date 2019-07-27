@@ -14,7 +14,7 @@ Game::Game(std::string race, std::string file){
     td = std::make_shared<TextDisplay>();
     pc = f.spawnPlayer(race);
     td->setPC(pc);
-    td->addAction("Game Started!");
+    td->addAction("Game Started as " + race + " ! ");
     for (int count = 0; count < 5; count++){
         allFloors.emplace_back(std::make_shared<Floor>(file));
         allFloors[count]->setPC(pc);
@@ -38,8 +38,7 @@ Game::Game(std::string race, bool isSpecified, std::string file)
         allFloors[count]->setTD(td);
     }
     allFloors[levelCount]->notifyObserver();
-    // f.genFloor(allFloors);
-    td->addAction("Game Started!");
+    td->addAction("Game Started as " + race + " ! ");
     std::cout << *td;
     td->clearAction();
 }
@@ -85,12 +84,15 @@ void Game::resetGame(){
     std::string race;
     std::cin >> race;
     levelCount = 0;
-    // startGame(race);
-    // f->genFloor(allFloors);
 }
 
 void Game::nextFloor() {
     levelCount++;
+    if (levelCount >= 5){
+        return td->addAction("PC has won this Game!");
+    }
     allFloors[levelCount]->notifyObserver();
+    td->addAction("PC has entered Floor " + std::to_string(levelCount + 1) + ". ");
+    std::cout << *td;
 }
 
