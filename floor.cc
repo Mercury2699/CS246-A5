@@ -200,15 +200,18 @@ shared_ptr<Cell> Floor::getCellPC() {
     return nullptr;
 }
 
-void Floor::playerMove(std::string direction) {
+int Floor::playerMove(std::string direction) {
     std::shared_ptr<Cell> targetCell = target(getCellPC(), direction);
     if (targetCell->checkOccupancy()) {
         if (targetCell->getOccupant()){
             if (targetCell->getOccupant()->getType() == Type::Trsr){
-                return playerUse(direction);
+                playerUse(direction);
+                return 0;
+            } else if (targetCell->getOccupant()->getType() == Type::Str) {
+                return 1;
             }
         }
-        return;
+        return 0;
     }
     std::shared_ptr<Stuff> s = getCellPC()->detachStuff();
     targetCell->attachStuff(pc);
@@ -220,9 +223,7 @@ bool isClose(std::shared_ptr<Cell> c1, std::shared_ptr<Cell> c2) {
     else return false;
 }
 
-int Floor::checkEvents() {
-    if (pc->isDead()) return 0;
-    if (getCellPC()->getOccupant()->getType() == Type::Str) return 1;
+void Floor::checkEvents() {
     for (auto cur : floorTiles) { // to refactor
         if(cur->getOccupant()){
             std::stringstream s;
@@ -230,9 +231,8 @@ int Floor::checkEvents() {
                 shared_ptr<Stuff> e = cur->getOccupant();
                 if(!e->isDead() && isClose(cur, getCellPC())) {
                     pc->beAttacked(e);
-                    s << e->getChar() << " deals " << e->getAtk() << " damages to PC. " ;
-                    td->addAction(s.str());
-                    if (pc->isDead()) return 0;
+                    td->addAction(e->getChar() + " deals " + std::to_string(e->getAtk()) + " damages to PC. ");
+                    // if (pc->isDead()) return;
                 } else if(e->isDead()) { // Some enemy is dead
                     if (e->getChar() == 'M') { // Merchant Died
                         cur->attachStuff(make_shared<Treasure>(3));
@@ -260,7 +260,6 @@ int Floor::checkEvents() {
             } 
         }
     }
-    return 2;
 }
 
 void Floor::playerAtk(std::string direction) {

@@ -42,7 +42,11 @@ int main(int argc, char *argv[]) {
 			}
 			continue;
 		} else if (command == "q") break;
-		g->takeCommand(command);
+		int state = g->takeCommand(command);
+		if (state == 1) {
+			std::cout << "PC is dead!" << std::endl;
+			break;
+		}
 	}
 	return 0;
 }

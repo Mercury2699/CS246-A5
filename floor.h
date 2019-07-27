@@ -23,11 +23,11 @@ class Floor {
 	public:
 	Floor(std::string file = "map.txt");
 	Floor(std::ifstream &fs);
-	void playerMove(std::string direction);
+	int playerMove(std::string direction);
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);
 	void moveEnemies();
-	int checkEvents();
+	void checkEvents();
 	void setTD(std::shared_ptr<TextDisplay>);
 	void setPC(std::shared_ptr<Player>);
 	std::shared_ptr<Cell> getCellPC();

@@ -47,15 +47,17 @@ Game::Game(std::string race, bool isSpecified, std::string file)
 // void Game::startGame(std::string race){
 // }
 
-void Game::takeCommand(std::string action){
-    if (action == N) allFloors[levelCount]->playerMove("N");
-    else if (action == S) allFloors[levelCount]->playerMove("S");
-    else if (action == E) allFloors[levelCount]->playerMove("E");
-    else if (action == W) allFloors[levelCount]->playerMove("W");
-    else if (action == NE) allFloors[levelCount]->playerMove("NE");
-    else if (action == NW) allFloors[levelCount]->playerMove("NW");
-    else if (action == SE) allFloors[levelCount]->playerMove("SE");
-    else if (action == SW) allFloors[levelCount]->playerMove("SW");
+int Game::takeCommand(std::string action){
+    // if (pc->isDead()) return 1;
+    int move = 0;
+    if (action == N) move = allFloors[levelCount]->playerMove("N");
+    else if (action == S) move = allFloors[levelCount]->playerMove("S");
+    else if (action == E) move = allFloors[levelCount]->playerMove("E");
+    else if (action == W) move = allFloors[levelCount]->playerMove("W");
+    else if (action == NE) move = allFloors[levelCount]->playerMove("NE");
+    else if (action == NW) move = allFloors[levelCount]->playerMove("NW");
+    else if (action == SE) move = allFloors[levelCount]->playerMove("SE");
+    else if (action == SW) move = allFloors[levelCount]->playerMove("SW");
     else if (action == UseN) allFloors[levelCount]->playerUse("N");
     else if (action == UseS) allFloors[levelCount]->playerUse("S");
     else if (action == UseE) allFloors[levelCount]->playerUse("E");
@@ -75,6 +77,8 @@ void Game::takeCommand(std::string action){
     else td->addAction("Invalid Operation!");
     std::cout << *td;
     td->clearAction();
+    if (move == 1) nextFloor();
+    return 0;
 }
 
 void Game::resetGame(){
@@ -83,5 +87,10 @@ void Game::resetGame(){
     levelCount = 0;
     // startGame(race);
     // f->genFloor(allFloors);
+}
+
+void Game::nextFloor() {
+    levelCount++;
+    allFloors[levelCount]->notifyObserver();
 }
 

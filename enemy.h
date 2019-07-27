@@ -38,7 +38,7 @@ class Enemy : public Character {
 	}
 	void beAttacked(std::shared_ptr<Stuff> c) override {
 		double damage = ceil((100 / (100 + static_cast<double>(this->getDef()))) * c->getAtk());
-		setHP(getHP()-damage);
+		setHP(getHP()-damage <= 0 ? 0 : getHP()-damage);
 	}
 };
 
