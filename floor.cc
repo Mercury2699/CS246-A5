@@ -225,17 +225,22 @@ bool isClose(std::shared_ptr<Cell> c1, std::shared_ptr<Cell> c2) {
 }
 
 void Floor::checkEvents() {
-    for (auto cur : floorTiles) { // to refactor
+    vector<shared_ptr<Cell>> neighbours;
+    string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+    for (int i = 0; i < 8; ++i) {
+        neighbours.emplace_back(target(getCellPC(), directions[i]));
+    }
+    for (auto cur : neighbours) { // to refactor
         if(cur->getOccupant()){
             std::stringstream s;
             if(cur->getOccupant()->getType() == Type::Enmy) {
                 shared_ptr<Stuff> e = cur->getOccupant();
-                if(!e->isDead() && isClose(cur, getCellPC())) {
+                if(!e->isDead()) {
                     pc->beAttacked(e);
                     s << e->getChar() << " deals " << e->getAtk() << " damages to PC. ";
                     td->addAction(s.str());
                     // if (pc->isDead()) return;
-                } else if(e->isDead()) { // Some enemy is dead
+                } else { // Some enemy died.
                     if (e->getChar() == 'M') { // Merchant Died
                         cur->detachStuff();
                         cur->attachStuff(make_shared<Treasure>(4));
@@ -244,10 +249,12 @@ void Floor::checkEvents() {
                     } else if (e->getChar() == 'D') { // Dragon Died
                         string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
                         for (int i = 0; i < 8; ++i) {
-                            if (target(cur, directions[i])->getOccupant()->isDragonHoard()) {
-                                target(cur, directions[i])->getOccupant()->setCollect();
+                            if (target(cur, directions[i])->checkOccupancy()) {
+                                if (target(cur, directions[i])->getOccupant()->isDragonHoard()) {
+                                    target(cur, directions[i])->getOccupant()->setCollect();
+                                }
                             }
-                        } 
+                        }
                         td->addAction("Wow! PC has slained a Dragon! ");
                     } else {
                         pc->setTreasure(pc->getTreasure() + 1);
@@ -320,14 +327,20 @@ void Floor::playerUse(std::string direction) {
                 targetCell->detachStuff()->effect(pc);
             }
         } else if (targetCell->getOccupant()->getChar() == 'C') {
+            targetCell->detachStuff();
             for (auto current : floorTiles) { // find the Stair
                 if(current->getOccupant()){
                     if (current->getOccupant()->getType() == Type::Str) {
                         current->getOccupant()->enableDisplay();
+                        td->addAction("PC found the compass. The stair is now visible.");
+                        current->notifyObserver();
                         break;
                     }
                 }
             }
+        } else if (targetCell->getOccupant()->getChar() == 'B') {
+            pc->setSuit(true);
+            targetCell->detachStuff();
         }
         playerMove(getDirection(getCellPC(), targetCell));
     }
@@ -337,7 +350,7 @@ void Floor::moveEnemies() {
     for (auto row : theGrid) {
         for (auto col : row) {
             if (col->getOccupant()) {
-                if (col->getOccupant()->getType() == Type::Enmy) {
+                if (col->getOccupant()->getType() == Type::Enmy && col->getOccupant()->getChar() != 'D') {
                     col->getOccupant()->toggleMoved();
                 }
             }

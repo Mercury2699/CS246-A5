@@ -48,6 +48,7 @@ Game::Game(std::string race, bool isSpecified, std::string file)
 
 int Game::takeCommand(std::string action){
     // if (pc->isDead()) return 1;
+    bool valid = true;
     int move = 0;
     if (action == N) move = allFloors[levelCount]->playerMove("N");
     else if (action == S) move = allFloors[levelCount]->playerMove("S");
@@ -73,9 +74,12 @@ int Game::takeCommand(std::string action){
     else if (action == AtkNW) allFloors[levelCount]->playerAtk("NW");
     else if (action == AtkSE) allFloors[levelCount]->playerAtk("SE");
     else if (action == AtkSW) allFloors[levelCount]->playerAtk("SW");
-    else td->addAction("Invalid Operation!");
+    else {
+        td->addAction("Invalid Operation!");
+        valid = false;
+    }
     // std::cout << *td;
-    allFloors[levelCount]->moveEnemies();
+    if (valid) allFloors[levelCount]->moveEnemies();
     std::cout << *td;
     td->clearAction();
     if (move == 1) nextFloor();
