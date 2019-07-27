@@ -375,15 +375,6 @@ void Floor::moveEnemies() {
     for (auto row : theGrid) {
         for (auto col : row) {
             if (col->getOccupant()) {
-                if (col->getOccupant()->getType() == Type::Enmy && col->getOccupant()->getChar() != 'D') {
-                    col->getOccupant()->toggleMoved();
-                }
-            }
-        }
-    }
-    for (auto row : theGrid) {
-        for (auto col : row) {
-            if (col->getOccupant()) {
                 if (col->getOccupant()->getType() == Type::Enmy) {
                     if (col->getOccupant()->getMoved()) continue;
                     vector<shared_ptr<Cell>> validMove;
@@ -395,6 +386,15 @@ void Floor::moveEnemies() {
                     shared_ptr<Cell> des = validMove[index];
                     des->attachStuff(col->detachStuff());
                     des->getOccupant()->toggleMoved();
+                }
+            }
+        }
+    }
+    for (auto row : theGrid) {
+        for (auto col : row) {
+            if (col->getOccupant()) {
+                if (col->getOccupant()->getType() == Type::Enmy && col->getOccupant()->getChar() != 'D') {
+                    col->getOccupant()->toggleMoved();
                 }
             }
         }
