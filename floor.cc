@@ -330,18 +330,28 @@ void Floor::playerUse(std::string direction) {
 void Floor::moveEnemies() {
     for (auto row : theGrid) {
         for (auto col : row) {
-            if (col->getOccupant()->getType() == Type::Enmy) {
-                if (col->getOccupant()->getMoved()) continue;
-                vector<shared_ptr<Cell>> validMove;
-                string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
-                for (int i = 0; i < 8; ++i) {
-                   if (target(col, directions[i])->checkOccupancy()) validMove.emplace_back(target(col, directions[i]));
-                } 
-                srand(time(nullptr));
-                int index = rand() % validMove.size();
-                shared_ptr<Cell> des = validMove[index];
-                theGrid[des->getX()][des->getY()]->attachStuff(theGrid[col->getX()][col->getY()]->detachStuff());
-                des->getOccupant()->toggleMoved();
+            if (col->getOccupant()) {
+                if (col->getOccupant()->getType() == Type::Enmy) {
+                    col->getOccupant()->toggleMoved();
+                }
+            }
+        }
+    }
+    for (auto row : theGrid) {
+        for (auto col : row) {
+            if (col->getOccupant()) {
+                if (col->getOccupant()->getType() == Type::Enmy) {
+                    if (col->getOccupant()->getMoved()) continue;
+                    vector<shared_ptr<Cell>> validMove;
+                    string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+                    for (int i = 0; i < 8; ++i) {
+                        if (!target(col, directions[i])->checkOccupancy() && target(col, directions[i])->getChar() != '+') validMove.emplace_back(target(col, directions[i]));
+                    }
+                    int index = rand() % validMove.size();
+                    shared_ptr<Cell> des = validMove[index];
+                    des->attachStuff(col->detachStuff());
+                    des->getOccupant()->toggleMoved();
+                }
             }
         }
     }
