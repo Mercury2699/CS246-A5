@@ -19,6 +19,11 @@
 
 using std::make_shared;
 
+Factory::Factory() {
+    srand(time(nullptr));
+}
+
+
 std::shared_ptr<Player> Factory::spawnPlayer(std::string race) {
     std::shared_ptr<Player> pc;
     if (race == "h" ) {
