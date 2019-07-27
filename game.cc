@@ -14,7 +14,7 @@ Game::Game(std::string race, std::string file){
     td = std::make_shared<TextDisplay>();
     pc = f.spawnPlayer(race);
     td->setPC(pc);
-    td->addAction("Game Started as " + race + " ! ");
+    td->addAction("Game Started as " + pc->getRace() + " ! ");
     for (int count = 0; count < 5; count++){
         allFloors.emplace_back(std::make_shared<Floor>(file));
         allFloors[count]->setPC(pc);
@@ -31,6 +31,7 @@ Game::Game(std::string race, bool isSpecified, std::string file)
     td = std::make_shared<TextDisplay>();
     pc = f.spawnPlayer(race);
     td->setPC(pc);
+    td->addAction("Game Started as " + pc->getRace() + " ! ");
     std::ifstream fs{file};
     for (int count = 0; count < 5; count++){
         allFloors.emplace_back(std::make_shared<Floor>(fs));
@@ -38,7 +39,7 @@ Game::Game(std::string race, bool isSpecified, std::string file)
         allFloors[count]->setTD(td);
     }
     allFloors[levelCount]->notifyObserver();
-    td->addAction("Game Started as " + race + " ! ");
+    
     std::cout << *td;
     td->clearAction();
 }
