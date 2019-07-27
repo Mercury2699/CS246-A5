@@ -163,13 +163,6 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
             randEnemy = rand() % tiles.size();
         }
     }
-       
-    // random generate compass
-    int randCompass = rand() % tiles.size();
-    std::shared_ptr<Compass> newCompass = make_shared<Compass>();
-    while(!f[i]->setCell(tiles[randCompass], newCompass)) {
-        randCompass = rand() % tiles.size();
-    }
    }
 }
 
