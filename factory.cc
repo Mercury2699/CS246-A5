@@ -103,7 +103,6 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
     int randChamber = rand() % cham.size();
     int x = rand() % cham[randChamber].size();
     f[i]->setCell(cham[randChamber][x], f[0]->getPlayer());
-    std::cout << "Setting Player for f[]" << i << std::endl;
 
     // stair spawned
     int differChameber = rand() % cham.size();
