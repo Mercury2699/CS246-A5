@@ -69,7 +69,8 @@ Floor::Floor(string file) :
     m.close();
 }
 
-Floor::Floor(ifstream &s) {
+Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
+    this->pc = pc;
     vector<shared_ptr<Cell>> row;
     for (int y = 0; y < 25; ++y) {
         for (int x = 0; x < 80; ++x) {

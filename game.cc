@@ -34,7 +34,7 @@ Game::Game(std::string race, bool isSpecified, std::string file)
     td->addAction("Game Started as " + pc->getRace() + " ! ");
     std::ifstream fs{file};
     for (int count = 0; count < 5; count++){
-        allFloors.emplace_back(std::make_shared<Floor>(fs));
+        allFloors.emplace_back(std::make_shared<Floor>(pc,fs));
         allFloors[count]->setPC(pc);
         allFloors[count]->setTD(td);
     }
