@@ -237,7 +237,8 @@ void Floor::checkEvents() {
                     // if (pc->isDead()) return;
                 } else if(e->isDead()) { // Some enemy is dead
                     if (e->getChar() == 'M') { // Merchant Died
-                        cur->attachStuff(make_shared<Treasure>(3));
+                        cur->detachStuff();
+                        cur->attachStuff(make_shared<Treasure>(4));
                         pc->setKilledMerch(true);
                         td->addAction("PC has slained a Merchant. ");
                     } else if (e->getChar() == 'D') { // Dragon Died
@@ -257,7 +258,11 @@ void Floor::checkEvents() {
                         shared_ptr<Compass> c = make_shared<Compass>();
                         cur->attachStuff(c);
                     }
-                    cur->detachStuff();
+                    if (cur->checkOccupancy()) {
+                        if (cur->getOccupant()->getType() == Type::Enmy) {
+                            cur->detachStuff();
+                        }
+                    }
                 }
             } 
         }

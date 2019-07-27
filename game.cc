@@ -74,10 +74,10 @@ int Game::takeCommand(std::string action){
     else if (action == AtkSE) allFloors[levelCount]->playerAtk("SE");
     else if (action == AtkSW) allFloors[levelCount]->playerAtk("SW");
     else td->addAction("Invalid Operation!");
-    std::cout << *td;
-    td->clearAction();
+    // std::cout << *td;
     allFloors[levelCount]->moveEnemies();
     std::cout << *td;
+    td->clearAction();
     if (move == 1) nextFloor();
     return 0;
 }
