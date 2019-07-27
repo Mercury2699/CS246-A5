@@ -17,6 +17,10 @@ bool BarrierSuit::isDragonHoard() {
 	return true;
 }
 
+std::shared_ptr<Stuff> BarrierSuit::getDragon() {
+    return dragon;
+}
+
 void Compass::effect(std::shared_ptr<Player> pc) {
     pc->setCompass(true);
 }

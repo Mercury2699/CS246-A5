@@ -7,6 +7,7 @@
 class Treasure final : public Item {
 	int val;
 	bool canCollect = true; // for DragonHoard should be false
+	std::shared_ptr<Stuff> dragon = nullptr;
 
 	public: 
 	Treasure(int val);
@@ -16,6 +17,8 @@ class Treasure final : public Item {
 	void setCollect() override;
 	bool isDragonHoard() override;
 	void effect(std::shared_ptr<Player>) override;
+	std::shared_ptr<Stuff> getDragon() override {return dragon; }
+	void setDragon(std::shared_ptr<Stuff> d) override {dragon = d; }
 };
 
 

@@ -5,6 +5,7 @@
 
 // class Player;
 // class Character;
+class Cell;
 
 enum Type {Plyr, Enmy, Trsr, Ptn, Itm, Str};
 
@@ -34,6 +35,8 @@ class Stuff {
     // for Treasure{6} and BarrierSuit
     virtual bool isDragonHoard() {return false;}
     virtual void setCollect() {}
+    virtual std::shared_ptr<Stuff> getDragon() {return nullptr;}
+    virtual void setDragon(std::shared_ptr<Stuff> d) {}
 };
 
 class Stair final : public Stuff {

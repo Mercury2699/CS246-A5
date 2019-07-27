@@ -94,6 +94,7 @@ void Factory::genDragon(std::shared_ptr<Cell> target, std::shared_ptr<Floor> flo
     while (!floor->setCell(floor->target(target, directions[randDir]), newDragon)) {
         randDir = rand() % 8;
     }
+    target->getOccupant()->setDragon(newDragon);
 }
 
 void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {

@@ -234,9 +234,21 @@ void Floor::checkEvents() {
     for (auto cur : neighbours) { // to refactor
         if(cur->getOccupant()){
             std::stringstream s;
-            if(cur->getOccupant()->getType() == Type::Enmy) {
+            if (cur->getOccupant()->isDragonHoard()) {
+                std::shared_ptr<Stuff> e = cur->getOccupant()->getDragon();
+                int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
+                if (!miss) {
+                    pc->beAttacked(e);
+                    s << e->getChar() << " deals " << e->getAtk() << " damages to PC. ";
+                    td->addAction(s.str());
+                } else {
+                    s << e->getChar() << " missed. ";
+                    td->addAction(s.str());
+                }
+            } else if(cur->getOccupant()->getType() == Type::Enmy) {
                 shared_ptr<Stuff> e = cur->getOccupant();
                 if(!e->isDead()) {
+                    if (e->getChar() == 'D') continue;
                     int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
                         if (!miss) {
                             pc->beAttacked(e);

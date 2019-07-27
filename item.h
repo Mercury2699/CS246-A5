@@ -21,6 +21,7 @@ class BarrierSuit final : public Item {
     // protected:
     // Type type; inherited from Stuff
     bool canCollect = false;
+    std::shared_ptr<Stuff> dragon;
     public:
     // Type getType(); inherited from Stuff
     std::string getName() const override; // inherited from Stuff
@@ -28,6 +29,8 @@ class BarrierSuit final : public Item {
     void effect(std::shared_ptr<Player>) override; // inherited from Item
     bool isDragonHoard() override;
     virtual void setCollect() override { canCollect = true ;}
+    std::shared_ptr<Stuff> getDragon() override;
+    void setDragon(std::shared_ptr<Stuff> d) override {dragon = d; }
 };
 
 struct Compass final : public Item {
