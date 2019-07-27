@@ -31,7 +31,7 @@ class Stuff {
     // for Str
     virtual void enableDisplay() {}
     virtual ~Stuff() = default;
-    // for Treasure{6}
+    // for Treasure{6} and BarrierSuit
     virtual bool isDragonHoard() {return false;}
     virtual void setCollect() {}
 };
