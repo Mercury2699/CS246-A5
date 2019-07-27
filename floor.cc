@@ -215,6 +215,7 @@ int Floor::playerMove(std::string direction) {
     }
     std::shared_ptr<Stuff> s = getCellPC()->detachStuff();
     targetCell->attachStuff(pc);
+    td->addAction("PC moves to " + direction + ". ");
     checkEvents();
     return 0;
 }
