@@ -72,7 +72,7 @@ Floor::Floor(string file) :
 Floor::Floor(ifstream &s) {
     vector<shared_ptr<Cell>> row;
     for (int y = 0; y < 25; ++y) {
-        for (int x = 0; x < 79; ++x) {
+        for (int x = 0; x < 80; ++x) {
             char c;
             s.get(c);
             if(c == '\n'){
