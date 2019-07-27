@@ -80,7 +80,10 @@ int Game::takeCommand(std::string action){
         valid = false;
     }
     // std::cout << *td;
-    if (valid) allFloors[levelCount]->moveEnemies();
+    if (valid) {
+        allFloors[levelCount]->moveEnemies();
+        allFloors[levelCount]->checkEvents();
+    }
     std::cout << *td;
     td->clearAction();
     if (move == 1) nextFloor();
@@ -88,8 +91,8 @@ int Game::takeCommand(std::string action){
 }
 
 void Game::resetGame(){
-    std::string race;
-    std::cin >> race;
+    // std::string race;
+    // std::cin >> race;
     levelCount = 0;
 }
 

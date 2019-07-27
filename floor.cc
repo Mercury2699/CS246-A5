@@ -216,7 +216,6 @@ int Floor::playerMove(std::string direction) {
     std::shared_ptr<Stuff> s = getCellPC()->detachStuff();
     targetCell->attachStuff(pc);
     td->addAction("PC moves to " + direction + ". ");
-    checkEvents();
     return 0;
 }
 
@@ -237,9 +236,15 @@ void Floor::checkEvents() {
             if(cur->getOccupant()->getType() == Type::Enmy) {
                 shared_ptr<Stuff> e = cur->getOccupant();
                 if(!e->isDead()) {
-                    pc->beAttacked(e);
-                    s << e->getChar() << " deals " << e->getAtk() << " damages to PC. ";
-                    td->addAction(s.str());
+                    int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
+                        if (!miss) {
+                            pc->beAttacked(e);
+                            s << e->getChar() << " deals " << e->getAtk() << " damages to PC. ";
+                            td->addAction(s.str());
+                        } else {
+                            s << e->getChar() << " missed. ";
+                            td->addAction(s.str());
+                        }
                     // if (pc->isDead()) return;
                 } else { // Some enemy died.
                     if (e->getChar() == 'M') { // Merchant Died
@@ -251,8 +256,10 @@ void Floor::checkEvents() {
                         string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
                         for (int i = 0; i < 8; ++i) {
                             if (target(cur, directions[i])->checkOccupancy()) {
-                                if (target(cur, directions[i])->getOccupant()->isDragonHoard()) {
-                                    target(cur, directions[i])->getOccupant()->setCollect();
+                                if (target(cur, directions[i])->getOccupant()) {
+                                    if (target(cur, directions[i])->getOccupant()->isDragonHoard()) {
+                                        target(cur, directions[i])->getOccupant()->setCollect();
+                                    }
                                 }
                             }
                         }
@@ -285,7 +292,6 @@ void Floor::playerAtk(std::string direction) {
         }
         targetCell->getOccupant()->beAttacked(pc);
         td->addAction("PC deals " + std::to_string(pc->getAtk()) + " damages to " + targetCell->getOccupant()->getChar() + ". ");
-        checkEvents();
     } else {
         td->addAction("PC cannot attack an Empty Cell!");
     }
@@ -340,8 +346,13 @@ void Floor::playerUse(std::string direction) {
                 }
             }
         } else if (targetCell->getOccupant()->getChar() == 'B') {
-            pc->setSuit(true);
-            targetCell->detachStuff();
+            if (!targetCell->getOccupant()->isDragonHoard()) {
+                targetCell->getOccupant()->effect(pc);
+                targetCell->detachStuff();
+                td->addAction("PC collected a Barrier Suit!");
+            } else {
+                td->addAction("PC cannot collect a Barrier Suit without killing the Dragon! ");
+            }
         }
         playerMove(getDirection(getCellPC(), targetCell));
     }
