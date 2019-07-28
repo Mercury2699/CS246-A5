@@ -32,3 +32,4 @@ class Vampire final : public Enemy {
 
 
 #endif
+

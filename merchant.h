@@ -33,4 +33,6 @@ class Merchant final : public Enemy {
 	// virtual void toggleMoved(); inherited from Enemy
 };
 
+
 #endif
+

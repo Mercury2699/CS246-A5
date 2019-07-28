@@ -43,5 +43,7 @@ class Orc final : public Player {
 	// int getMaxHP() const; inherited from Player
 };
 
+
 #endif
+
 

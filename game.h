@@ -26,12 +26,10 @@ class Game{
 };
 
 
-
-
-
-
-
-
 #endif
+
+
+
+
 
 

@@ -11,3 +11,9 @@ char Dragon::getChar() const {
 void Dragon::toggleMoved() {
     alreadyMoved = true;
 }
+
+
+
+
+
+

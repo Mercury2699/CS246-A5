@@ -14,3 +14,6 @@ bool Doorway::checkOccupancy() const{
 }
 
 
+
+
+

@@ -41,4 +41,9 @@ class Floor {
 	friend std::ostream &operator<<(std::ostream &out, const Floor &f);
 };
 
+
 #endif
+
+
+
+

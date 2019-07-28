@@ -43,7 +43,7 @@ class Elves final : public Player {
 	// int getMaxHP() const; inherited from Player
 };
 
-#endif
 
+#endif
 
 

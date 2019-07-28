@@ -14,3 +14,4 @@ bool Passage::checkOccupancy() const{
     return isOccupied;
 }
 
+

@@ -8,3 +8,4 @@ void Orc::addTreasure(double val){
 	treasure += val / 2;
 }
 
+
