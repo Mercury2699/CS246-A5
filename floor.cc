@@ -249,6 +249,9 @@ void Floor::checkEvents() {
                 shared_ptr<Stuff> e = cur->getOccupant();
                 if(!e->isDead()) {
                     if (e->getChar() == 'D') continue;
+                    if (e->getChar() == 'M') {
+                        if (!pc->hasKilledMerch()) continue;
+                    }
                     int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
                         if (!miss) {
                             pc->beAttacked(e);
@@ -263,7 +266,6 @@ void Floor::checkEvents() {
                     if (e->getChar() == 'M') { // Merchant Died
                         cur->detachStuff();
                         cur->attachStuff(make_shared<Treasure>(4));
-                        pc->setKilledMerch(true);
                         td->addAction("PC has slained a Merchant. ");
                     } else if (e->getChar() == 'D') { // Dragon Died
                         string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
@@ -304,6 +306,10 @@ void Floor::playerAtk(std::string direction) {
             return td->addAction("PC cannot attack non-Enemy stuff!");
         }
         targetCell->getOccupant()->beAttacked(pc);
+        targetCell->getOccupant()->toggleMoved();
+        if (targetCell->getOccupant()->getChar() == 'M') {
+            pc->setKilledMerch(true);
+        }
         td->addAction("PC deals " + std::to_string(pc->getAtk()) + " damages to " + targetCell->getOccupant()->getChar() + ". ");
     } else {
         td->addAction("PC cannot attack an Empty Cell!");
