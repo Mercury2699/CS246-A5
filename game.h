@@ -18,7 +18,6 @@ class Game{
     public:
     Game(std::string race, std::string file = "map.txt");
     Game(std::string race, bool isSpecified, std::string file = "layout.txt");
-    // void startGame();
     int takeCommand(std::string);
     void resetGame();
     void gameOver();

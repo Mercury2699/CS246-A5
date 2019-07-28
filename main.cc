@@ -7,7 +7,8 @@ int main(int argc, char *argv[]) {
 	std::unique_ptr<Game> g;
 
 	std::string command;
-	std::cout << "Welcome to the game of Chamber Crawler 3000+! To start, please select your character:" << std::endl;
+	std::cout << "Welcome to the game of Chamber Crawler 3000+!" << std::endl;
+	std::cout << " To start, please select your character:" << std::endl;
 	std::cout << "h: Human, e: Elves, d: Dwarf, o: Orc" << std::endl;
 
 	while(std::cin >> command) {
@@ -32,6 +33,8 @@ int main(int argc, char *argv[]) {
 	
 	while(std::cin >> command){
 		if(command == "r") {
+			std::cout << "To restart, please select your character:" << std::endl;
+			std::cout << "h: Human, e: Elves, d: Dwarf, o: Orc" << std::endl;
 			while(std::cin >> command) {
 				if(command == "h" || command == "e" || command == "d" || command == "o") {
 					g = std::make_unique<Game>(command);

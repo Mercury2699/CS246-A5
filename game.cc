@@ -44,14 +44,12 @@ Game::Game(std::string race, bool isSpecified, std::string file)
     td->clearAction();
 }
 
-// void Game::startGame(std::string race){
-// }
 
 int Game::takeCommand(std::string action){
-    // if (pc->isDead()) {
-    //     gameOver();
-    //     return 1;
-    // }
+    if (pc->isDead()) {
+        gameOver();
+        return 1;
+    }
     bool valid = true;
     int move = 0;
     if (action == N) move = allFloors[levelCount]->playerMove("N");
@@ -93,8 +91,6 @@ int Game::takeCommand(std::string action){
 }
 
 void Game::resetGame(){
-    // std::string race;
-    // std::cin >> race;
     levelCount = 0;
 }
 
