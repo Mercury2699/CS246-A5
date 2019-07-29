@@ -3,14 +3,12 @@
 #include <fstream>
 
 // Valid commands during game
-const std::string N = "no", S = "so", E = "ea", W = "we", NE = "ne", NW = "nw", SE = "se", SW = "sw";
-const std::string UseN = "uno", UseS = "uso", UseE = "uea", UseW = "uwe";
-const std::string UseNE = "une", UseNW = "unw", UseSE = "use", UseSW = "usw";
-const std::string AtkN = "ano", AtkS = "aso", AtkE = "aea", AtkW = "awe";
-const std::string AtkNE = "ane", AtkNW = "anw", AtkSE = "ase", AtkSW = "asw";
-const std::string restart = "r", quit = "q";
+// const std::string N = "no", S = "so", E = "ea", W = "we", NE = "ne", NW = "nw", SE = "se", SW = "sw";
+const char N = '8', S = '2', E = '6', W = '4' , NE = '9', NW = '5', SE = '3', SW = '1';
+const char Use = 'u';
+const char Atk = 'a';
 
-Game::Game(std::string race, std::string file){
+Game::Game(char race, std::string file){
     td = std::make_shared<TextDisplay>();
     pc = f.spawnPlayer(race);
     td->setPC(pc);
@@ -26,7 +24,7 @@ Game::Game(std::string race, std::string file){
     td->clearAction();
 }
 
-Game::Game(std::string race, bool isSpecified, std::string file) 
+Game::Game(char race, bool isSpecified, std::string file) 
     /*: specifiedLayout{isSpecified} */ {
     td = std::make_shared<TextDisplay>();
     pc = f.spawnPlayer(race);
@@ -45,38 +43,43 @@ Game::Game(std::string race, bool isSpecified, std::string file)
 }
 
 
-int Game::takeCommand(std::string action){
+int Game::takeCommand(){
     if (pc->isDead()) {
         gameOver();
         return 1;
     }
     bool valid = true;
     int move = 0;
-    if (action == N) move = allFloors[levelCount]->playerMove("N");
-    else if (action == S) move = allFloors[levelCount]->playerMove("S");
-    else if (action == E) move = allFloors[levelCount]->playerMove("E");
-    else if (action == W) move = allFloors[levelCount]->playerMove("W");
+    char action = getch();
+    if (action == N || action == KEY_UP) move = allFloors[levelCount]->playerMove("N");
+    else if (action == S || action == KEY_DOWN) move = allFloors[levelCount]->playerMove("S");
+    else if (action == E || action == KEY_RIGHT) move = allFloors[levelCount]->playerMove("E");
+    else if (action == W || action == KEY_LEFT) move = allFloors[levelCount]->playerMove("W");
     else if (action == NE) move = allFloors[levelCount]->playerMove("NE");
     else if (action == NW) move = allFloors[levelCount]->playerMove("NW");
     else if (action == SE) move = allFloors[levelCount]->playerMove("SE");
     else if (action == SW) move = allFloors[levelCount]->playerMove("SW");
-    else if (action == UseN) allFloors[levelCount]->playerUse("N");
-    else if (action == UseS) allFloors[levelCount]->playerUse("S");
-    else if (action == UseE) allFloors[levelCount]->playerUse("E");
-    else if (action == UseW) allFloors[levelCount]->playerUse("W");
-    else if (action == UseNE) allFloors[levelCount]->playerUse("NE");
-    else if (action == UseNW) allFloors[levelCount]->playerUse("NW");
-    else if (action == UseSE) allFloors[levelCount]->playerUse("SE");
-    else if (action == UseSW) allFloors[levelCount]->playerUse("SW");
-    else if (action == AtkN) allFloors[levelCount]->playerAtk("N");
-    else if (action == AtkS) allFloors[levelCount]->playerAtk("S");
-    else if (action == AtkE) allFloors[levelCount]->playerAtk("E");
-    else if (action == AtkW) allFloors[levelCount]->playerAtk("W");
-    else if (action == AtkNE) allFloors[levelCount]->playerAtk("NE");
-    else if (action == AtkNW) allFloors[levelCount]->playerAtk("NW");
-    else if (action == AtkSE) allFloors[levelCount]->playerAtk("SE");
-    else if (action == AtkSW) allFloors[levelCount]->playerAtk("SW");
-    else {
+    else if (action == Use){
+        action = getch();
+        if (action == N || action == KEY_UP) allFloors[levelCount]->playerUse("N");
+        else if (action == S || action == KEY_DOWN) allFloors[levelCount]->playerUse("S");
+        else if (action == E || action == KEY_RIGHT) allFloors[levelCount]->playerUse("E");
+        else if (action == W || action == KEY_LEFT) allFloors[levelCount]->playerUse("W");
+        else if (action == NE) allFloors[levelCount]->playerUse("NE");
+        else if (action == NW) allFloors[levelCount]->playerUse("NW");
+        else if (action == SE) allFloors[levelCount]->playerUse("SE");
+        else if (action == SW) allFloors[levelCount]->playerUse("SW");
+    } else if (action == Atk) {
+        action = getch();
+        if (action == N || action == KEY_UP) allFloors[levelCount]->playerAtk("N");
+        else if (action == S || action == KEY_DOWN) allFloors[levelCount]->playerAtk("S");
+        else if (action == E || action == KEY_RIGHT) allFloors[levelCount]->playerAtk("E");
+        else if (action == W || action == KEY_LEFT) allFloors[levelCount]->playerAtk("W");
+        else if (action == NE) allFloors[levelCount]->playerAtk("NE");
+        else if (action == NW) allFloors[levelCount]->playerAtk("NW");
+        else if (action == SE) allFloors[levelCount]->playerAtk("SE");
+        else if (action == SW) allFloors[levelCount]->playerAtk("SW");
+    } else {
         td->addAction("Invalid Operation!");
         valid = false;
     }

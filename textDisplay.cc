@@ -42,17 +42,40 @@ void TextDisplay::clearAction(){
 }
 
 ostream &operator<<(ostream & out, const TextDisplay & td){
-    for (auto i : td.theDisplay){
-        for (auto j : i){
-            out << j;
+    refresh();
+    for (unsigned int i = 0; i < td.theDisplay.size(); ++i){
+        for (unsigned int j = 0; j < td.theDisplay[i].size(); ++j){
+            mvaddch(i, j, td.theDisplay[i][j]);
+            refresh();
         }
-        out << endl;
     }
-    out << "Race: " << td.pc->getRace() << " Gold: " << td.pc->getTreasure() << endl;
-    out << "HP: " << td.pc->getHP() << endl;
-    out << "Atk: " << td.pc->getAtk() << endl;
-    out << "Def: " << td.pc->getDef() << endl;
-    out << "Action: " << td.action << endl;
+    move(25, 0);
+    stringstream s;
+    s << "Race: " << td.pc->getRace() << " Gold: " << td.pc->getTreasure() << endl;
+    move(26, 0);
+    clrtoeol();
+    mvprintw(26, 0, "%s", s.str().c_str());
+    s.str("");
+    s << "HP: " << td.pc->getHP() << endl;
+    move(27, 0);
+    clrtoeol();
+    mvprintw(27, 0, "%s", s.str().c_str());
+    s.str("");
+    s << "Atk: " << td.pc->getAtk() << endl;
+    move(28, 0);
+    clrtoeol();
+    mvprintw(28, 0, "%s", s.str().c_str());
+    s.str("");
+    s << "Def: " << td.pc->getDef() << endl;
+    move(29, 0);
+    clrtoeol();
+    mvprintw(29, 0, "%s", s.str().c_str());
+    s.str("");
+    s << "Action: " << td.action << endl;
+    move(30, 0);
+    clrtoeol();
+    mvprintw(30, 0, "%s", s.str().c_str());
+    
     return out;
 }
 

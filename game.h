@@ -16,9 +16,9 @@ class Game{
     int nextFloor();
 
     public:
-    Game(std::string race, std::string file = "map.txt");
-    Game(std::string race, bool isSpecified, std::string file = "layout.txt");
-    int takeCommand(std::string);
+    Game(char race, std::string file = "map.txt");
+    Game(char race, bool isSpecified, std::string file = "layout.txt");
+    int takeCommand();
     void resetGame();
     void gameOver();
     void gameWon();

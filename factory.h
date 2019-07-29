@@ -14,7 +14,7 @@
 
 struct Factory {
     Factory();
-    std::shared_ptr<Player> spawnPlayer(std::string);
+    std::shared_ptr<Player> spawnPlayer(char);
     std::shared_ptr<Enemy> genEnemy();
     std::shared_ptr<Potion> genPotion();
     std::shared_ptr<Treasure> genTreasure();
