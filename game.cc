@@ -4,7 +4,7 @@
 #include <sstream>
 
 // Valid commands during game
-const char N = '8', S = '2', E = '6', W = '4' , NE = '9', NW = '5', SE = '3', SW = '1';
+const char N = '8', S = '2', E = '6', W = '4' , NE = '9', NW = '7', SE = '3', SW = '1';
 const char Use = 'u', Atk = 'a', restart = 'r', quit = 'q';
 
 Game::Game(char race, std::string file){
