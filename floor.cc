@@ -203,13 +203,18 @@ shared_ptr<Cell> Floor::getCellPC() {
 
 int Floor::playerMove(std::string direction) {
     std::shared_ptr<Cell> targetCell = target(getCellPC(), direction);
-    if (targetCell->checkOccupancy()) {
+    if (targetCell->getChar() == '-' ||
+        targetCell->getChar() == '|' ||
+        targetCell->getChar() == ' '){
+        td->addAction("PC hits the wall");
+        return 3; // not successful move
+    } else if (targetCell->checkOccupancy()) {
         if (targetCell->getOccupant()){
             if (targetCell->getOccupant()->getType() == Type::Trsr){
                 playerUse(direction);
-                return 0;
+                return 0; // successful move and collected treasure
             } else if (targetCell->getOccupant()->getType() == Type::Str) {
-                return 1;
+                return 1; // next floor
             }
         }
         return 0;
