@@ -16,10 +16,13 @@ int main(int argc, char *argv[]) {
 
 	std::unique_ptr<Game> g;
 	char cmd;
-	std::string command;
-	std::cout << "Welcome to the game of Chamber Crawler 3000+!" << std::endl;
-	std::cout << " To start, please select your character:" << std::endl;
-	std::cout << "h: Human, e: Elves, d: Dwarf, o: Orc" << std::endl;
+
+	mvprintw(0, 0, "%s", "Welcome to the game of Chamber Crawler 3000+!");
+	mvprintw(1, 0, "%s", "To start, please select your character:");
+	mvprintw(2, 0, "%s", "h: Human 140 HP, 20 Atk, 20 Def, +50% score");
+	mvprintw(3, 0, "%s", "e: Elves 140 HP, 30 Atk, 10 Def, negative potions have positive effect");
+	mvprintw(4, 0, "%s", "d: Dwarf 100 HP, 20 Atk, 30 Def, gold is doubled in value");
+	mvprintw(5, 0, "%s", "o: Orc   180 HP, 30 Atk, 25 Def, gold is worth half value");
 	
 	while(1) {
 		cmd = getch();
@@ -40,22 +43,25 @@ int main(int argc, char *argv[]) {
         	endwin();
 			return 0;
 		} else {
-			std::cout << "Invalid! Please reselect your character." << std::endl;
+			mvprintw(6, 0, "%s", "Invalid! Please reselect your character.");
 		}
 	}	
 	
 	while(1){
 		cmd = getch();
 		if(cmd == restart) {
-			std::cout << "To restart, please select your character:" << std::endl;
-			std::cout << "h: Human, e: Elves, d: Dwarf, o: Orc" << std::endl;
+			mvprintw(0, 0, "%s", "To restart, please select your character:");
+			mvprintw(1, 0, "%s", "h: Human 140 HP, 20 Atk, 20 Def, +50% score");
+			mvprintw(2, 0, "%s", "e: Elves 140 HP, 30 Atk, 10 Def, negative potions have positive effect");
+			mvprintw(3, 0, "%s", "d: Dwarf 100 HP, 20 Atk, 30 Def, gold is doubled in value");
+			mvprintw(4, 0, "%s", "o: Orc   180 HP, 30 Atk, 25 Def, gold is worth half value");
 			while(1) {
 				cmd = getch();
 				if(cmd == 'h' || cmd == 'e' || cmd == 'd' || cmd == 'o') {
 					g = std::make_unique<Game>(cmd);
 					break;
 				} else {
-					std::cout << "Invalid! Please reselect your character." << std::endl;
+					mvprintw(5, 0, "%s", "Invalid! Please reselect your character.");
 				}
 			}
 			continue;
@@ -69,6 +75,8 @@ int main(int argc, char *argv[]) {
 			break;
 		}
 	}
+	clear();
+	endwin();
 	return 0;
 }
 

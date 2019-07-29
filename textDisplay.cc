@@ -49,33 +49,25 @@ ostream &operator<<(ostream & out, const TextDisplay & td){
             refresh();
         }
     }
-    move(25, 0);
     stringstream s;
     s << "Race: " << td.pc->getRace() << " Gold: " << td.pc->getTreasure() << endl;
-    move(26, 0);
+    mvprintw(25, 0, "%s", s.str().c_str());
+    s.str("");
     clrtoeol();
+    s << "HP: " << td.pc->getHP() << endl;
     mvprintw(26, 0, "%s", s.str().c_str());
     s.str("");
-    s << "HP: " << td.pc->getHP() << endl;
-    move(27, 0);
+    s << "Atk: " << td.pc->getAtk() << endl;
     clrtoeol();
     mvprintw(27, 0, "%s", s.str().c_str());
     s.str("");
-    s << "Atk: " << td.pc->getAtk() << endl;
-    move(28, 0);
+    s << "Def: " << td.pc->getDef() << endl;
     clrtoeol();
     mvprintw(28, 0, "%s", s.str().c_str());
     s.str("");
-    s << "Def: " << td.pc->getDef() << endl;
-    move(29, 0);
+    s << "Action: " << td.action << endl;
     clrtoeol();
     mvprintw(29, 0, "%s", s.str().c_str());
-    s.str("");
-    s << "Action: " << td.action << endl;
-    move(30, 0);
-    clrtoeol();
-    mvprintw(30, 0, "%s", s.str().c_str());
-    
     return out;
 }
 

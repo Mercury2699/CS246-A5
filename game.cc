@@ -1,6 +1,7 @@
 #include "game.h"
 #include <string>
 #include <fstream>
+#include <sstream>
 
 // Valid commands during game
 // const std::string N = "no", S = "so", E = "ea", W = "we", NE = "ne", NW = "nw", SE = "se", SW = "sw";
@@ -117,24 +118,28 @@ int Game::nextFloor() {
 
 void Game::gameOver(){
     clear();
-    std::cout << "GAME OVER!!! " << std::endl;
-    std::cout << "YOU DIED." << std::endl;
+    mvprintw(0, 0, "%s", "GAME OVER!!! ");
+    mvprintw(1, 0, "%s", "YOU DIED.");
     double score = pc->getTreasure();
     if (pc->getRace() == "Human"){
         score *= 1.5;
     }
-    std::cout << "Your score is: " << score << std::endl;
+    std::stringstream s;
+    s << "Your score is: " << score << std::endl;
+    mvprintw(2, 0, "%s", s.str().c_str());
 }
 
 void Game::gameWon(){
     clear();
-    std::cout << "GAME WON!!! " << std::endl;
-    std::cout << "YOU HAVE ESCAPED FROM THE DUNGEON!!!" << std::endl;
+    mvprintw(0, 0, "%s", "GAME WON!!!");
+    mvprintw(1, 0, "%s", "YOU HAVE ESCAPED FROM THE DUNGEON!!!");
     double score = pc->getTreasure();
     if (pc->getRace() == "Human"){
         score *= 1.5;
     }
-    std::cout << "Your score is: " << score << std::endl;
+    std::stringstream s;
+    s << "Your score is: " << score << std::endl;
+    mvprintw(2, 0, "%s", s.str().c_str());
 }
 
 
