@@ -23,8 +23,8 @@ TextDisplay::TextDisplay(string map){
 }
 
 void TextDisplay::notify(int x, int y, char type){
-    if (y <= theDisplay.size()){
-        if (x <= theDisplay[y].size())
+    if ((unsigned int)y <= theDisplay.size()){
+        if ((unsigned int)x <= theDisplay[y].size())
             theDisplay[y][x] = type;
     }
 }
