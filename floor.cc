@@ -246,18 +246,19 @@ void Floor::checkEvents() {
                 for (auto i : neighbours) {
                     if (i->getOccupant()) {
                         if (i->getOccupant()->getChar() == 'D') {
-                            std::shared_ptr<Stuff> e = i->getOccupant();
-                            int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
-                            if (!miss) {
-                                pc->beAttacked(e);
-                                double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
-                                s << e->getChar() << " deals " << damage << " damages to PC. ";
-                                td->addAction(s.str());
-                            } else {
-                                s << e->getChar() << " missed. ";
-                                td->addAction(s.str());
+                            if (i->getOccupant() == cur->getOccupant()->getDragon()) {
+                                std::shared_ptr<Stuff> e = i->getOccupant();
+                                int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
+                                if (!miss) {
+                                    pc->beAttacked(e);
+                                    double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
+                                    s << e->getChar() << " deals " << damage << " damages to PC. ";
+                                    td->addAction(s.str());
+                                } else {
+                                    s << e->getChar() << " missed. ";
+                                    td->addAction(s.str());
+                                }
                             }
-                            break;
                         }
                     }
                 }
@@ -330,7 +331,7 @@ void Floor::playerAtk(std::string direction) {
             pc->setKilledMerch(true);
         }
         double damage = ceil((100 / (100 + static_cast<double>(e->getDef()))) * pc->getAtk());
-        s << "PC deals " << damage << " damages to " << e->getChar() << ". " << std::endl;
+        s << "PC deals " << damage << " damages to " << e->getChar() << ". ";
         td->addAction(s.str());
     } else {
         td->addAction("PC cannot attack an Empty Cell! ");

@@ -28,7 +28,7 @@ void WoundAtk::effect(std::shared_ptr<Player> pc) {
 	if(pc->getRace() == "Elves"){
 		pc->setAtk(pc->getAtk() + 5);
 	} else {
-		pc->setAtk(pc->getAtk() - 5);
+		pc->setAtk(pc->getAtk() - 5 >= 0 ? pc->getAtk() - 5 : 0);
 	}
 }
 
@@ -36,7 +36,7 @@ void WoundDef::effect(std::shared_ptr<Player> pc) {
 	if(pc->getRace() == "Elves"){
 		pc->setDef(pc->getDef() + 5);
 	} else {
-		pc->setDef(pc->getDef() - 5);
+		pc->setDef(pc->getDef() - 5 >= 0 ? pc->getDef() - 5 : 0);
 	}
 }
 
