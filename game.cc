@@ -91,7 +91,7 @@ int Game::takeCommand(){
     if (move == 3) valid = false;
     if (valid) {
         allFloors[levelCount]->moveEnemies();
-        allFloors[levelCount]->checkEvents();  
+        allFloors[levelCount]->checkEvents();
     }
 
     std::cout << *td;

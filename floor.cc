@@ -239,25 +239,33 @@ void Floor::checkEvents() {
     for (int i = 0; i < 8; ++i) {
         neighbours.emplace_back(target(getCellPC(), directions[i]));
     }
-    for (auto cur : neighbours) { // to refactor
+    for (auto cur : neighbours) {
         if(cur->getOccupant()){
             std::stringstream s;
             if (cur->getOccupant()->isDragonHoard()) {
-                std::shared_ptr<Stuff> e = cur->getOccupant()->getDragon();
-                int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
-                if (!miss) {
-                    pc->beAttacked(e);
-                    double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
-                    s << e->getChar() << " deals " << damage << " damages to PC. ";
-                    td->addAction(s.str());
-                } else {
-                    s << e->getChar() << " missed. ";
-                    td->addAction(s.str());
+                for (auto i : neighbours) {
+                    if (i->getOccupant()) {
+                        if (i->getOccupant()->getChar() == 'D') {
+                            std::shared_ptr<Stuff> e = i->getOccupant();
+                            int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
+                            if (!miss) {
+                                pc->beAttacked(e);
+                                double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
+                                s << e->getChar() << " deals " << damage << " damages to PC. ";
+                                td->addAction(s.str());
+                            } else {
+                                s << e->getChar() << " missed. ";
+                                td->addAction(s.str());
+                            }
+                            break;
+                        }
+                    }
                 }
             } else if(cur->getOccupant()->getType() == Type::Enmy) {
                 shared_ptr<Stuff> e = cur->getOccupant();
                 if(!e->isDead()) {
                     if (e->getChar() == 'D') continue;
+                    // e->toggleMoved();
                     if (e->getChar() == 'M') {
                         if (!pc->hasKilledMerch()) continue;
                     }
@@ -318,7 +326,6 @@ void Floor::playerAtk(std::string direction) {
             return td->addAction("PC cannot attack non-Enemy stuff! ");
         }
         e->beAttacked(pc);
-        e->toggleMoved();
         if (e->getChar() == 'M') {
             pc->setKilledMerch(true);
         }
@@ -396,6 +403,14 @@ void Floor::moveEnemies() {
         for (auto col : row) {
             if (col->getOccupant()) {
                 if (col->getOccupant()->getType() == Type::Enmy) {
+                    // string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+                    // for (int i = 0; i < 8; ++i) {
+                    //     if (target(col, directions[i])->getX() == getCellPC()->getX() &&
+                    //     target(col, directions[i])->getY() == getCellPC()->getY()) {
+                    //         col->getOccupant()->toggleMoved();
+                    //     }
+                    // }
+                    if (isClose(col, getCellPC())) col->getOccupant()->toggleMoved();
                     if (col->getOccupant()->getMoved()) continue;
                     vector<shared_ptr<Cell>> validMove;
                     string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
@@ -413,7 +428,8 @@ void Floor::moveEnemies() {
     for (auto row : theGrid) {
         for (auto col : row) {
             if (col->getOccupant()) {
-                if (col->getOccupant()->getType() == Type::Enmy && col->getOccupant()->getChar() != 'D') {
+                if (col->getOccupant()->getType() == Type::Enmy && col->getOccupant()->getChar() != 'D'
+                && col->getOccupant()->getMoved()) {
                     col->getOccupant()->toggleMoved();
                 }
             }
