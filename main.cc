@@ -4,7 +4,6 @@
 #include <ncurses.h>
 #include "game.h"
 
-const char restart = 'r', quit = 'q';
 
 int main(int argc, char *argv[]) {
 	initscr(); // Ncurses initializations
@@ -38,7 +37,7 @@ int main(int argc, char *argv[]) {
 				g = std::make_unique<Game>(cmd);
 			}
 			break;
-		} else if (cmd == quit){
+		} else if (cmd == 'q'){
 			clear();
         	endwin();
 			return 0;
@@ -48,8 +47,9 @@ int main(int argc, char *argv[]) {
 	}	
 	
 	while(1){
-		cmd = getch();
-		if(cmd == restart) {
+		int state = g->takeCommand();
+		if (state == 5) {
+			clear();
 			mvprintw(0, 0, "%s", "To restart, please select your character:");
 			mvprintw(1, 0, "%s", "h: Human 140 HP, 20 Atk, 20 Def, +50% score");
 			mvprintw(2, 0, "%s", "e: Elves 140 HP, 30 Atk, 10 Def, negative potions have positive effect");
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 			mvprintw(4, 0, "%s", "o: Orc   180 HP, 30 Atk, 25 Def, gold is worth half value");
 			while(1) {
 				cmd = getch();
-				if(cmd == 'h' || cmd == 'e' || cmd == 'd' || cmd == 'o') {
+				if (cmd == 'h' || cmd == 'e' || cmd == 'd' || cmd == 'o') {
 					g = std::make_unique<Game>(cmd);
 					break;
 				} else {
@@ -65,14 +65,32 @@ int main(int argc, char *argv[]) {
 				}
 			}
 			continue;
-		} else if (cmd == quit) {
+		} else if (state == 4) {
 			clear();
         	endwin();
 			break;
-		}
-		int state = g->takeCommand();
-		if (state == 1) {
-			break;
+		} else if (state == 1) {
+			mvprintw(3, 0, "%s", "Do you want to start again? [y/n]");
+			cmd = getch();
+			if (cmd == 'Y' || cmd == 'y') {
+				clear();
+				mvprintw(0, 0, "%s", "To restart, please select your character:");
+				mvprintw(1, 0, "%s", "h: Human 140 HP, 20 Atk, 20 Def, +50% score");
+				mvprintw(2, 0, "%s", "e: Elves 140 HP, 30 Atk, 10 Def, negative potions have positive effect");
+				mvprintw(3, 0, "%s", "d: Dwarf 100 HP, 20 Atk, 30 Def, gold is doubled in value");
+				mvprintw(4, 0, "%s", "o: Orc   180 HP, 30 Atk, 25 Def, gold is worth half value");
+				while(1) {
+					cmd = getch();
+					if (cmd == 'h' || cmd == 'e' || cmd == 'd' || cmd == 'o') {
+						g = std::make_unique<Game>(cmd);
+						break;
+					} else {
+						mvprintw(5, 0, "%s", "Invalid! Please reselect your character.");
+					}
+				}
+				continue;
+			}
+			else if (cmd == 'N' || cmd == 'n') break;
 		}
 	}
 	clear();

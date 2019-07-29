@@ -4,10 +4,8 @@
 #include <sstream>
 
 // Valid commands during game
-// const std::string N = "no", S = "so", E = "ea", W = "we", NE = "ne", NW = "nw", SE = "se", SW = "sw";
 const char N = '8', S = '2', E = '6', W = '4' , NE = '9', NW = '5', SE = '3', SW = '1';
-const char Use = 'u';
-const char Atk = 'a';
+const char Use = 'u', Atk = 'a', restart = 'r', quit = 'q';
 
 Game::Game(char race, std::string file){
     td = std::make_shared<TextDisplay>();
@@ -80,6 +78,10 @@ int Game::takeCommand(){
         else if (action == NW) allFloors[levelCount]->playerAtk("NW");
         else if (action == SE) allFloors[levelCount]->playerAtk("SE");
         else if (action == SW) allFloors[levelCount]->playerAtk("SW");
+    } else if (action == restart) {
+        return 5;
+    } else if (action == quit){
+        return 4;
     } else {
         td->addAction("Invalid Operation!");
         valid = false;

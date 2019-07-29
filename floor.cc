@@ -206,7 +206,7 @@ int Floor::playerMove(std::string direction) {
     if (targetCell->getChar() == '-' ||
         targetCell->getChar() == '|' ||
         targetCell->getChar() == ' '){
-        td->addAction("PC hits the wall");
+        td->addAction("PC hits the wall. ");
         return 3; // not successful move
     } else if (targetCell->checkOccupancy()) {
         if (targetCell->getOccupant()){
@@ -216,8 +216,11 @@ int Floor::playerMove(std::string direction) {
             } else if (targetCell->getOccupant()->getType() == Type::Str) {
                 return 1; // next floor
             }
+            stringstream s;
+            s << "There is a " << targetCell->getOccupant()->getChar() << " in PC's way. ";
+            td->addAction(s.str());
+            return 3;
         }
-        return 0;
     }
     std::shared_ptr<Stuff> s = getCellPC()->detachStuff();
     targetCell->attachStuff(pc);
