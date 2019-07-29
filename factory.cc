@@ -20,7 +20,7 @@
 using std::make_shared;
 
 Factory::Factory() {
-    // srand(time(nullptr));
+    srand(time(nullptr));
 }
 
 
