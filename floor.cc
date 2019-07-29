@@ -246,12 +246,15 @@ void Floor::checkEvents() {
                 for (auto i : neighbours) {
                     if (i->getOccupant()) {
                         if (i->getOccupant()->getChar() == 'D') {
-                            if (i->getOccupant() == cur->getOccupant()->getDragon()) {
+                            if (i->getOccupant() == cur->getOccupant()->getDragon() || cur->getOccupant()->getDragon() == nullptr) {
                                 std::shared_ptr<Stuff> e = i->getOccupant();
                                 int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
                                 if (!miss) {
                                     pc->beAttacked(e);
                                     double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
+                                    if (pc->getSuit()) {
+                                        damage = ceil(damage / 2);
+                                    }
                                     s << e->getChar() << " deals " << damage << " damages to PC. ";
                                     td->addAction(s.str());
                                 } else {
@@ -274,6 +277,9 @@ void Floor::checkEvents() {
                         if (!miss) {
                             pc->beAttacked(e);
                             double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
+                            if (pc->getSuit()) {
+                                damage = ceil(damage / 2);
+                            }
                             s << e->getChar() << " deals " << damage << " damages to PC. ";
                             td->addAction(s.str());
                         } else {
