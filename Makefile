@@ -13,7 +13,7 @@ OBJECTS = ${INTERFACE} ${CONTROLLERS} ${CELLS} ${PLAYERS} ${ENEMIES} ${ITEMS} ${
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
+	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lncurses
 
 -include ${DEPENDS}
 

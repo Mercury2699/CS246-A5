@@ -24,15 +24,15 @@ Factory::Factory() {
 }
 
 
-std::shared_ptr<Player> Factory::spawnPlayer(std::string race) {
+std::shared_ptr<Player> Factory::spawnPlayer(char race) {
     std::shared_ptr<Player> pc;
-    if (race == "h" ) {
+    if (race == 'h' ) {
         pc = make_shared<Human>();
-    } else if (race == "e") {
+    } else if (race == 'e') {
         pc = make_shared<Elves>();
-    } else if (race == "o") {
+    } else if (race == 'o') {
         pc = make_shared<Orc>();
-    } else if (race == "d") {
+    } else if (race == 'd') {
         pc = make_shared<Dwarf>();
     }
     return pc;
