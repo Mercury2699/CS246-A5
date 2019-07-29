@@ -101,13 +101,9 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
 
    for (int i = 0; i < 5; i++) {
     
-<<<<<<< HEAD
-    std::vector<std::vector<std::shared_ptr<Cell>>> cham = f[0]->getChambers();
-=======
     std::vector<std::vector<std::shared_ptr<Cell>>> cham = f[i]->getChambers();
     
     std::vector<std::shared_ptr<Cell>> tiles = f[i]->getTiles();
->>>>>>> fb02fbdcafbee983ef61f384117b412ae5fe9548
 
     // player spawned
     int randChamber = rand() % cham.size();

@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -g -std=c++14 -Wall -MMD
-EXEC = cc3k
+EXEC = cc3k+
 
 PLAYERS = player.o human.o dwarf.o orc.o elves.o
 POTIONS = potion.o
