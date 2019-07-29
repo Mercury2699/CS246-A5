@@ -36,7 +36,6 @@ std::shared_ptr<Player> Factory::spawnPlayer(std::string race) {
 
 std::shared_ptr<Enemy> Factory::genEnemy() {
     int NPCRand = rand() % 18;
-    std::cout << NPCRand <<std::endl;
     
     if ( NPCRand <= 3 ) { // if (NPCRand == 0, 1, 2, 3)
         return make_shared<Werewolf>();
@@ -95,7 +94,6 @@ void Factory::genDragon(std::shared_ptr<Cell> target, std::shared_ptr<Floor> flo
 void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
     
     std::vector<std::vector<std::shared_ptr<Cell>>> cham = f[0]->getChambers();
-    // set random seed
 
     // player spawned -- first floor
     int randChamber = rand() % cham.size();
