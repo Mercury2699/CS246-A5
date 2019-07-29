@@ -68,6 +68,10 @@ int Game::takeCommand(){
         else if (action == NW) allFloors[levelCount]->playerUse("NW");
         else if (action == SE) allFloors[levelCount]->playerUse("SE");
         else if (action == SW) allFloors[levelCount]->playerUse("SW");
+        else {
+            td->addAction("Invalid Operation!");
+            valid = false;
+        }
     } else if (action == Atk) {
         action = getch();
         if (action == N || action == (char)KEY_UP) allFloors[levelCount]->playerAtk("N");
@@ -78,6 +82,10 @@ int Game::takeCommand(){
         else if (action == NW) allFloors[levelCount]->playerAtk("NW");
         else if (action == SE) allFloors[levelCount]->playerAtk("SE");
         else if (action == SW) allFloors[levelCount]->playerAtk("SW");
+        else {
+            td->addAction("Invalid Operation!");
+            valid = false;
+        }
     } else if (action == restart) {
         return 5;
     } else if (action == quit){
