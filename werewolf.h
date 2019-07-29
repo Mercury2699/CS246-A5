@@ -29,4 +29,7 @@ class Werewolf final : public Enemy {
 	// bool getMoved() const; inherited from Enemy
 	// virtual void toggleMoved(); inherited from Enemy
 };
+
+
 #endif
+

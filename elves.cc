@@ -7,4 +7,3 @@ Elves::Elves(int HP, int Atk, int Def) : Player {HP, Atk, Def} {
 
 
 
-

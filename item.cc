@@ -10,7 +10,16 @@ char BarrierSuit::getChar() const {
 
 std::string BarrierSuit::getName() const{
     return "Barriersuit";
-} 
+}
+
+bool BarrierSuit::isDragonHoard() {
+    if (canCollect) return false;
+	return true;
+}
+
+std::shared_ptr<Stuff> BarrierSuit::getDragon() {
+    return dragon;
+}
 
 void Compass::effect(std::shared_ptr<Player> pc) {
     pc->setCompass(true);

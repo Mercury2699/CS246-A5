@@ -8,8 +8,8 @@ Player::Player(int HP, int Atk, int Def):
 		type = Type::Plyr;
 	}
 
-void Player::setTreasure(double t) {
-	treasure = t;
+void Player::addTreasure(double t) {
+	treasure += t;
 }
 
 double Player::getTreasure() const {return treasure;}
@@ -35,10 +35,11 @@ int Player::getDefaultDef() const {
 }
 
 void Player::beAttacked(std::shared_ptr<Stuff> c) {
+	double damage = ceil((100 / (100 + static_cast<double>(this->getDef()))) * c->getAtk());
 	if (getSuit()) {
-		setHP(getHP() - ceil(ceil(((100 / (100 + getDef())) * c->getAtk())) / 2));
+		setHP(getHP() - ceil(damage / 2) <= 0 ? 0 : getHP() - ceil(damage / 2));
 	} else {
-		setHP(getHP()- ceil((100 / (100 + getDef())) * c->getAtk()));
+		setHP(getHP() - damage <= 0 ? 0 : getHP() - damage);
 	}
 }
 
@@ -66,7 +67,5 @@ std::string Player::getRace() const {
 int Player::getMaxHP() const {
 	return maxHP;
 }
-
-
 
 

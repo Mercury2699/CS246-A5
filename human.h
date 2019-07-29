@@ -31,7 +31,7 @@ class Human final : public Player {
 	// void setCell(std::shared_ptr<Cell>); inherited from Player
 	// void setCompass(bool); inherited from Player
 	// void setSuit(bool); inherited from Player
-	// void setTreasure(double); inherited from Player
+	// void addTreasure(double); inherited from Player
 	// double getTreasure() const; inherited from Player
 	// bool hasKilledMerch() const; inherited from Player
 	// char getChar() const override; inherited from Player

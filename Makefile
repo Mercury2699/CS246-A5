@@ -19,9 +19,13 @@ ${EXEC}: ${OBJECTS}
 
 .PHONY: clean
 .PHONY: test
+.PHONY: clear
 
 clean:
 	rm ${OBJECTS} ${EXEC} ${DEPENDS}
+
+clear:
+	rm ${OBJECTS} ${DEPENDS}
   
 test:
 	./runSuite suitea5.txt ./exec

@@ -1,6 +1,7 @@
 #ifndef DRAGON_H
 #define DRAGON_H
 #include "enemy.h"
+#include "cell.h"
 
 class Item;
 
@@ -34,4 +35,5 @@ class Dragon final : public Enemy {
 };
 
 #endif
+
 

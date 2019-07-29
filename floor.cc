@@ -69,10 +69,11 @@ Floor::Floor(string file) :
     m.close();
 }
 
-Floor::Floor(ifstream &s) {
+Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
+    this->pc = pc;
     vector<shared_ptr<Cell>> row;
     for (int y = 0; y < 25; ++y) {
-        for (int x = 0; x < 79; ++x) {
+        for (int x = 0; x < 80; ++x) {
             char c;
             s.get(c);
             if(c == '\n'){
@@ -126,7 +127,7 @@ Floor::Floor(ifstream &s) {
                     row[x]->attachStuff(make_shared<Dragon>());
                 } else if (c == '@'){
                     row[x]->attachStuff(pc);
-                } else if (c == '\\'){
+                } else if (c == '/'){
                     row[x]->attachStuff(make_shared<Stair>());
                 }
             }
@@ -200,19 +201,23 @@ shared_ptr<Cell> Floor::getCellPC() {
     return nullptr;
 }
 
-void Floor::playerMove(std::string direction) {
+int Floor::playerMove(std::string direction) {
     std::shared_ptr<Cell> targetCell = target(getCellPC(), direction);
     if (targetCell->checkOccupancy()) {
         if (targetCell->getOccupant()){
             if (targetCell->getOccupant()->getType() == Type::Trsr){
-                return playerUse(direction);
+                playerUse(direction);
+                return 0;
+            } else if (targetCell->getOccupant()->getType() == Type::Str) {
+                return 1;
             }
         }
-        return;
+        return 0;
     }
     std::shared_ptr<Stuff> s = getCellPC()->detachStuff();
     targetCell->attachStuff(pc);
-    checkEvents();
+    td->addAction("PC moves to " + direction + ". ");
+    return 0;
 }
 
 bool isClose(std::shared_ptr<Cell> c1, std::shared_ptr<Cell> c2) {
@@ -220,59 +225,100 @@ bool isClose(std::shared_ptr<Cell> c1, std::shared_ptr<Cell> c2) {
     else return false;
 }
 
-int Floor::checkEvents() {
-    if (pc->isDead()) return 0;
-    if (getCellPC()->getOccupant()->getType() == Type::Str) return 1;
-    for (auto cur : floorTiles) { // to refactor
+void Floor::checkEvents() {
+    vector<shared_ptr<Cell>> neighbours;
+    string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+    for (int i = 0; i < 8; ++i) {
+        neighbours.emplace_back(target(getCellPC(), directions[i]));
+    }
+    for (auto cur : neighbours) { // to refactor
         if(cur->getOccupant()){
-            if(cur->getOccupant()->getType() == Type::Enmy) {
-                shared_ptr<Stuff> e = cur->getOccupant();
-                if(!e->isDead() && isClose(cur, getCellPC())) {
+            std::stringstream s;
+            if (cur->getOccupant()->isDragonHoard()) {
+                std::shared_ptr<Stuff> e = cur->getOccupant()->getDragon();
+                int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
+                if (!miss) {
                     pc->beAttacked(e);
-                    if (pc->isDead()) return 0;
-                } else if(e->isDead()) {
+                    double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
+                    s << e->getChar() << " deals " << damage << " damages to PC. ";
+                    td->addAction(s.str());
+                } else {
+                    s << e->getChar() << " missed. ";
+                    td->addAction(s.str());
+                }
+            } else if(cur->getOccupant()->getType() == Type::Enmy) {
+                shared_ptr<Stuff> e = cur->getOccupant();
+                if(!e->isDead()) {
+                    if (e->getChar() == 'D') continue;
+                    if (e->getChar() == 'M') {
+                        if (!pc->hasKilledMerch()) continue;
+                    }
+                    int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
+                        if (!miss) {
+                            pc->beAttacked(e);
+                            double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
+                            s << e->getChar() << " deals " << damage << " damages to PC. ";
+                            td->addAction(s.str());
+                        } else {
+                            s << e->getChar() << " missed. ";
+                            td->addAction(s.str());
+                        }
+                    if (pc->isDead()) return;
+                } else { // Some enemy died.
                     if (e->getChar() == 'M') { // Merchant Died
-                        cur->attachStuff(make_shared<Treasure>(3));
-                        pc->setKilledMerch(true);
-                        td->addAction("PC has slained a Merchant");
+                        cur->detachStuff();
+                        cur->attachStuff(make_shared<Treasure>(4));
+                        td->addAction("PC has slained a Merchant. ");
                     } else if (e->getChar() == 'D') { // Dragon Died
                         string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
                         for (int i = 0; i < 8; ++i) {
-                            if (target(cur, directions[i])->getOccupant()->isDragonHoard()) {
-                                target(cur, directions[i])->getOccupant()->setCollect();
+                            if (target(cur, directions[i])->checkOccupancy()) {
+                                if (target(cur, directions[i])->getOccupant()) {
+                                    if (target(cur, directions[i])->getOccupant()->isDragonHoard()) {
+                                        target(cur, directions[i])->getOccupant()->setCollect();
+                                    }
+                                }
                             }
-                        } 
-                        td->addAction("Wow! PC has slained a Dragon!");
+                        }
+                        td->addAction("Wow! PC has slained a Dragon! ");
                     } else {
-                        pc->setTreasure(pc->getTreasure() + 1);
-                        td->addAction("PC has slained a " + e->getChar());
+                        pc->addTreasure(1);
+                        s << "PC has slained a " << e->getChar() << ". ";
+                        td->addAction(s.str());
                     }
                     if (e->checkCompass()) {
-                        shared_ptr<Compass> c = make_shared<Compass>();
-                        cur->attachStuff(c);
+                        cur->detachStuff();
+                        cur->attachStuff(make_shared<Compass>());
                     }
-                    cur->detachStuff();
+                    if (cur->checkOccupancy()) {
+                        if (cur->getOccupant()->getType() == Type::Enmy) {
+                            cur->detachStuff();
+                        }
+                    }
                 }
             } 
         }
     }
-    return 2;
 }
 
 void Floor::playerAtk(std::string direction) {
     shared_ptr<Cell> targetCell = target(getCellPC(), direction);
-    if (targetCell->getOccupant()) {
-        if (targetCell->getOccupant()->getType() != Type::Enmy) {
-            return td->addAction("PC cannot attack non-Enemy stuff!");
+    shared_ptr<Stuff> e = targetCell->getOccupant();
+    stringstream s;
+    if (e) {
+        if (e->getType() != Type::Enmy) {
+            return td->addAction("PC cannot attack non-Enemy stuff! ");
         }
-        targetCell->getOccupant()->beAttacked(pc);
-        td->addAction("PC deals " + std::to_string(pc->getAtk()) + " damages to " + targetCell->getOccupant()->getChar());
-        checkEvents();
-        pc->beAttacked(targetCell->getOccupant());
-        td->addAction(targetCell->getOccupant()->getChar() + " deals " + std::to_string(targetCell->getOccupant()->getAtk()) + " damages to PC");
-        checkEvents();
+        e->beAttacked(pc);
+        e->toggleMoved();
+        if (e->getChar() == 'M') {
+            pc->setKilledMerch(true);
+        }
+        double damage = ceil((100 / (100 + static_cast<double>(e->getDef()))) * pc->getAtk());
+        s << "PC deals " << damage << " damages to " << e->getChar() << ". " << std::endl;
+        td->addAction(s.str());
     } else {
-        td->addAction("PC cannot attack an Empty Cell!");
+        td->addAction("PC cannot attack an Empty Cell! ");
     }
 }
 
@@ -303,24 +349,34 @@ void Floor::playerUse(std::string direction) {
     if(targetCell->getOccupant()){
         if (targetCell->getOccupant()->getType() == Type::Ptn) {
             targetCell->getOccupant()->effect(pc);
-            td->addAction("PC used a " + targetCell->getOccupant()->getName());
+            td->addAction("PC used a " + targetCell->getOccupant()->getName() + ". ");
              targetCell->detachStuff();
         } else if (targetCell->getOccupant()->getType() == Type::Trsr) {
             if (targetCell->getOccupant()->isDragonHoard()) {
-                    td->addAction("PC cannot take a DragonHoard without killing the Dragon!");
-                    return;
+                    return td->addAction("PC cannot take a DragonHoard without killing the Dragon! ");
             } else {
-                td->addAction("PC collected a " + targetCell->getOccupant()->getName());
+                td->addAction("PC collected a " + targetCell->getOccupant()->getName() + ". ");
                 targetCell->detachStuff()->effect(pc);
             }
         } else if (targetCell->getOccupant()->getChar() == 'C') {
-            for (auto current : floorTiles) { // find Stair
+            targetCell->detachStuff();
+            for (auto current : floorTiles) { // find the Stair
                 if(current->getOccupant()){
                     if (current->getOccupant()->getType() == Type::Str) {
                         current->getOccupant()->enableDisplay();
+                        td->addAction("PC found the compass. The stair is now visible.");
+                        current->notifyObserver();
                         break;
                     }
                 }
+            }
+        } else if (targetCell->getOccupant()->getChar() == 'B') {
+            if (!targetCell->getOccupant()->isDragonHoard()) {
+                targetCell->getOccupant()->effect(pc);
+                targetCell->detachStuff();
+                td->addAction("PC collected a Barrier Suit! ");
+            } else {
+                td->addAction("PC cannot collect a Barrier Suit without killing the Dragon! ");
             }
         }
         playerMove(getDirection(getCellPC(), targetCell));
@@ -330,18 +386,28 @@ void Floor::playerUse(std::string direction) {
 void Floor::moveEnemies() {
     for (auto row : theGrid) {
         for (auto col : row) {
-            if (col->getOccupant()->getType() == Type::Enmy) {
-                if (col->getOccupant()->getMoved()) continue;
-                vector<shared_ptr<Cell>> validMove;
-                string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
-                for (int i = 0; i < 8; ++i) {
-                   if (target(col, directions[i])->checkOccupancy()) validMove.emplace_back(target(col, directions[i]));
-                } 
-                srand(time(nullptr));
-                int index = rand() % validMove.size();
-                shared_ptr<Cell> des = validMove[index];
-                theGrid[des->getX()][des->getY()]->attachStuff(theGrid[col->getX()][col->getY()]->detachStuff());
-                des->getOccupant()->toggleMoved();
+            if (col->getOccupant()) {
+                if (col->getOccupant()->getType() == Type::Enmy) {
+                    if (col->getOccupant()->getMoved()) continue;
+                    vector<shared_ptr<Cell>> validMove;
+                    string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+                    for (int i = 0; i < 8; ++i) {
+                        if (!target(col, directions[i])->checkOccupancy() && target(col, directions[i])->getChar() != '+') validMove.emplace_back(target(col, directions[i]));
+                    }
+                    int index = rand() % validMove.size();
+                    shared_ptr<Cell> des = validMove[index];
+                    des->attachStuff(col->detachStuff());
+                    des->getOccupant()->toggleMoved();
+                }
+            }
+        }
+    }
+    for (auto row : theGrid) {
+        for (auto col : row) {
+            if (col->getOccupant()) {
+                if (col->getOccupant()->getType() == Type::Enmy && col->getOccupant()->getChar() != 'D') {
+                    col->getOccupant()->toggleMoved();
+                }
             }
         }
     }
@@ -364,4 +430,6 @@ std::vector<std::shared_ptr<Cell>> Floor::getTiles() {
 std::vector<std::vector<std::shared_ptr<Cell>>> Floor::getChambers() {
     return chambers;
 }
+
+
 

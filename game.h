@@ -13,25 +13,22 @@ class Game{
     std::shared_ptr<TextDisplay> td;
     Factory f;
     int levelCount = 0;
-    bool specifiedLayout = false;
-    void nextFloor();
+    int nextFloor();
 
     public:
     Game(std::string race, std::string file = "map.txt");
     Game(std::string race, bool isSpecified, std::string file = "layout.txt");
-    // void startGame();
-    void takeCommand(std::string);
+    int takeCommand(std::string);
     void resetGame();
-    
+    void gameOver();
+    void gameWon();
 };
 
 
-
-
-
-
-
-
 #endif
+
+
+
+
 
 

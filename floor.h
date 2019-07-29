@@ -22,12 +22,12 @@ class Floor {
 	
 	public:
 	Floor(std::string file = "map.txt");
-	Floor(std::ifstream &fs);
-	void playerMove(std::string direction);
+	Floor(std::shared_ptr<Player> pc, std::ifstream &fs);
+	int playerMove(std::string direction);
 	void playerAtk(std::string direction);
 	void playerUse(std::string direction);
 	void moveEnemies();
-	int checkEvents();
+	void checkEvents();
 	void setTD(std::shared_ptr<TextDisplay>);
 	void setPC(std::shared_ptr<Player>);
 	std::shared_ptr<Cell> getCellPC();
@@ -41,4 +41,9 @@ class Floor {
 	friend std::ostream &operator<<(std::ostream &out, const Floor &f);
 };
 
+
 #endif
+
+
+
+

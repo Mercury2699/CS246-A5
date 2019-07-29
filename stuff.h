@@ -5,6 +5,7 @@
 
 // class Player;
 // class Character;
+class Cell;
 
 enum Type {Plyr, Enmy, Trsr, Ptn, Itm, Str};
 
@@ -31,9 +32,11 @@ class Stuff {
     // for Str
     virtual void enableDisplay() {}
     virtual ~Stuff() = default;
-    // for Treasure{6}
+    // for Treasure{6} and BarrierSuit
     virtual bool isDragonHoard() {return false;}
     virtual void setCollect() {}
+    virtual std::shared_ptr<Stuff> getDragon() {return nullptr;}
+    virtual void setDragon(std::shared_ptr<Stuff> d) {}
 };
 
 class Stair final : public Stuff {
@@ -42,7 +45,12 @@ class Stair final : public Stuff {
 
     public:
     Stair() {this->type = Type::Str;}
-    char getChar() const override {return '/';} // inherited from Stuff
+    char getChar() const override {
+        if (canDisplay) 
+            return '/';
+        else
+            return '.';
+    } // inherited from Stuff
     Type getType() {return type;} // inherited from Stuff
     void beAttacked(std::shared_ptr<Stuff>) override {}
     bool checkDisplay() const {return canDisplay;}
@@ -52,3 +60,5 @@ class Stair final : public Stuff {
 
 
 #endif
+
+

@@ -21,4 +21,6 @@ class TextDisplay {
     friend std::ostream &operator<<(std::ostream &out, const TextDisplay &);
 };
 
+
 #endif
+

@@ -19,6 +19,11 @@
 
 using std::make_shared;
 
+Factory::Factory() {
+    // srand(time(nullptr));
+}
+
+
 std::shared_ptr<Player> Factory::spawnPlayer(std::string race) {
     std::shared_ptr<Player> pc;
     if (race == "h" ) {
@@ -89,30 +94,37 @@ void Factory::genDragon(std::shared_ptr<Cell> target, std::shared_ptr<Floor> flo
     while (!floor->setCell(floor->target(target, directions[randDir]), newDragon)) {
         randDir = rand() % 8;
     }
+    target->getOccupant()->setDragon(newDragon);
 }
 
 void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
-    
-    std::vector<std::vector<std::shared_ptr<Cell>>> cham = f[0]->getChambers();
 
-    // player spawned -- first floor
+   for (int i = 0; i < 5; i++) {
+    
+<<<<<<< HEAD
+    std::vector<std::vector<std::shared_ptr<Cell>>> cham = f[0]->getChambers();
+=======
+    std::vector<std::vector<std::shared_ptr<Cell>>> cham = f[i]->getChambers();
+    
+    std::vector<std::shared_ptr<Cell>> tiles = f[i]->getTiles();
+>>>>>>> fb02fbdcafbee983ef61f384117b412ae5fe9548
+
+    // player spawned
     int randChamber = rand() % cham.size();
     int x = rand() % cham[randChamber].size();
-    f[0]->setCell(cham[randChamber][x], f[0]->getPlayer());
+    f[i]->setCell(cham[randChamber][x], f[0]->getPlayer());
 
-    // stair spawned -- first floor
+    // stair spawned
     int differChameber = rand() % cham.size();
     while (differChameber == randChamber) {
         differChameber = rand() % cham.size();
     }
     int y = rand() % cham[differChameber].size();
-    f[0]->setCell(cham[differChameber][y], make_shared<Stair>());
-    int hasBarrier = 0;
-
-   for (int i = 0; i < 5; i++) {
-    std::vector<std::shared_ptr<Cell>> tiles = f[i]->getTiles();
+    f[i]->setCell(cham[differChameber][y], make_shared<Stair>());
 
     // random generate barrier suit
+    int hasBarrier = 0;
+
     if (i == 0) {
         int randFloor = rand() % 5;
         std::vector<std::shared_ptr<Cell>> tempTiles = f[randFloor]->getTiles();
@@ -123,13 +135,6 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
         }
         genDragon(tempTiles[randBarrier], f[randFloor]);
         hasBarrier++;
-    }
-    
-    // random generate compass
-    int randCompass = rand() % tiles.size();
-    std::shared_ptr<Compass> newCompass = make_shared<Compass>();
-    while(!f[i]->setCell(tiles[randCompass], newCompass)) {
-        randCompass = rand() % tiles.size();
     }
 
     // random generate potion
@@ -152,19 +157,27 @@ void Factory::genFloor(std::vector<std::shared_ptr<Floor>>& f) {
         if (newTreasure->isDragonHoard()) {
             genDragon(tiles[randTreasure], f[i]);
             dragonNum++;
-        }   
+        }
     }
 
     // random generate enemy
+    int randNum = rand() % (20 - dragonNum - hasBarrier);
     for (int l = 0; l < 20 - dragonNum - hasBarrier; l++) {
         int randEnemy = rand() % tiles.size();
         std::shared_ptr<Enemy> newEnemy = genEnemy();
+        if (l == randNum && newEnemy->getChar() != 'M') {
+            newEnemy->assignCompass();
+        } else if (l == randNum) {
+            randNum++;
+        }
         while(!f[i]->setCell(tiles[randEnemy], newEnemy)) {
             randEnemy = rand() % tiles.size();
         }
     }
-    f[i]->notifyObserver();
    }
 }
+
+
+
 
 

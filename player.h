@@ -38,7 +38,7 @@ class Player : public Character{
 	void beAttacked(std::shared_ptr<Stuff>) override;
 	void setCompass(bool);
 	void setSuit(bool);
-	void setTreasure(double);
+	virtual void addTreasure(double);
 	double getTreasure() const;
 	bool hasKilledMerch() const;
 	void setKilledMerch(bool);
