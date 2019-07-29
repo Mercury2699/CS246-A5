@@ -51,30 +51,30 @@ int Game::takeCommand(){
     bool valid = true;
     int move = 0;
     char action = getch();
-    if (action == N || action == KEY_UP) move = allFloors[levelCount]->playerMove("N");
-    else if (action == S || action == KEY_DOWN) move = allFloors[levelCount]->playerMove("S");
-    else if (action == E || action == KEY_RIGHT) move = allFloors[levelCount]->playerMove("E");
-    else if (action == W || action == KEY_LEFT) move = allFloors[levelCount]->playerMove("W");
+    if (action == N || action == (char)KEY_UP) move = allFloors[levelCount]->playerMove("N");
+    else if (action == S || action == (char)KEY_DOWN) move = allFloors[levelCount]->playerMove("S");
+    else if (action == E || action == (char)KEY_RIGHT) move = allFloors[levelCount]->playerMove("E");
+    else if (action == W || action == (char)KEY_LEFT) move = allFloors[levelCount]->playerMove("W");
     else if (action == NE) move = allFloors[levelCount]->playerMove("NE");
     else if (action == NW) move = allFloors[levelCount]->playerMove("NW");
     else if (action == SE) move = allFloors[levelCount]->playerMove("SE");
     else if (action == SW) move = allFloors[levelCount]->playerMove("SW");
     else if (action == Use){
         action = getch();
-        if (action == N || action == KEY_UP) allFloors[levelCount]->playerUse("N");
-        else if (action == S || action == KEY_DOWN) allFloors[levelCount]->playerUse("S");
-        else if (action == E || action == KEY_RIGHT) allFloors[levelCount]->playerUse("E");
-        else if (action == W || action == KEY_LEFT) allFloors[levelCount]->playerUse("W");
+        if (action == N || action == (char)KEY_UP) allFloors[levelCount]->playerUse("N");
+        else if (action == S || action == (char)KEY_DOWN) allFloors[levelCount]->playerUse("S");
+        else if (action == E || action == (char)KEY_RIGHT) allFloors[levelCount]->playerUse("E");
+        else if (action == W || action == (char)KEY_LEFT) allFloors[levelCount]->playerUse("W");
         else if (action == NE) allFloors[levelCount]->playerUse("NE");
         else if (action == NW) allFloors[levelCount]->playerUse("NW");
         else if (action == SE) allFloors[levelCount]->playerUse("SE");
         else if (action == SW) allFloors[levelCount]->playerUse("SW");
     } else if (action == Atk) {
         action = getch();
-        if (action == N || action == KEY_UP) allFloors[levelCount]->playerAtk("N");
-        else if (action == S || action == KEY_DOWN) allFloors[levelCount]->playerAtk("S");
-        else if (action == E || action == KEY_RIGHT) allFloors[levelCount]->playerAtk("E");
-        else if (action == W || action == KEY_LEFT) allFloors[levelCount]->playerAtk("W");
+        if (action == N || action == (char)KEY_UP) allFloors[levelCount]->playerAtk("N");
+        else if (action == S || action == (char)KEY_DOWN) allFloors[levelCount]->playerAtk("S");
+        else if (action == E || action == (char)KEY_RIGHT) allFloors[levelCount]->playerAtk("E");
+        else if (action == W || action == (char)KEY_LEFT) allFloors[levelCount]->playerAtk("W");
         else if (action == NE) allFloors[levelCount]->playerAtk("NE");
         else if (action == NW) allFloors[levelCount]->playerAtk("NW");
         else if (action == SE) allFloors[levelCount]->playerAtk("SE");
@@ -116,6 +116,7 @@ int Game::nextFloor() {
 }
 
 void Game::gameOver(){
+    clear();
     std::cout << "GAME OVER!!! " << std::endl;
     std::cout << "YOU DIED." << std::endl;
     double score = pc->getTreasure();
@@ -126,6 +127,7 @@ void Game::gameOver(){
 }
 
 void Game::gameWon(){
+    clear();
     std::cout << "GAME WON!!! " << std::endl;
     std::cout << "YOU HAVE ESCAPED FROM THE DUNGEON!!!" << std::endl;
     double score = pc->getTreasure();

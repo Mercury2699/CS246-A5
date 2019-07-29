@@ -42,7 +42,7 @@ void TextDisplay::clearAction(){
 }
 
 ostream &operator<<(ostream & out, const TextDisplay & td){
-    refresh();
+    clear();
     for (unsigned int i = 0; i < td.theDisplay.size(); ++i){
         for (unsigned int j = 0; j < td.theDisplay[i].size(); ++j){
             mvaddch(i, j, td.theDisplay[i][j]);
