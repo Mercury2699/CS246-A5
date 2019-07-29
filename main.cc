@@ -60,6 +60,10 @@ int main(int argc, char *argv[]) {
 				if (cmd == 'h' || cmd == 'e' || cmd == 'd' || cmd == 'o') {
 					g = std::make_unique<Game>(cmd);
 					break;
+				} else if (cmd == 'q'){
+					clear();
+					endwin();
+					return 0;
 				} else {
 					mvprintw(5, 0, "%s", "Invalid! Please reselect your character.");
 				}
@@ -84,6 +88,10 @@ int main(int argc, char *argv[]) {
 					if (cmd == 'h' || cmd == 'e' || cmd == 'd' || cmd == 'o') {
 						g = std::make_unique<Game>(cmd);
 						break;
+					} else if (cmd == 'q'){
+						clear();
+						endwin();
+						return 0;
 					} else {
 						mvprintw(5, 0, "%s", "Invalid! Please reselect your character.");
 					}
