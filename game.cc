@@ -86,7 +86,7 @@ int Game::takeCommand(){
     }
 
     if (move == 1) return nextFloor();
-
+    if (move == 3) valid = false;
     if (valid) {
         allFloors[levelCount]->moveEnemies();
         allFloors[levelCount]->checkEvents();  
