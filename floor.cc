@@ -239,7 +239,8 @@ void Floor::checkEvents() {
                 int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
                 if (!miss) {
                     pc->beAttacked(e);
-                    s << e->getChar() << " deals " << e->getAtk() << " damages to PC. ";
+                    double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
+                    s << e->getChar() << " deals " << damage << " damages to PC. ";
                     td->addAction(s.str());
                 } else {
                     s << e->getChar() << " missed. ";
@@ -255,13 +256,14 @@ void Floor::checkEvents() {
                     int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
                         if (!miss) {
                             pc->beAttacked(e);
-                            s << e->getChar() << " deals " << e->getAtk() << " damages to PC. ";
+                            double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
+                            s << e->getChar() << " deals " << damage << " damages to PC. ";
                             td->addAction(s.str());
                         } else {
                             s << e->getChar() << " missed. ";
                             td->addAction(s.str());
                         }
-                    // if (pc->isDead()) return;
+                    if (pc->isDead()) return;
                 } else { // Some enemy died.
                     if (e->getChar() == 'M') { // Merchant Died
                         cur->detachStuff();
@@ -301,18 +303,22 @@ void Floor::checkEvents() {
 
 void Floor::playerAtk(std::string direction) {
     shared_ptr<Cell> targetCell = target(getCellPC(), direction);
-    if (targetCell->getOccupant()) {
-        if (targetCell->getOccupant()->getType() != Type::Enmy) {
-            return td->addAction("PC cannot attack non-Enemy stuff!");
+    shared_ptr<Stuff> e = targetCell->getOccupant();
+    stringstream s;
+    if (e) {
+        if (e->getType() != Type::Enmy) {
+            return td->addAction("PC cannot attack non-Enemy stuff! ");
         }
-        targetCell->getOccupant()->beAttacked(pc);
-        targetCell->getOccupant()->toggleMoved();
-        if (targetCell->getOccupant()->getChar() == 'M') {
+        e->beAttacked(pc);
+        e->toggleMoved();
+        if (e->getChar() == 'M') {
             pc->setKilledMerch(true);
         }
-        td->addAction("PC deals " + std::to_string(pc->getAtk()) + " damages to " + targetCell->getOccupant()->getChar() + ". ");
+        double damage = ceil((100 / (100 + static_cast<double>(e->getDef()))) * pc->getAtk());
+        s << "PC deals " << damage << " damages to " << e->getChar() << ". " << std::endl;
+        td->addAction(s.str());
     } else {
-        td->addAction("PC cannot attack an Empty Cell!");
+        td->addAction("PC cannot attack an Empty Cell! ");
     }
 }
 
@@ -368,7 +374,7 @@ void Floor::playerUse(std::string direction) {
             if (!targetCell->getOccupant()->isDragonHoard()) {
                 targetCell->getOccupant()->effect(pc);
                 targetCell->detachStuff();
-                td->addAction("PC collected a Barrier Suit!");
+                td->addAction("PC collected a Barrier Suit! ");
             } else {
                 td->addAction("PC cannot collect a Barrier Suit without killing the Dragon! ");
             }

@@ -80,13 +80,17 @@ int Game::takeCommand(std::string action){
         td->addAction("Invalid Operation!");
         valid = false;
     }
+
+    if (move == 1) return nextFloor();
+
     if (valid) {
         allFloors[levelCount]->moveEnemies();
-        allFloors[levelCount]->checkEvents();
+        allFloors[levelCount]->checkEvents();  
     }
+
     std::cout << *td;
     td->clearAction();
-    if (move == 1) return nextFloor();
+    
     return 0;
 }
 
@@ -111,13 +115,21 @@ int Game::nextFloor() {
 void Game::gameOver(){
     std::cout << "GAME OVER!!! " << std::endl;
     std::cout << "YOU DIED." << std::endl;
-    std::cout << "Your score is: " << pc->getTreasure() << std::endl;
+    double score = pc->getTreasure();
+    if (pc->getRace() == "Human"){
+        score *= 1.5;
+    }
+    std::cout << "Your score is: " << score << std::endl;
 }
 
 void Game::gameWon(){
     std::cout << "GAME WON!!! " << std::endl;
-    std::cout << "YOU HAVE EACAPED FROM THE DUNGEON!!!" << std::endl;
-    std::cout << "Your score is: " << pc->getTreasure() << std::endl;
+    std::cout << "YOU HAVE ESCAPED FROM THE DUNGEON!!!" << std::endl;
+    double score = pc->getTreasure();
+    if (pc->getRace() == "Human"){
+        score *= 1.5;
+    }
+    std::cout << "Your score is: " << score << std::endl;
 }
 
 

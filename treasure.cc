@@ -17,7 +17,7 @@ std::string Treasure::getName() const {
 	if (val == 1) return "Normal Hoard";
 	if (val > 1 && val < 4) return "Small Hoard";
 	if (val >= 4 && val < 6) return "Merchant Hoard";
-	else return "DRAGON HOARD!!!";
+	else return "DRAGON HOARD";
 }
 
 char Treasure::getChar() const {
