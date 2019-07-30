@@ -137,6 +137,7 @@ Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
                 } else if (c == '/'){
                     row[x]->attachStuff(make_shared<Stair>());
                 }
+                floorTiles.emplace_back(row[x]);
             }
         }
     }
