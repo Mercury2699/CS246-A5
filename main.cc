@@ -92,8 +92,16 @@ int main(int argc, char *argv[]) {
 				while(1) {
 					cmd = getch();
 					if (cmd == 'h' || cmd == 'e' || cmd == 'd' || cmd == 'o') {
-						g = std::make_unique<Game>(cmd);
-						break;
+						if(argc > 1) { // optional command line argument that speficies the layout
+							if (std::string(argv[1]) == "-layout") {
+								g = std::make_unique<Game>(cmd, true, argv[2]);
+							} else if (std::string(argv[1]) == "-map" ){
+								g = std::make_unique<Game>(cmd, argv[2]);
+							}
+						} else {
+							g = std::make_unique<Game>(cmd);
+						}
+					break;
 					} else if (cmd == 'q'){
 						clear();
 						endwin();
