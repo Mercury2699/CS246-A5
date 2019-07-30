@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
 				}
 				continue;
 			}
-			else if (cmd == 'N' || cmd == 'n') break;
+			else if (cmd == 'N' || cmd == 'n' || cmd == 'q') break;
 		}
 	}
 	clear();
