@@ -3,9 +3,6 @@
 #include "cell.h"
 #include "stuff.h"
 
-class TextDisplay;
-
-
 class FloorTile final : public Cell {
     // protected:
 	// int x = 0, y = 0; inherited from Cell

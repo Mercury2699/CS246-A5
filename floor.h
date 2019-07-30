@@ -10,9 +10,6 @@
 #include "textDisplay.h"
 #include "player.h"
 
-
-class TextDisplay;
-
 class Floor {
 	std::vector<std::vector<std::shared_ptr<Cell>>> theGrid;
 	std::vector<std::shared_ptr<Cell>> floorTiles;
