@@ -1,7 +1,6 @@
 #ifndef TEXTDISPLAY_H
 #define TEXTDISPLAY_H
 #include <vector>
-#include <iostream>
 #include <memory>
 #include <string>
 #include <ncurses.h>

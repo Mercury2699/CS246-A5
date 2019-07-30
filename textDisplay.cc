@@ -50,22 +50,22 @@ ostream &operator<<(ostream & out, const TextDisplay & td){
         }
     }
     stringstream s;
-    s << "Race: " << td.pc->getRace() << " Gold: " << td.pc->getTreasure() << endl;
+    s << "Race: " << td.pc->getRace() << " Gold: " << td.pc->getTreasure();
     mvprintw(25, 0, "%s", s.str().c_str());
     s.str("");
     clrtoeol();
-    s << "HP: " << td.pc->getHP() << endl;
+    s << "HP: " << td.pc->getHP();
     mvprintw(26, 0, "%s", s.str().c_str());
     s.str("");
-    s << "Atk: " << td.pc->getAtk() << endl;
+    s << "Atk: " << td.pc->getAtk();
     clrtoeol();
     mvprintw(27, 0, "%s", s.str().c_str());
     s.str("");
-    s << "Def: " << td.pc->getDef() << endl;
+    s << "Def: " << td.pc->getDef();
     clrtoeol();
     mvprintw(28, 0, "%s", s.str().c_str());
     s.str("");
-    s << "Action: " << td.action << endl;
+    s << "Action: " << td.action;
     clrtoeol();
     mvprintw(29, 0, "%s", s.str().c_str());
     return out;

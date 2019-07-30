@@ -134,7 +134,7 @@ void Game::gameOver(){
         score *= 1.5;
     }
     std::stringstream s;
-    s << "Your score is: " << score << std::endl;
+    s << "Your score is: " << score;
     mvprintw(2, 0, "%s", s.str().c_str());
 }
 
@@ -147,7 +147,7 @@ void Game::gameWon(){
         score *= 1.5;
     }
     std::stringstream s;
-    s << "Your score is: " << score << std::endl;
+    s << "Your score is: " << score;
     mvprintw(2, 0, "%s", s.str().c_str());
 }
 
