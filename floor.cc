@@ -376,7 +376,7 @@ void Floor::playerAtk(std::string direction) {
             pc->setKilledMerch(true);
         }
         double damage = ceil((100 / (100 + static_cast<double>(e->getDef()))) * pc->getAtk());
-        s << "PC deals " << damage << " damages to " << e->getChar() << ". ";
+        s << "PC deals " << damage << " damages to " << e->getChar() << " (" << e->getHP() << " HP). ";
         td->addAction(s.str());
     } else {
         td->addAction("PC cannot attack an Empty Cell! ");
