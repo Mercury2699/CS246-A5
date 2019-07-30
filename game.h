@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include <iostream>
 #include "factory.h"
 #include "textDisplay.h"
 

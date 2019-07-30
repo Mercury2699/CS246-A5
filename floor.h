@@ -2,7 +2,6 @@
 #define FLOOR_H
 
 #include <vector>
-#include <iostream>
 #include <string>
 #include <memory>
 #include <cmath>
