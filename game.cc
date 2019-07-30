@@ -20,6 +20,7 @@ Game::Game(char race, std::string file){
     f.genFloor(allFloors);
     allFloors[levelCount]->notifyObserver();
     std::cout << *td;
+    mvprintw(25, 70, "%s", "Floor 1");
     td->clearAction();
 }
 
@@ -35,8 +36,8 @@ Game::Game(char race, bool isSpecified, std::string file) {
         allFloors[count]->setTD(td);
     }
     allFloors[levelCount]->notifyObserver();
-    
     std::cout << *td;
+    mvprintw(25, 70, "%s", "Floor 1");
     td->clearAction();
 }
 
@@ -103,8 +104,11 @@ int Game::takeCommand(){
         allFloors[levelCount]->moveEnemies();
         allFloors[levelCount]->checkEvents();
     }
-
     std::cout << *td;
+    std::stringstream s;
+    s << "Floor " << levelCount + 1;
+    mvprintw(25, 70, "%s", s.str().c_str());
+    s.str("");
     td->clearAction();
     
     return 0;
@@ -125,7 +129,11 @@ int Game::nextFloor() {
     allFloors[levelCount]->notifyObserver();
     td->addAction("PC has entered Floor " + std::to_string(levelCount + 1) + ". ");
     pc->removePotion();
+    std::stringstream s;
+    s << "Floor " << levelCount;
     std::cout << *td;
+    mvprintw(25, 70, "%s", s.str().c_str());
+    s.str("");
     return 0;
 }
 
