@@ -72,6 +72,7 @@ Floor::Floor(string file) :
 Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
     this->pc = pc;
     vector<shared_ptr<Cell>> row;
+    vector<shared_ptr<Enemy>> enemies;
     for (int y = 0; y < 25; ++y) {
         for (int x = 0; x < 80; ++x) {
             char c;
@@ -112,19 +113,25 @@ Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
                 } else if (c == '9'){
                     row[x]->attachStuff(make_shared<Treasure>(6));
                 } else if (c == 'W'){
-                    row[x]->attachStuff(make_shared<Werewolf>());
+                    enemies.emplace_back(make_shared<Werewolf>());
+                    row[x]->attachStuff(enemies.back());
                 } else if (c == 'V'){
-                    row[x]->attachStuff(make_shared<Vampire>());
+                    enemies.emplace_back(make_shared<Vampire>());
+                    row[x]->attachStuff(enemies.back());
                 } else if (c == 'N'){
-                    row[x]->attachStuff(make_shared<Goblin>());
+                    enemies.emplace_back(make_shared<Goblin>());
+                    row[x]->attachStuff(enemies.back());
                 } else if (c == 'T'){
-                    row[x]->attachStuff(make_shared<Troll>());
+                    enemies.emplace_back(make_shared<Troll>());
+                    row[x]->attachStuff(enemies.back());
                 } else if (c == 'X'){
-                    row[x]->attachStuff(make_shared<Phoenix>());
+                    enemies.emplace_back(make_shared<Phoenix>());
+                    row[x]->attachStuff(enemies.back());
                 } else if (c == 'M'){
                     row[x]->attachStuff(make_shared<Merchant>());
                 } else if (c == 'D'){
-                    row[x]->attachStuff(make_shared<Dragon>());
+                    enemies.emplace_back(make_shared<Dragon>());
+                    row[x]->attachStuff(enemies.back());
                 } else if (c == '@'){
                     row[x]->attachStuff(pc);
                 } else if (c == '/'){
@@ -132,6 +139,10 @@ Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
                 }
             }
         }
+    }
+    if (enemies.size()) {
+        int index = rand() % enemies.size();
+        enemies[index]->assignCompass();
     }
 }
 
@@ -246,7 +257,7 @@ void Floor::checkEvents() {
                 for (auto i : neighbours) {
                     if (i->getOccupant()) {
                         if (i->getOccupant()->getChar() == 'D') {
-                            if (i->getOccupant() == cur->getOccupant()->getDragon() || cur->getOccupant()->getDragon() == nullptr) {
+                            if (i->getOccupant() == cur->getOccupant()->getDragon()) {
                                 std::shared_ptr<Stuff> e = i->getOccupant();
                                 int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
                                 if (!miss) {
@@ -261,6 +272,22 @@ void Floor::checkEvents() {
                                     s << e->getChar() << " missed. ";
                                     td->addAction(s.str());
                                 }
+                            } else {
+                                std::shared_ptr<Stuff> e = i->getOccupant();
+                                int miss = rand() % 2; // 0 or 1: Enemy has a 50% chance of missing.
+                                if (!miss) {
+                                    pc->beAttacked(e);
+                                    double damage = ceil((100 / (100 + static_cast<double>(pc->getDef()))) * e->getAtk());
+                                    if (pc->getSuit()) {
+                                        damage = ceil(damage / 2);
+                                    }
+                                    s << e->getChar() << " deals " << damage << " damages to PC. ";
+                                    td->addAction(s.str());
+                                } else {
+                                    s << e->getChar() << " missed. ";
+                                    td->addAction(s.str());
+                                }
+                                break;
                             }
                         }
                     }
@@ -269,7 +296,6 @@ void Floor::checkEvents() {
                 shared_ptr<Stuff> e = cur->getOccupant();
                 if(!e->isDead()) {
                     if (e->getChar() == 'D') continue;
-                    // e->toggleMoved();
                     if (e->getChar() == 'M') {
                         if (!pc->hasKilledMerch()) continue;
                     }
