@@ -437,13 +437,6 @@ void Floor::moveEnemies() {
         for (auto col : row) {
             if (col->getOccupant()) {
                 if (col->getOccupant()->getType() == Type::Enmy) {
-                    // string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
-                    // for (int i = 0; i < 8; ++i) {
-                    //     if (target(col, directions[i])->getX() == getCellPC()->getX() &&
-                    //     target(col, directions[i])->getY() == getCellPC()->getY()) {
-                    //         col->getOccupant()->toggleMoved();
-                    //     }
-                    // }
                     if (isClose(col, getCellPC())) col->getOccupant()->toggleMoved();
                     if (col->getOccupant()->getMoved()) continue;
                     vector<shared_ptr<Cell>> validMove;

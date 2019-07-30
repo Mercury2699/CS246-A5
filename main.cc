@@ -29,7 +29,6 @@ int main(int argc, char *argv[]) {
 			if(argc > 1) { // optional command line argument that speficies the layout
 				if (std::string(argv[1]) == "-layout") {
 					g = std::make_unique<Game>(cmd, true, argv[2]);
-					// std::cerr << "Using layout specified by " << argv[2] << std::endl;
 				} else if (std::string(argv[1]) == "-map" ){
 					g = std::make_unique<Game>(cmd, argv[2]);
 				}
