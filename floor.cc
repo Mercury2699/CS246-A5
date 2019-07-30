@@ -39,6 +39,7 @@ void Floor::processCells(shared_ptr<Cell> col, int num) {
         neighbours.emplace_back(target(col, directions[i]));
     }
     for (auto cur : neighbours) {
+        if (cur->getLabel() == num) return;
         processCells(cur, num);
     }
 }
