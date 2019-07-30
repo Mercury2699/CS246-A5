@@ -42,6 +42,9 @@ Game::Game(char race, bool isSpecified, std::string file) {
 
 
 int Game::takeCommand(){
+    if (levelCount >= 5){
+        return 1;
+    }
     if (pc->isDead()) {
         gameOver();
         return 1;
