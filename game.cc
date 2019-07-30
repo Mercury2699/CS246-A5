@@ -23,8 +23,7 @@ Game::Game(char race, std::string file){
     td->clearAction();
 }
 
-Game::Game(char race, bool isSpecified, std::string file) 
-    /*: specifiedLayout{isSpecified} */ {
+Game::Game(char race, bool isSpecified, std::string file) {
     td = std::make_shared<TextDisplay>();
     pc = f.spawnPlayer(race);
     td->setPC(pc);
