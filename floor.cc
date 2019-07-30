@@ -84,7 +84,8 @@ Floor::Floor(string file) :
     m.close();
 }
 
-Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
+Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) :
+    chambers(5) {
     this->pc = pc;
     bool isPlayerSet = false;
     vector<shared_ptr<Cell>> row;
