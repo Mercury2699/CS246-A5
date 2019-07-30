@@ -33,6 +33,7 @@ class Floor {
 	std::shared_ptr<Player> getPlayer();
 	std::vector<std::shared_ptr<Cell>> getTiles();
 	std::vector<std::vector<std::shared_ptr<Cell>>> getChambers();
+	void processCells(std::shared_ptr<Cell> col, int num);
 
 	friend std::ostream &operator<<(std::ostream &out, const Floor &f);
 };

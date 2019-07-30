@@ -25,8 +25,23 @@
 #include "troll.h"
 #include "goblin.h"
 
+#include <iostream>
 using namespace std;
 
+
+void Floor::processCells(shared_ptr<Cell> col, int num) {
+    if (col->getChar() == '-' || col->getChar() == '|' || col->getChar() == '+') return;
+    chambers[num].emplace_back(col);
+    col->setLabel(num);
+    vector<shared_ptr<Cell>> neighbours;
+    string directions[8] = {"N", "S", "E", "W", "NE", "NW", "SE", "SW"};
+    for (int i = 0; i < 8; ++i) {
+        neighbours.emplace_back(target(col, directions[i]));
+    }
+    for (auto cur : neighbours) {
+        processCells(cur, num);
+    }
+}
 
 Floor::Floor(string file) : 
     chambers(5) {
@@ -94,6 +109,7 @@ Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
                 row.emplace_back(make_shared<Passage>(x, y));            
             } else {
                 row.emplace_back(make_shared<FloorTile>(x, y));
+                row[x]->setLabel(-1);
                 if (c == '0'){
                     row[x]->attachStuff(make_shared<RestorHP>());
                 } else if (c == '1'){
@@ -148,14 +164,50 @@ Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
         int index = rand() % enemies.size();
         enemies[index]->assignCompass();
     }
+    // if (!isPlayerSet) {
+    //     for (auto cur : floorTiles) {
+    //         if (!cur->getOccupant()) {
+    //             playerPos.emplace_back(cur);
+    //         }
+    //     }
+    //     int index = rand() % playerPos.size();
+    //     playerPos[index]->attachStuff(pc);
+    // }
+    for (int i = 0; i < 5; ++i) {
+        bool processed = false;
+        for (auto row : theGrid) {
+            for (auto col : row) {
+                if (col->getLabel() == -1 && !processed) {
+                    processCells(col, i);
+                    processed = true;
+                }
+            }
+        }
+    }
     if (!isPlayerSet) {
-        for (auto cur : floorTiles) {
+        vector<int> choices;
+        bool hasStair = false;
+        for (int i = 0; i < 5; ++i) {
+            for (auto cur : chambers[i]) {
+                if (cur->getOccupant()) {
+                    if (cur->getOccupant()->getType() == Type::Str) {
+                        hasStair = true;
+                        break;
+                    }
+                }
+            }
+            if (!hasStair) {
+                choices.emplace_back(i);
+            }
+        }
+        int index = choices[rand() % 4];
+        for (auto cur : chambers[index]) {
             if (!cur->getOccupant()) {
                 playerPos.emplace_back(cur);
             }
         }
-        int index = rand() % playerPos.size();
-        playerPos[index]->attachStuff(pc);
+        int pos = rand() % playerPos.size();
+        playerPos[pos]->attachStuff(pc);
     }
 }
 

@@ -8,6 +8,7 @@
 class Cell {
 	protected:
 	int x = 0, y = 0;
+	int label = -2;
 	bool isOccupied = false;
 	std::shared_ptr<Stuff> occupant;
 	std::shared_ptr<TextDisplay> td;
@@ -42,8 +43,11 @@ class Cell {
 
 	int getX() const {return x;}
 	int getY() const {return y;}
+	int getLabel() const {return label;}
+	void setLabel(int label) {this->label = label;}
 	};
 
+	
 
 #endif
 
