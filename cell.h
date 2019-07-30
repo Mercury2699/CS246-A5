@@ -10,7 +10,7 @@ class Cell {
 	int x = 0, y = 0;
 	int label = -2;
 	bool isOccupied = false;
-	std::shared_ptr<Stuff> occupant;
+	std::shared_ptr<Stuff> occupant = nullptr;
 	std::shared_ptr<TextDisplay> td;
 
 	public:
