@@ -68,21 +68,37 @@ Floor::Floor(string file) :
             row.emplace_back(make_shared<Doorway>(x, y));
         } else if (c == '#') {
             row.emplace_back(make_shared<Passage>(x, y));
-        } else if (c >= 65 && c <= 97) { // c is A-Z
-            shared_ptr<FloorTile> cur1 = make_shared<FloorTile>(x ,y);
-            row.emplace_back(cur1);
-            shared_ptr<FloorTile> cur2 = cur1;
-            floorTiles.emplace_back(cur2);
-            shared_ptr<FloorTile> cur3 = cur1;
-            if (c == 'A') chambers[0].emplace_back(cur3);
-            else if (c == 'B') chambers[1].emplace_back(cur3);
-            else if (c == 'C') chambers[2].emplace_back(cur3);
-            else if (c == 'D') chambers[3].emplace_back(cur3);
-            else chambers[4].emplace_back(cur3); // c == 'E'
+        } else if (c == '.') {
+            row.emplace_back(make_shared<FloorTile>(x ,y));
+            row[x]->setLabel(-1);
+            floorTiles.emplace_back(row[x]);
         }
         x++;
+        // else if (c >= 65 && c <= 97) { // c is A-Z
+        //     shared_ptr<FloorTile> cur1 = make_shared<FloorTile>(x ,y);
+        //     row.emplace_back(cur1);
+        //     shared_ptr<FloorTile> cur2 = cur1;
+        //     floorTiles.emplace_back(cur2);
+        //     shared_ptr<FloorTile> cur3 = cur1;
+            // if (c == 'A') chambers[0].emplace_back(cur3);
+            // else if (c == 'B') chambers[1].emplace_back(cur3);
+            // else if (c == 'C') chambers[2].emplace_back(cur3);
+            // else if (c == 'D') chambers[3].emplace_back(cur3);
+            // else chambers[4].emplace_back(cur3); // c == 'E'
+            //}
     }
     m.close();
+    for (int i = 0; i < 5; ++i) {
+        bool processed = false;
+        for (auto row : theGrid) {
+            for (auto col : row) {
+                if (col->getLabel() == -1 && !processed) {
+                    processCells(col, i);
+                    processed = true;
+                }
+            }
+        }
+    }
 }
 
 Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) :
