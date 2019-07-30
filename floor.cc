@@ -71,8 +71,10 @@ Floor::Floor(string file) :
 
 Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
     this->pc = pc;
+    bool isPlayerSet = false;
     vector<shared_ptr<Cell>> row;
     vector<shared_ptr<Enemy>> enemies;
+    vector<shared_ptr<Cell>> playerPos;
     for (int y = 0; y < 25; ++y) {
         for (int x = 0; x < 80; ++x) {
             char c;
@@ -134,6 +136,7 @@ Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
                     row[x]->attachStuff(enemies.back());
                 } else if (c == '@'){
                     row[x]->attachStuff(pc);
+                    isPlayerSet = true;
                 } else if (c == '/'){
                     row[x]->attachStuff(make_shared<Stair>());
                 }
@@ -144,6 +147,15 @@ Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) {
     if (enemies.size()) {
         int index = rand() % enemies.size();
         enemies[index]->assignCompass();
+    }
+    if (!isPlayerSet) {
+        for (auto cur : floorTiles) {
+            if (!cur->getOccupant()) {
+                playerPos.emplace_back(cur);
+            }
+        }
+        int index = rand() % playerPos.size();
+        playerPos[index]->attachStuff(pc);
     }
 }
 
