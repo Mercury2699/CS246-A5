@@ -130,7 +130,7 @@ int Game::nextFloor() {
     td->addAction("PC has entered Floor " + std::to_string(levelCount + 1) + ". ");
     pc->removePotion();
     std::stringstream s;
-    s << "Floor " << levelCount;
+    s << "Floor " << levelCount + 1;
     std::cout << *td;
     mvprintw(25, 70, "%s", s.str().c_str());
     s.str("");
