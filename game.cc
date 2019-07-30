@@ -118,6 +118,7 @@ int Game::nextFloor() {
         gameWon();
         return 1;
     }
+    pc->setKilledMerch(false);
     allFloors[levelCount]->notifyObserver();
     td->addAction("PC has entered Floor " + std::to_string(levelCount + 1) + ". ");
     pc->removePotion();
