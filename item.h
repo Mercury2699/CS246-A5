@@ -2,7 +2,6 @@
 #define ITEM_H
 
 #include <memory>
-#include "stuff.h"
 #include "player.h"
 
 class Item : public Stuff {

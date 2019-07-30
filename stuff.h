@@ -3,8 +3,6 @@
 
 #include "textDisplay.h"
 
-// class Player;
-// class Character;
 class Cell;
 
 enum Type {Plyr, Enmy, Trsr, Ptn, Itm, Str};
