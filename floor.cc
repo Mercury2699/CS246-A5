@@ -39,7 +39,7 @@ void Floor::processCells(shared_ptr<Cell> col, int num) {
         neighbours.emplace_back(target(col, directions[i]));
     }
     for (auto cur : neighbours) {
-        if (cur->getLabel() == num) return;
+        if (cur->getLabel() == num) continue;
         processCells(cur, num);
     }
 }
@@ -74,18 +74,6 @@ Floor::Floor(string file) :
             floorTiles.emplace_back(row[x]);
         }
         x++;
-        // else if (c >= 65 && c <= 97) { // c is A-Z
-        //     shared_ptr<FloorTile> cur1 = make_shared<FloorTile>(x ,y);
-        //     row.emplace_back(cur1);
-        //     shared_ptr<FloorTile> cur2 = cur1;
-        //     floorTiles.emplace_back(cur2);
-        //     shared_ptr<FloorTile> cur3 = cur1;
-            // if (c == 'A') chambers[0].emplace_back(cur3);
-            // else if (c == 'B') chambers[1].emplace_back(cur3);
-            // else if (c == 'C') chambers[2].emplace_back(cur3);
-            // else if (c == 'D') chambers[3].emplace_back(cur3);
-            // else chambers[4].emplace_back(cur3); // c == 'E'
-            //}
     }
     m.close();
     for (int i = 0; i < 5; ++i) {
