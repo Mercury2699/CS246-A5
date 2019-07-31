@@ -206,14 +206,18 @@ Floor::Floor(std::shared_ptr<Player> pc, ifstream &s) :
                 choices.emplace_back(i);
             }
         }
-        int index = choices[rand() % 4];
-        for (auto cur : chambers[index]) {
-            if (!cur->getOccupant()) {
-                playerPos.emplace_back(cur);
+        while (1) {
+            int index = choices[rand() % 4];
+            for (auto cur : chambers[index]) {
+                if (!cur->getOccupant()) {
+                    playerPos.emplace_back(cur);
+                }
             }
+            if (playerPos.size() == 0) continue;
+            int pos = rand() % playerPos.size();
+            playerPos[pos]->attachStuff(pc);
+            break;
         }
-        int pos = rand() % playerPos.size();
-        playerPos[pos]->attachStuff(pc);
     }
 }
 
